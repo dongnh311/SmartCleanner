@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="MacCleaner.Win.App.Views.ShredderPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:MacCleaner.Win.App.Controls">
+
+    <Grid RowSpacing="16" Padding="0,0,0,16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <controls:ModuleHeader
+            Grid.Row="0"
+            Title="Shredder"
+            Subtitle="Overwrite then delete"
+            IconGlyphChar="&#xE74D;" />
+
+        <Border Grid.Row="1" Style="{StaticResource Card}" Margin="16,0,16,0">
+            <StackPanel Spacing="12">
+                <TextBlock
+                    Text="On SSDs, wear leveling may relocate blocks, so overwrite-then-delete cannot guarantee the original ciphertext is destroyed. Use full-disk BitLocker for SSDs you intend to dispose of."
+                    TextWrapping="Wrap"
+                    Opacity="0.7"
+                    FontSize="11" />
+
+                <Grid ColumnSpacing="8">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBox x:Name="PathBox" Grid.Column="0" PlaceholderText="Absolute path to a single file" />
+                    <Button x:Name="ShredButton" Grid.Column="1" Content="Shred" Style="{ThemeResource AccentButtonStyle}" Click="ShredButton_Click" />
+                </Grid>
+
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <TextBlock Text="Passes:" VerticalAlignment="Center" FontSize="12" />
+                    <NumberBox x:Name="PassesBox" Value="3" Minimum="1" Maximum="35" Width="100" />
+                </StackPanel>
+
+                <TextBlock x:Name="StatusText" FontSize="12" Opacity="0.75" TextWrapping="Wrap" />
+            </StackPanel>
+        </Border>
+    </Grid>
+</Page>

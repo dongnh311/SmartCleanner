@@ -54,6 +54,12 @@ public sealed partial class MainWindow : Window
             "largeold"   => typeof(LargeOldFilesPage),
             "duplicates" => typeof(DuplicatesPage),
             "similar"    => typeof(SimilarPhotosPage),
+            "shredder"   => typeof(ShredderPage),
+            "quarantine" => typeof(QuarantinePage),
+            "mytools"    => typeof(MyToolsPage),
+            "clock"      => typeof(ClockPage),
+            "paint"      => typeof(PaintPage),
+            "scroll"     => typeof(ScrollDenoiserPage),
             _            => typeof(StubPage)
         };
 

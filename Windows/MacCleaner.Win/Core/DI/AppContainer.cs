@@ -4,6 +4,7 @@ using MacCleaner.Win.Core.Files;
 using MacCleaner.Win.Core.FileSystem;
 using MacCleaner.Win.Core.Performance;
 using MacCleaner.Win.Core.Storage;
+using MacCleaner.Win.Core.Tools;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
@@ -41,6 +42,10 @@ public static class AppContainer
         services.AddSingleton<ILargeOldFilesService, LargeOldFilesService>();
         services.AddSingleton<IDuplicateFinderService, DuplicateFinderService>();
         services.AddSingleton<ISimilarPhotosService, SimilarPhotosService>();
+        services.AddSingleton<IShredderService, ShredderService>();
+        services.AddSingleton<IQuarantineService, QuarantineService>();
+        services.AddSingleton<IMyToolsService, MyToolsService>();
+        services.AddSingleton<IScrollDenoiserService, ScrollDenoiserService>();
 
         return services;
     }

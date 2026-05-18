@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="MacCleaner.Win.App.Views.PaintPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:MacCleaner.Win.App.Controls">
+
+    <Grid RowSpacing="16" Padding="0,0,0,16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <controls:ModuleHeader
+            Grid.Row="0"
+            Title="Paint"
+            Subtitle="Quick canvas backed by InkCanvas"
+            IconGlyphChar="&#xE7C4;" />
+
+        <StackPanel Grid.Row="1" Margin="16,0,16,0" Orientation="Horizontal" Spacing="8">
+            <Button Content="Clear" Click="ClearButton_Click" />
+            <TextBlock Text="Use a pen, touchscreen or mouse to draw." VerticalAlignment="Center" FontSize="12" Opacity="0.6" />
+        </StackPanel>
+
+        <Border Grid.Row="2" Style="{StaticResource Card}" Margin="16,0,16,0" Padding="0">
+            <InkCanvas x:Name="Canvas" Loaded="Canvas_Loaded" />
+        </Border>
+    </Grid>
+</Page>
