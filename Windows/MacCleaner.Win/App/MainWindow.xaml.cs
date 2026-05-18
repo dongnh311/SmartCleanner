@@ -18,9 +18,7 @@ public sealed partial class MainWindow : Window
     {
         if (args.IsSettingsSelected)
         {
-            ContentFrame.Navigate(typeof(StubPage), new ModuleDescriptor(
-                "settings", "Settings", "App preferences",
-                "", Color.FromArgb(255, 142, 142, 147)));
+            ContentFrame.Navigate(typeof(SettingsPage));
             return;
         }
 
