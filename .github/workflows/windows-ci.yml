@@ -31,11 +31,8 @@ jobs:
         with:
           dotnet-version: '8.0.x'
 
-      - name: Install Windows App SDK workload
-        run: dotnet workload install windowsappsdk
-
       - name: Restore
-        run: dotnet restore MacCleaner.Win.sln
+        run: dotnet restore MacCleaner.Win.sln /p:Platform=x64
 
       - name: Build (Debug)
         run: dotnet build MacCleaner.Win.sln --configuration Debug --no-restore /p:Platform=x64
@@ -64,9 +61,6 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.0.x'
-
-      - name: Install Windows App SDK workload
-        run: dotnet workload install windowsappsdk
 
       - name: Publish
         run: dotnet publish App/App.csproj --configuration Release --runtime win-x64 --self-contained true -p:Platform=x64 -p:PublishSingleFile=false -o publish/win-x64
