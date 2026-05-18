@@ -23,6 +23,7 @@ public static class AppContainer
 
         services.AddSingleton<ISystemMetricsService, SystemMetricsService>();
         services.AddSingleton<IProcessService, ProcessService>();
+        services.AddSingleton<IBatteryService, BatteryService>();
         services.AddSingleton<IDriveService, DriveService>();
         services.AddSingleton<IRegistryService, RegistryService>();
         services.AddSingleton<ISqliteService, SqliteService>();

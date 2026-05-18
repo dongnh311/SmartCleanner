@@ -11,7 +11,7 @@ public sealed partial class MainWindow : Window
     {
         InitializeComponent();
         Title = "MacCleaner for Windows";
-        ContentFrame.Navigate(typeof(StubPage), Modules.Get("dashboard"));
+        NavigateTo("dashboard");
     }
 
     private void Nav_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
@@ -20,13 +20,32 @@ public sealed partial class MainWindow : Window
         {
             ContentFrame.Navigate(typeof(StubPage), new ModuleDescriptor(
                 "settings", "Settings", "App preferences",
-                "", Color.FromArgb(255, 142, 142, 147)));
+                "", Color.FromArgb(255, 142, 142, 147)));
             return;
         }
 
         if (args.SelectedItem is NavigationViewItem item && item.Tag is string tag)
         {
-            ContentFrame.Navigate(typeof(StubPage), Modules.Get(tag));
+            NavigateTo(tag);
         }
+    }
+
+    /// <summary>Routes a nav tag to its real page if Phase 2+ shipped one;
+    /// otherwise falls through to the generic stub. Add cases here as
+    /// modules land.</summary>
+    private void NavigateTo(string tag)
+    {
+        Type pageType = tag switch
+        {
+            "dashboard"  => typeof(DashboardPage),
+            "processes"  => typeof(ProcessMonitorPage),
+            "memory"     => typeof(MemoryPage),
+            "battery"    => typeof(BatteryPage),
+            "loginitems" => typeof(LoginItemsPage),
+            _            => typeof(StubPage)
+        };
+
+        object? parameter = pageType == typeof(StubPage) ? Modules.Get(tag) : null;
+        ContentFrame.Navigate(pageType, parameter);
     }
 }
