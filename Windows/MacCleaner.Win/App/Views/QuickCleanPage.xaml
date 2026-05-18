@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="MacCleaner.Win.App.Views.QuickCleanPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:MacCleaner.Win.App.Controls">
+
+    <Grid RowSpacing="16" Padding="0,0,0,16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <controls:ModuleHeader
+            Grid.Row="0"
+            Title="Quick Clean"
+            Subtitle="Caches, temp folders, browser data and dump files"
+            IconGlyphChar="&#xEC7A;" />
+
+        <StackPanel Grid.Row="1" Margin="16,0,16,0" Orientation="Horizontal" Spacing="12">
+            <Button x:Name="ScanButton"  Content="Scan"  Click="ScanButton_Click" />
+            <Button x:Name="CleanButton" Content="Clean selected" IsEnabled="False" Click="CleanButton_Click" />
+            <TextBlock x:Name="StatusText" VerticalAlignment="Center" FontSize="12" Opacity="0.7" />
+        </StackPanel>
+
+        <Border Grid.Row="2" Style="{StaticResource Card}" Margin="16,0,16,0">
+            <ListView x:Name="TargetsList" SelectionMode="None" />
+        </Border>
+
+        <TextBlock
+            x:Name="TotalText"
+            Grid.Row="3"
+            Margin="16,0,16,0"
+            FontSize="13"
+            FontWeight="SemiBold"
+            HorizontalAlignment="Right" />
+    </Grid>
+</Page>

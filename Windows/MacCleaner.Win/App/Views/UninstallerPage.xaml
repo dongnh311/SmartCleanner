@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="MacCleaner.Win.App.Views.UninstallerPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:MacCleaner.Win.App.Controls">
+
+    <Grid RowSpacing="16" Padding="0,0,0,16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <controls:ModuleHeader
+            Grid.Row="0"
+            Title="Uninstaller"
+            Subtitle="Installed programs across HKCU and HKLM (64-bit + WoW64)"
+            IconGlyphChar="&#xE74D;" />
+
+        <Grid Grid.Row="1" Margin="16,0,16,0" ColumnSpacing="12">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <TextBox
+                x:Name="FilterBox"
+                Grid.Column="0"
+                PlaceholderText="Filter by name or publisher…"
+                TextChanged="FilterBox_TextChanged" />
+            <TextBlock
+                x:Name="CountText"
+                Grid.Column="1"
+                VerticalAlignment="Center"
+                FontSize="12"
+                Opacity="0.65" />
+        </Grid>
+
+        <Border Grid.Row="2" Style="{StaticResource Card}" Margin="16,0,16,0">
+            <ListView x:Name="ProgramsList" SelectionMode="Single" />
+        </Border>
+    </Grid>
+</Page>

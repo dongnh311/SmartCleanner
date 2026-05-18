@@ -1,3 +1,5 @@
+using MacCleaner.Win.Core.Applications;
+using MacCleaner.Win.Core.Cleanup;
 using MacCleaner.Win.Core.FileSystem;
 using MacCleaner.Win.Core.Performance;
 using MacCleaner.Win.Core.Storage;
@@ -31,6 +33,9 @@ public static class AppContainer
         services.AddSingleton<IDriveService, DriveService>();
         services.AddSingleton<IRegistryService, RegistryService>();
         services.AddSingleton<ISqliteService, SqliteService>();
+        services.AddSingleton<IWingetService, WingetService>();
+        services.AddSingleton<ICleanupService, CleanupService>();
+        services.AddSingleton<IRecycleBinService, RecycleBinService>();
 
         return services;
     }

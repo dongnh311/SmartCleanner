@@ -46,6 +46,10 @@ public sealed partial class MainWindow : Window
             "bluetooth"  => typeof(BluetoothPage),
             "sensors"    => typeof(SensorsPage),
             "loginitems" => typeof(LoginItemsPage),
+            "uninstaller"=> typeof(UninstallerPage),
+            "updater"    => typeof(UpdaterPage),
+            "quickclean" => typeof(QuickCleanPage),
+            "recyclebin" => typeof(RecycleBinPage),
             _            => typeof(StubPage)
         };
 
