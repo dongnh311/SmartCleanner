@@ -48,10 +48,19 @@ jobs:
           path: Windows/MacCleaner.Win/Tests/TestResults/*.trx
 
   publish:
-    name: Publish self-contained x64 exe
+    name: Publish self-contained ${{ matrix.rid }}
     runs-on: windows-latest
     needs: build
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - rid: win-x64
+            platform: x64
+          - rid: win-arm64
+            platform: ARM64
 
     steps:
       - name: Checkout
@@ -62,12 +71,12 @@ jobs:
         with:
           dotnet-version: '8.0.x'
 
-      - name: Publish
-        run: dotnet publish App/App.csproj --configuration Release --runtime win-x64 --self-contained true -p:Platform=x64 -p:PublishSingleFile=false -o publish/win-x64
+      - name: Publish ${{ matrix.rid }}
+        run: dotnet publish App/App.csproj --configuration Release --runtime ${{ matrix.rid }} --self-contained true -p:Platform=${{ matrix.platform }} -p:PublishSingleFile=false -o publish/${{ matrix.rid }}
 
       - name: Upload publish artifact
         uses: actions/upload-artifact@v4
         with:
-          name: MacCleaner-win-x64
-          path: Windows/MacCleaner.Win/publish/win-x64/**
+          name: MacCleaner-${{ matrix.rid }}
+          path: Windows/MacCleaner.Win/publish/${{ matrix.rid }}/**
           retention-days: 7
