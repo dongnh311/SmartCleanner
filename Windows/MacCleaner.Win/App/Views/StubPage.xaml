@@ -25,7 +25,7 @@
                 VerticalAlignment="Center"
                 Spacing="12">
                 <FontIcon
-                    FontFamily="{StaticResource SymbolThemeFontFamily}"
+                    FontFamily="Segoe Fluent Icons,Segoe MDL2 Assets"
                     FontSize="48"
                     Glyph="&#xE7BA;"
                     Opacity="0.45" />

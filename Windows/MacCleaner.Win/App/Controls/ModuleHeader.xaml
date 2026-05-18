@@ -24,9 +24,14 @@
             CornerRadius="{StaticResource RadiusLg}"
             BorderThickness="0.5"
             VerticalAlignment="Center">
+            <!-- Hard-coded font family list mirrors what SymbolThemeFontFamily
+                 resolves to in WinUI 3 default theme; using {StaticResource}
+                 here failed at parse time on unpackaged self-contained
+                 startups before the theme dictionary was reachable, crashing
+                 Microsoft.UI.Xaml.dll before any window appeared. -->
             <FontIcon
                 x:Name="IconGlyph"
-                FontFamily="{StaticResource SymbolThemeFontFamily}"
+                FontFamily="Segoe Fluent Icons,Segoe MDL2 Assets"
                 FontSize="22"
                 Glyph="&#xE713;"
                 VerticalAlignment="Center"

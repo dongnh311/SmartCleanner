@@ -10,21 +10,10 @@
     <Platforms>x64;ARM64</Platforms>
     <RuntimeIdentifiers>win-x64;win-arm64</RuntimeIdentifiers>
     <UseWinUI>true</UseWinUI>
-    <!-- EnableMsixTooling=false because we ship unpackaged
-         (WindowsPackageType=None). Leaving it true makes MSBuild
-         configure resource indexing for an MSIX layout and skip the
-         loose Resources.pri that an unpackaged WinUI 3 process needs at
-         startup — symptom is Microsoft.UI.Xaml.dll crashing at offset
-         0xa270 with STATUS_STOWED_EXCEPTION (0xc000027b) before any
-         window is created, particularly on ARM64. -->
-    <EnableMsixTooling>false</EnableMsixTooling>
+    <EnableMsixTooling>true</EnableMsixTooling>
     <WindowsPackageType>None</WindowsPackageType>
     <WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>
     <SelfContained>true</SelfContained>
-    <!-- UseRidGraph=true is required for .NET 8 + WinAppSDK 1.6
-         self-contained restore; without it the runtimepack RID
-         resolution silently drops native dependencies. -->
-    <UseRidGraph>true</UseRidGraph>
   </PropertyGroup>
 
   <ItemGroup>
