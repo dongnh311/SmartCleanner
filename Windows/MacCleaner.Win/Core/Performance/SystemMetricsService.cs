@@ -28,7 +28,7 @@ public interface ISystemMetricsService
 public sealed class SystemMetricsService : ISystemMetricsService, IDisposable
 {
     private readonly PerformanceCounter _cpu;
-    private readonly Lock _historyLock = new();
+    private readonly object _historyLock = new();
     private readonly List<double> _history = new(HistoryCapacity);
     private const int HistoryCapacity = 60;
 

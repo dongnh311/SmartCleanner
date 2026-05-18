@@ -14,7 +14,7 @@ namespace MacCleaner.Win.App.Services;
 public sealed class ToastService : IToastService, IDisposable
 {
     private static bool _registered;
-    private static readonly Lock _lock = new();
+    private static readonly object _lock = new();
 
     public ToastService()
     {
