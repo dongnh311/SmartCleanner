@@ -33,7 +33,7 @@ actor PrivacyCleaner: CleanupScanner {
 
         var removed: [CleanableItem] = []
         var failed: [CleanFailure] = []
-        var bytesFreed: Int64 = 0
+        var bytesQuarantined: Int64 = 0
 
         for blocked in blockedItems {
             failed.append(CleanFailure(item: blocked, reason: "Quit the browser before cleaning."))
@@ -48,15 +48,17 @@ actor PrivacyCleaner: CleanupScanner {
             for item in safeItems {
                 if succeededSet.contains(item.url.path) {
                     removed.append(item)
-                    bytesFreed += item.size
+                    // Browser data is moved into quarantine so the user can
+                    // restore if they over-cleaned; disk only frees on purge.
+                    bytesQuarantined += item.size
                 } else if let reason = failedMap[item.url.path] {
                     failed.append(CleanFailure(item: item, reason: reason))
                 }
             }
         }
 
-        Log.scanner.info("privacy clean: removed=\(removed.count) blocked=\(blockedItems.count) failed=\(failed.count)")
-        return CleanResult(removed: removed, failed: failed, totalBytesFreed: bytesFreed)
+        Log.scanner.info("privacy clean: removed=\(removed.count) blocked=\(blockedItems.count) failed=\(failed.count) bytesQuarantined=\(bytesQuarantined)")
+        return CleanResult(removed: removed, failed: failed, bytesFreed: 0, bytesQuarantined: bytesQuarantined)
     }
 
     // MARK: - Helpers

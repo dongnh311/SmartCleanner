@@ -478,7 +478,8 @@ struct CleanupModuleView<S: CleanupScanner>: View {
             let protected = result.failed.filter { $0.reason.hasPrefix("Refused:") }.count
             let errors = result.failed.count - protected
             lastResultMessage = QuickCleanView.formatResult(
-                freed: result.totalBytesFreed,
+                freed: result.bytesFreed,
+                quarantined: result.bytesQuarantined,
                 removed: result.removed.count,
                 protected: protected,
                 errors: errors
@@ -491,7 +492,7 @@ struct CleanupModuleView<S: CleanupScanner>: View {
                     startedAt: startedAt,
                     finishedAt: Date(),
                     itemsScanned: result.removed.count,
-                    bytesTotal: result.totalBytesFreed,
+                    bytesTotal: result.bytesProcessed,
                     sourcePath: nil,
                     status: result.failed.isEmpty ? "completed" : "partial"
                 )

@@ -46,6 +46,7 @@ actor SystemJunkScanner: CleanupScanner {
         var removed: [CleanableItem] = []
         var failed: [CleanFailure] = []
         var bytesFreed: Int64 = 0
+        var bytesQuarantined: Int64 = 0
 
         if !directDeleteItems.isEmpty {
             let urls = directDeleteItems.map { $0.url }
@@ -70,15 +71,17 @@ actor SystemJunkScanner: CleanupScanner {
             for item in quarantineItems {
                 if succeededSet.contains(item.url.path) {
                     removed.append(item)
-                    bytesFreed += item.size
+                    // Quarantine = move within the same APFS volume; no disk
+                    // recovered until the 7-day purge or a manual empty.
+                    bytesQuarantined += item.size
                 } else if let reason = failedMap[item.url.path] {
                     failed.append(CleanFailure(item: item, reason: reason))
                 }
             }
         }
 
-        Log.scanner.info("system_junk clean: removed=\(removed.count) failed=\(failed.count) bytesFreed=\(bytesFreed)")
-        return CleanResult(removed: removed, failed: failed, totalBytesFreed: bytesFreed)
+        Log.scanner.info("system_junk clean: removed=\(removed.count) failed=\(failed.count) bytesFreed=\(bytesFreed) bytesQuarantined=\(bytesQuarantined)")
+        return CleanResult(removed: removed, failed: failed, bytesFreed: bytesFreed, bytesQuarantined: bytesQuarantined)
     }
 
     private static func allowsDirectDelete(category: ItemCategory) -> Bool {

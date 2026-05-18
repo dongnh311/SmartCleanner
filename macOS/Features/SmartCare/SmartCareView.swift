@@ -7,6 +7,12 @@ struct SmartCareView: View {
 
     @State private var report: SmartCareReport?
     @State private var phase: Phase = .idle
+    /// Set during the auto-rescan after a Clean so the pillar view stays
+    /// visible (just shows an inline "Refreshing…" chip) instead of
+    /// blanking out to a full-screen spinner. The first scan still
+    /// uses `phase = .scanning` so the blank-with-spinner empty state
+    /// covers the "no report yet" case.
+    @State private var isRefreshing = false
     @State private var lastError: String?
     @State private var cleanedMessage: String?
     @State private var lastRunLog: CleanupLog?
@@ -61,7 +67,14 @@ struct SmartCareView: View {
             subtitle: "Cleanup · Protection · Speed — all in one pass",
             accent: .accentColor
         ) {
-            if phase == .ready, let report {
+            if isRefreshing {
+                HStack(spacing: 6) {
+                    ProgressView().controlSize(.small)
+                    Text("Refreshing…")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+            } else if phase == .ready, let report {
                 Text(report.scannedAt.formatted(date: .omitted, time: .shortened))
                     .font(.caption)
                     .foregroundStyle(.tertiary)
@@ -71,6 +84,7 @@ struct SmartCareView: View {
                     Label("Rescan", systemImage: "arrow.clockwise")
                 }
                 .keyboardShortcut("r")
+                .disabled(isRefreshing)
             }
         }
     }
@@ -322,8 +336,18 @@ struct SmartCareView: View {
         Task { @MainActor in await runScanAsync() }
     }
 
-    private func runScanAsync() async {
-        phase = .scanning
+    /// `quiet: true` means the rescan is happening *after* a Clean and the
+    /// post-clean result should remain visible — keep the pillar view in
+    /// `.ready`, just flip `isRefreshing` so a small inline indicator
+    /// surfaces. Without that, the post-clean rescan blanks the whole
+    /// content area to a "Running all scans…" spinner and the user loses
+    /// the freed/quarantined summary they were reading.
+    private func runScanAsync(quiet: Bool = false) async {
+        if quiet {
+            isRefreshing = true
+        } else {
+            phase = .scanning
+        }
         // Preserve `cleanedMessage` + `lastRunLog` so the "Show log" link
         // stays available across the auto-rescan that follows a Clean.
         lastError = nil
@@ -338,7 +362,11 @@ struct SmartCareView: View {
         malwareSelection = []
         speedSelection = []
         bgAppsSelection = []
-        phase = .ready
+        if quiet {
+            isRefreshing = false
+        } else {
+            phase = .ready
+        }
         try? await container.db.recordScan(
             module: "SmartCare",
             startedAt: startedAt,
@@ -389,8 +417,16 @@ struct SmartCareView: View {
             )
 
             var parts: [String] = []
-            if clean.totalBytesFreed > 0 {
-                parts.append("Freed \(clean.totalBytesFreed.formattedBytes)")
+            // Always show "Freed X" once a clean has run (even at 0 KB) so
+            // the user can compare against the Dashboard disk gauge — and
+            // see at a glance which slice was real disk recovery vs the
+            // moved-but-still-on-disk quarantine slice.
+            let didRun = clean.removed.count + clean.failed.count > 0 || threats > 0 || quits > 0
+            if didRun {
+                parts.append("Freed \(clean.bytesFreed.formattedBytes)")
+            }
+            if clean.bytesQuarantined > 0 {
+                parts.append("\(clean.bytesQuarantined.formattedBytes) quarantined (7-day auto-purge)")
             }
             if threats > 0 {
                 parts.append("\(threats) threat\(threats == 1 ? "" : "s") quarantined")
@@ -407,12 +443,12 @@ struct SmartCareView: View {
                 startedAt: Date().addingTimeInterval(-1),
                 finishedAt: Date(),
                 itemsScanned: clean.removed.count + threats + quits,
-                bytesTotal: clean.totalBytesFreed,
+                bytesTotal: clean.bytesProcessed,
                 sourcePath: nil,
                 status: clean.failed.isEmpty ? "completed" : "partial"
             )
 
-            await runScanAsync()
+            await runScanAsync(quiet: true)
         }
     }
 }
@@ -795,6 +831,7 @@ struct CleanupLog {
     static let maxSampleSize = 200
 
     let cleanedBytes: Int64
+    let quarantinedBytes: Int64
     let cleanedSample: [String]
     let cleanedCount: Int
     let protectedSample: [String]
@@ -815,7 +852,8 @@ struct CleanupLog {
                 errored.append((failure.item.url.path, failure.reason))
             }
         }
-        self.cleanedBytes = clean.totalBytesFreed
+        self.cleanedBytes = clean.bytesFreed
+        self.quarantinedBytes = clean.bytesQuarantined
         self.cleanedCount = clean.removed.count
         self.cleanedSample = clean.removed.prefix(Self.maxSampleSize).map(\.url.path)
         self.protectedCount = protected.count
@@ -901,9 +939,10 @@ private struct CleanupLogSheet: View {
     @ViewBuilder
     private var summarySection: some View {
         Section {
-            summaryRow("Cleanup", value: log.cleanedBytes.formattedBytes,
-                       hint: "\(log.cleanedCount) removed · \(log.protectedCount) protected · \(log.erroredCount) errors",
-                       symbol: "trash.circle.fill", tint: log.cleanedBytes > 0 ? .green : .secondary)
+            summaryRow("Cleanup",
+                       value: log.cleanedBytes.formattedBytes + (log.quarantinedBytes > 0 ? " + \(log.quarantinedBytes.formattedBytes) Q" : ""),
+                       hint: "\(log.cleanedCount) removed · \(log.protectedCount) protected · \(log.erroredCount) errors" + (log.quarantinedBytes > 0 ? " · Q = quarantined (7-day auto-purge)" : ""),
+                       symbol: "trash.circle.fill", tint: (log.cleanedBytes + log.quarantinedBytes) > 0 ? .green : .secondary)
             summaryRow("Protection", value: log.threatsQuarantined > 0 ? "\(log.threatsQuarantined) threats" : "—",
                        hint: log.threatsQuarantined > 0 ? "Moved to 7-day quarantine" : "Nothing quarantined",
                        symbol: "shield.lefthalf.filled", tint: log.threatsQuarantined > 0 ? .red : .secondary)

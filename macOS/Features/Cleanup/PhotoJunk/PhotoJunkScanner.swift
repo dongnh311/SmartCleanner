@@ -35,7 +35,7 @@ actor PhotoJunkScanner: CleanupScanner {
             }
         }
         Log.scanner.info("photo_junk clean: removed=\(removed.count) bytes=\(bytes)")
-        return CleanResult(removed: removed, failed: failed, totalBytesFreed: bytes)
+        return CleanResult(removed: removed, failed: failed, bytesFreed: bytes, bytesQuarantined: 0)
     }
 
     private nonisolated static func collect() -> [CleanableItem] {

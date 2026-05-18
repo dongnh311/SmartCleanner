@@ -124,7 +124,7 @@ actor TrashBinScanner: CleanupScanner {
         }
 
         Log.scanner.info("trash clean: removed=\(removed.count) failed=\(failed.count) bytesFreed=\(bytesFreed)")
-        return CleanResult(removed: removed, failed: failed, totalBytesFreed: bytesFreed)
+        return CleanResult(removed: removed, failed: failed, bytesFreed: bytesFreed, bytesQuarantined: 0)
     }
 
     /// FileManager.removeItem chokes on items the system sandboxes (apps

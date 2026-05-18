@@ -102,7 +102,8 @@ actor SmartCareOrchestrator {
         return CleanResult(
             removed: j.removed + t.removed,
             failed: j.failed + t.failed,
-            totalBytesFreed: j.totalBytesFreed + t.totalBytesFreed
+            bytesFreed: j.bytesFreed + t.bytesFreed,
+            bytesQuarantined: j.bytesQuarantined + t.bytesQuarantined
         )
     }
 

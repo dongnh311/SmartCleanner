@@ -22,7 +22,18 @@ struct CleanFailure: Sendable {
 struct CleanResult: Sendable {
     let removed: [CleanableItem]
     let failed: [CleanFailure]
-    let totalBytesFreed: Int64
+    /// Bytes that left the disk via direct unlink (cache/log delete, trash empty).
+    /// `volumeAvailableCapacity` should drop by roughly this amount once macOS
+    /// reclaims the freed APFS extents.
+    let bytesFreed: Int64
+    /// Bytes that moved into `~/.MacCleanerQuarantine/` instead of being unlinked.
+    /// Same volume → still occupies disk until the 7-day auto-purge runs (or the
+    /// user empties Quarantine manually).
+    let bytesQuarantined: Int64
+
+    /// Sum that the user usually wants to see as "I cleaned this much" — disk
+    /// freed plus quarantined-but-recoverable. Useful for one-line summaries.
+    var bytesProcessed: Int64 { bytesFreed + bytesQuarantined }
 }
 
 protocol CleanupScanner: Sendable {

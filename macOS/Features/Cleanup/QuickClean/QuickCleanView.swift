@@ -340,7 +340,8 @@ struct QuickCleanView: View {
             async let trashResult = container.trashBinScanner.clean(trashItems, onProgress: handler)
             let (jr, tr) = await (junkResult, trashResult)
             progress.finish()
-            let freed = jr.totalBytesFreed + tr.totalBytesFreed
+            let freed = jr.bytesFreed + tr.bytesFreed
+            let quarantined = jr.bytesQuarantined + tr.bytesQuarantined
             let removed = jr.removed.count + tr.removed.count
             let allFailures = jr.failed + tr.failed
             // Split "failed" into "refused for safety" vs real errors so
@@ -353,12 +354,12 @@ struct QuickCleanView: View {
                 startedAt: scannedAt ?? Date().addingTimeInterval(-1),
                 finishedAt: Date(),
                 itemsScanned: removed + allFailures.count,
-                bytesTotal: freed,
+                bytesTotal: freed + quarantined,
                 sourcePath: nil,
                 status: errors == 0 ? "completed" : "partial"
             )
 
-            resultMessage = Self.formatResult(freed: freed, removed: removed, protected: protected, errors: errors)
+            resultMessage = Self.formatResult(freed: freed, quarantined: quarantined, removed: removed, protected: protected, errors: errors)
             phase = .done
 
             // Auto-rescan to refresh sizes — but stay on the .done screen visually.
@@ -401,11 +402,16 @@ struct QuickCleanView: View {
         }
     }
 
-    /// Splits the post-clean tally into removed / protected / errors so
-    /// the user sees that "33 failed" is really "33 refused for safety"
-    /// — the cleaner doing its job, not a problem to fix.
-    static func formatResult(freed: Int64, removed: Int, protected: Int, errors: Int) -> String {
+    /// Splits the post-clean tally into freed / quarantined / protected /
+    /// errors. "Freed" is the only number that actually drops disk usage —
+    /// "Quarantined" is moved-not-deleted bytes that auto-purge in 7 days,
+    /// so we surface it separately to set expectations against the
+    /// Dashboard disk gauge.
+    static func formatResult(freed: Int64, quarantined: Int64, removed: Int, protected: Int, errors: Int) -> String {
         var parts: [String] = ["Freed \(freed.formattedBytes)"]
+        if quarantined > 0 {
+            parts.append("\(quarantined.formattedBytes) quarantined (7-day auto-purge)")
+        }
         parts.append("\(removed) item\(removed == 1 ? "" : "s") removed")
         if protected > 0 {
             parts.append("\(protected) skipped for safety")
