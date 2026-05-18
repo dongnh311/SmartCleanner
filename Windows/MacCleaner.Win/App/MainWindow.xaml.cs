@@ -41,6 +41,10 @@ public sealed partial class MainWindow : Window
             "processes"  => typeof(ProcessMonitorPage),
             "memory"     => typeof(MemoryPage),
             "battery"    => typeof(BatteryPage),
+            "network"    => typeof(NetworkPage),
+            "diskmon"    => typeof(DiskMonitorPage),
+            "bluetooth"  => typeof(BluetoothPage),
+            "sensors"    => typeof(SensorsPage),
             "loginitems" => typeof(LoginItemsPage),
             _            => typeof(StubPage)
         };
