@@ -1,5 +1,6 @@
 using MacCleaner.Win.Core.Applications;
 using MacCleaner.Win.Core.Cleanup;
+using MacCleaner.Win.Core.Files;
 using MacCleaner.Win.Core.FileSystem;
 using MacCleaner.Win.Core.Performance;
 using MacCleaner.Win.Core.Storage;
@@ -36,6 +37,10 @@ public static class AppContainer
         services.AddSingleton<IWingetService, WingetService>();
         services.AddSingleton<ICleanupService, CleanupService>();
         services.AddSingleton<IRecycleBinService, RecycleBinService>();
+        services.AddSingleton<ISpaceLensService, SpaceLensService>();
+        services.AddSingleton<ILargeOldFilesService, LargeOldFilesService>();
+        services.AddSingleton<IDuplicateFinderService, DuplicateFinderService>();
+        services.AddSingleton<ISimilarPhotosService, SimilarPhotosService>();
 
         return services;
     }

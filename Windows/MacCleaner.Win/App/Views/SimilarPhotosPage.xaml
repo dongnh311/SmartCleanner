@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="MacCleaner.Win.App.Views.SimilarPhotosPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:MacCleaner.Win.App.Controls">
+
+    <Grid RowSpacing="16" Padding="0,0,0,16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <controls:ModuleHeader
+            Grid.Row="0"
+            Title="Similar Photos"
+            Subtitle="Perceptual (average) hash clustering"
+            IconGlyphChar="&#xEB9F;" />
+
+        <StackPanel Grid.Row="1" Margin="16,0,16,0" Spacing="8">
+            <Grid ColumnSpacing="8">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <TextBox x:Name="PathBox" Grid.Column="0" PlaceholderText="Path to scan" />
+                <Button x:Name="ScanButton" Grid.Column="1" Content="Scan" Style="{ThemeResource AccentButtonStyle}" Click="ScanButton_Click" />
+            </Grid>
+            <StackPanel Orientation="Horizontal" Spacing="4">
+                <TextBlock Text="Max distance:" VerticalAlignment="Center" FontSize="12" />
+                <NumberBox x:Name="MaxDist" Value="6" Minimum="0" Maximum="20" SmallChange="1" Width="100" />
+                <TextBlock x:Name="StatusText" VerticalAlignment="Center" FontSize="12" Opacity="0.65" Margin="16,0,0,0" />
+            </StackPanel>
+        </StackPanel>
+
+        <Border Grid.Row="2" Style="{StaticResource Card}" Margin="16,0,16,0">
+            <ListView x:Name="GroupsList" SelectionMode="None" />
+        </Border>
+    </Grid>
+</Page>

@@ -50,6 +50,10 @@ public sealed partial class MainWindow : Window
             "updater"    => typeof(UpdaterPage),
             "quickclean" => typeof(QuickCleanPage),
             "recyclebin" => typeof(RecycleBinPage),
+            "spacelens"  => typeof(SpaceLensPage),
+            "largeold"   => typeof(LargeOldFilesPage),
+            "duplicates" => typeof(DuplicatesPage),
+            "similar"    => typeof(SimilarPhotosPage),
             _            => typeof(StubPage)
         };
 
