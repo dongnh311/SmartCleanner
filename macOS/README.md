@@ -1,6 +1,6 @@
 # SmartCleanner — macOS
 
-> Phần macOS của repo dual-platform `SmartCleanner`. Bản Windows ở `../Windows/`. App scheme + bundle name vẫn là `MacCleaner` để không phải tái-sign + tái-cấp quyền TCC.
+> macOS side of the dual-platform `SmartCleanner` repo. The Windows port lives in [`../Windows/`](../Windows/). The Xcode scheme and bundle name stay `MacCleaner` so existing code signatures and TCC grants keep working — no re-sign, no re-prompt.
 
 A personal macOS cleaner + system monitor — scans junk, manages malware
 persistence, uninstalls apps with leftovers, and surfaces real-time

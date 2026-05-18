@@ -36,8 +36,9 @@ dotnet run --project App/App.csproj
 ```
 
 CI lives at `.github/workflows/windows-ci.yml`: builds on every push
-touching `Windows/**`, runs xunit, publishes a self-contained `win-x64`
-artifact named `MacCleaner-win-x64` on each green main build.
+touching `Windows/**`, runs xunit, and publishes two self-contained
+artifacts — `MacCleaner-win-x64` and `MacCleaner-win-arm64` — on each
+green main build.
 
 ## Solution layout
 
@@ -96,7 +97,7 @@ Windows/MacCleaner.Win/
 | Quarantine | `quarantine` | `IQuarantineService` |
 | My Tools | `mytools` | `IMyToolsService` |
 | Clock | `clock` | `TimeZoneInfo` (no service) |
-| Paint | `paint` | `InkCanvas` (no service) |
+| Paint | `paint` | placeholder — `InkCanvas` deferred (XAML compiler issue on the unpackaged self-contained build) |
 | Scroll Denoiser | `scroll` | `IScrollDenoiserService` (WH_MOUSE_LL) |
 | Settings | (NavView built-in) | `ISqliteService`, `IQuarantineService` |
 
