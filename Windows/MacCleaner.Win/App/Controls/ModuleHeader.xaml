@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UserControl
+    x:Class="MacCleaner.Win.App.Controls.ModuleHeader"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Grid Padding="{StaticResource SpacingLg},{StaticResource SpacingMd},{StaticResource SpacingLg},{StaticResource SpacingMd}"
+          ColumnSpacing="{StaticResource SpacingMd}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Hero icon backdrop — gradient tile lifted from heroIconBackdrop() -->
+        <Border
+            Grid.Column="0"
+            x:Name="IconBackdrop"
+            Width="56"
+            Height="56"
+            CornerRadius="{StaticResource RadiusLg}"
+            BorderThickness="0.5"
+            VerticalAlignment="Center">
+            <FontIcon
+                x:Name="IconGlyph"
+                FontFamily="{StaticResource SymbolThemeFontFamily}"
+                FontSize="22"
+                Glyph="&#xE713;"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center" />
+        </Border>
+
+        <StackPanel
+            Grid.Column="1"
+            VerticalAlignment="Center"
+            Spacing="1">
+            <TextBlock
+                x:Name="TitleText"
+                FontSize="{StaticResource FontSizeTitleMedium}"
+                FontWeight="SemiBold"
+                Text="Module" />
+            <TextBlock
+                x:Name="SubtitleText"
+                FontSize="12"
+                Opacity="0.65"
+                Text="Subtitle" />
+        </StackPanel>
+
+        <ContentPresenter
+            Grid.Column="2"
+            x:Name="TrailingSlot"
+            VerticalAlignment="Center" />
+    </Grid>
+</UserControl>

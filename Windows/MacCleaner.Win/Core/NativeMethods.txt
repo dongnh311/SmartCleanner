@@ -1,0 +1,5 @@
+// CsWin32 source generator input. Add Win32 APIs needed by Core services here;
+// the generator emits strongly-typed P/Invoke wrappers at build time.
+//
+// Phase 1 will populate this as services land. Keep it empty until then so
+// the generator does not produce unused bindings.

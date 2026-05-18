@@ -1,0 +1,79 @@
+name: Windows CI
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'Windows/**'
+      - '.github/workflows/windows-ci.yml'
+  pull_request:
+    paths:
+      - 'Windows/**'
+      - '.github/workflows/windows-ci.yml'
+  workflow_dispatch:
+
+defaults:
+  run:
+    shell: pwsh
+    working-directory: Windows/MacCleaner.Win
+
+jobs:
+  build:
+    name: Build + test (windows-latest)
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET 8
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Install Windows App SDK workload
+        run: dotnet workload install windowsappsdk
+
+      - name: Restore
+        run: dotnet restore MacCleaner.Win.sln
+
+      - name: Build (Debug)
+        run: dotnet build MacCleaner.Win.sln --configuration Debug --no-restore /p:Platform=x64
+
+      - name: Test
+        run: dotnet test Tests/Tests.csproj --configuration Debug --no-build --logger "trx;LogFileName=test-results.trx"
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: Windows/MacCleaner.Win/Tests/TestResults/*.trx
+
+  publish:
+    name: Publish self-contained x64 exe
+    runs-on: windows-latest
+    needs: build
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET 8
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Install Windows App SDK workload
+        run: dotnet workload install windowsappsdk
+
+      - name: Publish
+        run: dotnet publish App/App.csproj --configuration Release --runtime win-x64 --self-contained true -p:Platform=x64 -p:PublishSingleFile=false -o publish/win-x64
+
+      - name: Upload publish artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: MacCleaner-win-x64
+          path: Windows/MacCleaner.Win/publish/win-x64/**
+          retention-days: 7

@@ -47,6 +47,18 @@ fastlane/test_output
 *.swp
 *~
 
+# .NET / Windows port
+Windows/**/bin/
+Windows/**/obj/
+Windows/**/.vs/
+Windows/**/*.user
+Windows/**/*.suo
+Windows/**/AppPackages/
+Windows/**/BundleArtifacts/
+Windows/**/Generated Files/
+Windows/**/publish/
+*.pdb
+
 # Env / secrets
 .env
 .env.local

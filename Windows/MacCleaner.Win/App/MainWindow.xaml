@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window
+    x:Class="MacCleaner.Win.App.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:Microsoft.UI.Xaml.Controls">
+
+    <Grid>
+        <NavigationView
+            x:Name="Nav"
+            IsBackButtonVisible="Collapsed"
+            IsSettingsVisible="True"
+            PaneDisplayMode="Left"
+            OpenPaneLength="220"
+            SelectionChanged="Nav_SelectionChanged">
+
+            <NavigationView.MenuItems>
+                <!-- Performance -->
+                <NavigationViewItemHeader Content="Performance" />
+                <NavigationViewItem Content="Dashboard"        Tag="dashboard"    Icon="ViewAll" />
+                <NavigationViewItem Content="Process Monitor"  Tag="processes"    Icon="AllApps" />
+                <NavigationViewItem Content="Usage Trends"     Tag="trends"       Icon="BarChart4" />
+                <NavigationViewItem Content="Memory"           Tag="memory"       Icon="MemoryProcess" />
+                <NavigationViewItem Content="Battery"          Tag="battery"      Icon="Battery8" />
+                <NavigationViewItem Content="Sensors"          Tag="sensors"      Icon="Lightbulb" />
+                <NavigationViewItem Content="Network"          Tag="network"      Icon="Globe" />
+                <NavigationViewItem Content="Bluetooth"        Tag="bluetooth"    Icon="Phone" />
+                <NavigationViewItem Content="Disk Monitor"     Tag="diskmon"      Icon="Save" />
+                <NavigationViewItem Content="Login Items"      Tag="loginitems"   Icon="Permissions" />
+
+                <!-- Applications -->
+                <NavigationViewItemHeader Content="Applications" />
+                <NavigationViewItem Content="Uninstaller"      Tag="uninstaller"  Icon="Delete" />
+                <NavigationViewItem Content="Updater"          Tag="updater"      Icon="Download" />
+
+                <!-- Cleanup -->
+                <NavigationViewItemHeader Content="Cleanup" />
+                <NavigationViewItem Content="Quick Clean"      Tag="quickclean"   Icon="Broom" />
+                <NavigationViewItem Content="Recycle Bin"      Tag="recyclebin"   Icon="DeleteLines" />
+
+                <!-- Files -->
+                <NavigationViewItemHeader Content="Files" />
+                <NavigationViewItem Content="Space Lens"       Tag="spacelens"    Icon="ZoomIn" />
+                <NavigationViewItem Content="Large &amp; Old"  Tag="largeold"     Icon="Calendar" />
+                <NavigationViewItem Content="Duplicates"       Tag="duplicates"   Icon="Copy" />
+                <NavigationViewItem Content="Similar Photos"   Tag="similar"      Icon="Pictures" />
+
+                <!-- Tools -->
+                <NavigationViewItemHeader Content="Tools" />
+                <NavigationViewItem Content="Shredder"         Tag="shredder"     Icon="Shredder" />
+                <NavigationViewItem Content="Quarantine"       Tag="quarantine"   Icon="Shield" />
+                <NavigationViewItem Content="My Tools"         Tag="mytools"      Icon="Bookmarks" />
+                <NavigationViewItem Content="Clock"            Tag="clock"        Icon="Clock" />
+                <NavigationViewItem Content="Paint"            Tag="paint"        Icon="Highlight" />
+                <NavigationViewItem Content="Scroll Denoiser"  Tag="scroll"       Icon="Filter" />
+            </NavigationView.MenuItems>
+
+            <Frame x:Name="ContentFrame" />
+        </NavigationView>
+    </Grid>
+</Window>
