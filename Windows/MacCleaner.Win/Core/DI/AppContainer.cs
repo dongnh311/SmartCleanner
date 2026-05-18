@@ -1,13 +1,15 @@
+using MacCleaner.Win.Core.FileSystem;
+using MacCleaner.Win.Core.Performance;
+using MacCleaner.Win.Core.Storage;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
 namespace MacCleaner.Win.Core.DI;
 
 /// <summary>
-/// Composition root for Core services. Phase 1 will register the system
-/// metric / process / drive / registry / sqlite services here; for now this
-/// just wires logging so the App layer can call <c>AddCoreServices</c>
-/// from <c>App.xaml.cs</c> without referencing concrete types.
+/// Composition root for Core services. The App layer adds its own
+/// platform-bound services (e.g. ToastService that needs WindowsAppSDK)
+/// in a separate extension method after calling this one.
 /// </summary>
 public static class AppContainer
 {
@@ -18,6 +20,13 @@ public static class AppContainer
             builder.AddDebug();
             builder.SetMinimumLevel(LogLevel.Information);
         });
+
+        services.AddSingleton<ISystemMetricsService, SystemMetricsService>();
+        services.AddSingleton<IProcessService, ProcessService>();
+        services.AddSingleton<IDriveService, DriveService>();
+        services.AddSingleton<IRegistryService, RegistryService>();
+        services.AddSingleton<ISqliteService, SqliteService>();
+
         return services;
     }
 }
