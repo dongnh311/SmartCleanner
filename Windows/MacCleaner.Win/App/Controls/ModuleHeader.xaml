@@ -4,8 +4,11 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <Grid Padding="{StaticResource SpacingLg},{StaticResource SpacingMd},{StaticResource SpacingLg},{StaticResource SpacingMd}"
-          ColumnSpacing="{StaticResource SpacingMd}">
+    <!-- Padding mirrors macOS ModuleHeader: Spacing.lg horizontal,
+         Spacing.md vertical. Hardcoded because WinUI Thickness attribute
+         parser doesn't accept markup extensions in comma-separated form. -->
+    <Grid Padding="16,12,16,12"
+          ColumnSpacing="12">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />

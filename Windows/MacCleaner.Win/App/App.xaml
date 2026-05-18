@@ -6,7 +6,8 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
+                <!-- WinUI 3 loads its default theme resources automatically;
+                     XamlControlsResources is a WinUI 2 / UWP-only type. -->
                 <ResourceDictionary Source="Resources/DesignTokens.xaml" />
                 <ResourceDictionary Source="Resources/Styles.xaml" />
             </ResourceDictionary.MergedDictionaries>
