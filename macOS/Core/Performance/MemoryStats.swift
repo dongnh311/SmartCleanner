@@ -11,10 +11,15 @@ struct MemoryStats: Sendable, Hashable {
     let appMemory: Int64
     let pageSize: Int
 
-    var used: Int64 { total - free }
+    /// macOS "Memory Used" — matches Activity Monitor and vm_stat's notion of
+    /// in-use RAM. `total - free` overcounts wildly because macOS keeps almost
+    /// nothing truly "free": inactive pages are old app data that's reclaimable
+    /// on demand, not used. `wired + compressed + active` is what's actually
+    /// holding live state.
+    var used: Int64 { wired + compressed + active }
     var pressurePercent: Double {
         guard total > 0 else { return 0 }
-        return Double(wired + compressed + active) / Double(total) * 100
+        return Double(used) / Double(total) * 100
     }
 }
 
