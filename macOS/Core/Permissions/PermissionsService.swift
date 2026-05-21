@@ -60,4 +60,13 @@ actor PermissionsService {
     static func requestAccessibilityPrompt() -> Bool {
         AXIsProcessTrustedWithOptions(["AXTrustedCheckOptionPrompt": true] as CFDictionary)
     }
+
+    /// Silent trust check — same signal as `requestAccessibilityPrompt` but
+    /// never shows the system dialog. Use this on background re-checks (e.g.
+    /// post-wake rebuilds) where popping a permission alert would surprise
+    /// the user.
+    @MainActor
+    static func isAccessibilityTrusted() -> Bool {
+        AXIsProcessTrusted()
+    }
 }
