@@ -105,7 +105,11 @@ final class ScrollDenoiserController: ObservableObject {
         }
 
         if savedEnabled {
-            start()
+            // No prompt on init — permission was granted previously when the
+            // user enabled the feature. A bare `AXIsProcessTrusted()` here
+            // also dodges the post-login race where TCC briefly reports
+            // not-trusted (and would falsely re-prompt).
+            startWithRetry(initialPrompt: false)
         }
     }
 
@@ -115,7 +119,7 @@ final class ScrollDenoiserController: ObservableObject {
     // and the process teardown reclaims the tap regardless.
 
     func start() {
-        startInternal(promptIfNeeded: true)
+        startWithRetry(initialPrompt: true)
     }
 
     /// 500ms settle delay lets WindowServer/TCC re-establish trust state
@@ -127,7 +131,27 @@ final class ScrollDenoiserController: ObservableObject {
         Task { @MainActor [weak self] in
             try? await Task.sleep(nanoseconds: 500_000_000)
             guard let self, self.isEnabled else { return }
-            self.startInternal(promptIfNeeded: false)
+            self.startWithRetry(initialPrompt: false)
+        }
+    }
+
+    /// TCC can take several seconds to load the trust DB after fresh login
+    /// (and occasionally after wake), so a single AX check right at process
+    /// launch returns false even when permission was previously granted.
+    /// Retry silently with backoff before leaving the user with an error
+    /// banner — the next-day-after-login case where the feature "just
+    /// stopped working" was this.
+    private func startWithRetry(initialPrompt: Bool) {
+        startInternal(promptIfNeeded: initialPrompt)
+        if isRunning { return }
+
+        Task { @MainActor [weak self] in
+            for delaySec: UInt64 in [1, 2, 4] {
+                try? await Task.sleep(nanoseconds: delaySec * 1_000_000_000)
+                guard let self, self.isEnabled, !self.isRunning else { return }
+                self.startInternal(promptIfNeeded: false)
+                if self.isRunning { return }
+            }
         }
     }
 
