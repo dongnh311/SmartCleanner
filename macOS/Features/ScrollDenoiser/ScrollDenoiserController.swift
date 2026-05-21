@@ -81,6 +81,7 @@ final class ScrollDenoiserController: ObservableObject {
     private var tap: CFMachPort?
     private var runLoopSource: CFRunLoopSource?
     private var tapContext: ScrollDenoiserTapContext?
+    private var wakeObserver: NSObjectProtocol?
 
     init() {
         let savedEnabled = UserDefaults.standard.bool(forKey: DefaultsKeys.scrollDenoiserEnabled)
@@ -89,6 +90,19 @@ final class ScrollDenoiserController: ObservableObject {
         self.filter = DirectionLockFilter(settings: savedSettings)
         self.isEnabled = savedEnabled
         self.settings = savedSettings
+
+        // macOS sometimes invalidates a CGEventTap across sleep without
+        // firing `.tapDisabledByUserInput` — callback recovery never runs
+        // and the filter goes silently dead until toggled off+on.
+        self.wakeObserver = NSWorkspace.shared.notificationCenter.addObserver(
+            forName: NSWorkspace.didWakeNotification,
+            object: nil,
+            queue: nil
+        ) { [weak self] _ in
+            Task { @MainActor [weak self] in
+                self?.handleWake()
+            }
+        }
 
         if savedEnabled {
             start()
@@ -101,13 +115,33 @@ final class ScrollDenoiserController: ObservableObject {
     // and the process teardown reclaims the tap regardless.
 
     func start() {
+        startInternal(promptIfNeeded: true)
+    }
+
+    /// 500ms settle delay lets WindowServer/TCC re-establish trust state
+    /// post-wake — without it, `AXIsProcessTrusted()` can briefly return
+    /// false even when permission is granted.
+    private func handleWake() {
+        guard isEnabled else { return }
+        stop()
+        Task { @MainActor [weak self] in
+            try? await Task.sleep(nanoseconds: 500_000_000)
+            guard let self, self.isEnabled else { return }
+            self.startInternal(promptIfNeeded: false)
+        }
+    }
+
+    private func startInternal(promptIfNeeded: Bool) {
         guard tap == nil else { return }
 
-        // A `.defaultTap` event tap (one that can drop events) requires
-        // Accessibility access, not Input Monitoring. Prompt the user the
-        // first time so MacCleaner is added to the system list — without
-        // this call the app silently won't appear under Privacy → Accessibility.
-        guard PermissionsService.requestAccessibilityPrompt() else {
+        // `.defaultTap` requires Accessibility access, not Input Monitoring.
+        // Wake-driven restarts skip the prompt — permission is already
+        // granted, we just need a fresh tap, and popping the system dialog
+        // would surprise the user.
+        let trusted = promptIfNeeded
+            ? PermissionsService.requestAccessibilityPrompt()
+            : PermissionsService.isAccessibilityTrusted()
+        guard trusted else {
             lastError = "MacCleaner needs Accessibility access to filter scroll events. Open System Settings → Privacy & Security → Accessibility, enable MacCleaner, then toggle the filter again."
             isRunning = false
             return
