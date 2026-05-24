@@ -98,9 +98,9 @@ private struct ScrollDenoiserContent: View {
             tunableRow(
                 title: "Slow-scroll lock",
                 description: "Lock window when wheel is moving slowly. Lower = legitimate reverses pass quicker.",
-                value: Binding(
-                    get: { Double(controller.settings.minLockMs) },
-                    set: { controller.settings.minLockMs = Int($0) }
+                value: settingBinding(
+                    get: \.minLockMs,
+                    set: { $0.minLockMs = $1 }
                 ),
                 range: 0...100,
                 step: 5,
@@ -110,9 +110,9 @@ private struct ScrollDenoiserContent: View {
             tunableRow(
                 title: "Fast-scroll lock",
                 description: "Lock window when wheel is moving fast (encoder most prone to aliasing). Higher = stronger filtering.",
-                value: Binding(
-                    get: { Double(controller.settings.maxLockMs) },
-                    set: { controller.settings.maxLockMs = Int($0) }
+                value: settingBinding(
+                    get: \.maxLockMs,
+                    set: { $0.maxLockMs = $1 }
                 ),
                 range: 30...300,
                 step: 10,
@@ -122,9 +122,9 @@ private struct ScrollDenoiserContent: View {
             tunableRow(
                 title: "Fast-scroll threshold",
                 description: "Ticks per measurement window above which the wheel is treated as 'fast'.",
-                value: Binding(
-                    get: { Double(controller.settings.fastThreshold) },
-                    set: { controller.settings.fastThreshold = Int($0) }
+                value: settingBinding(
+                    get: \.fastThreshold,
+                    set: { $0.fastThreshold = $1 }
                 ),
                 range: 1...15,
                 step: 1,
@@ -142,6 +142,27 @@ private struct ScrollDenoiserContent: View {
         }
         .padding(Spacing.md)
         .cardStyle(radius: Radius.lg, withShadow: false)
+    }
+
+    /// Slider bindings must do a full struct write-back instead of mutating a
+    /// nested field directly. `controller.settings.minLockMs = X` *should*
+    /// fire the `@Published` setter + `didSet`, but Swift's modify-access path
+    /// through a property wrapper can skip the user-defined `didSet`, leaving
+    /// `filter.update(settings:)` unrun — the "have to click Reset to apply"
+    /// bug. Building a fresh struct and assigning it whole guarantees the
+    /// setter (and didSet) fires.
+    private func settingBinding(
+        get keyPath: KeyPath<DirectionLockSettings, Int>,
+        set mutator: @escaping (inout DirectionLockSettings, Int) -> Void
+    ) -> Binding<Double> {
+        Binding(
+            get: { Double(controller.settings[keyPath: keyPath]) },
+            set: { newValue in
+                var updated = controller.settings
+                mutator(&updated, Int(newValue))
+                controller.settings = updated
+            }
+        )
     }
 
     private func tunableRow(
