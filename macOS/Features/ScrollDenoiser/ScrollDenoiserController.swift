@@ -82,6 +82,10 @@ final class ScrollDenoiserController: ObservableObject {
     private var runLoopSource: CFRunLoopSource?
     private var tapContext: ScrollDenoiserTapContext?
     private var wakeObserver: NSObjectProtocol?
+    private var screensWakeObserver: NSObjectProtocol?
+    private var sessionActiveObserver: NSObjectProtocol?
+    private var screenUnlockObserver: NSObjectProtocol?
+    private var healthCheckTask: Task<Void, Never>?
 
     init() {
         let savedEnabled = UserDefaults.standard.bool(forKey: DefaultsKeys.scrollDenoiserEnabled)
@@ -91,18 +95,8 @@ final class ScrollDenoiserController: ObservableObject {
         self.isEnabled = savedEnabled
         self.settings = savedSettings
 
-        // macOS sometimes invalidates a CGEventTap across sleep without
-        // firing `.tapDisabledByUserInput` — callback recovery never runs
-        // and the filter goes silently dead until toggled off+on.
-        self.wakeObserver = NSWorkspace.shared.notificationCenter.addObserver(
-            forName: NSWorkspace.didWakeNotification,
-            object: nil,
-            queue: nil
-        ) { [weak self] _ in
-            Task { @MainActor [weak self] in
-                self?.handleWake()
-            }
-        }
+        registerRecoveryObservers()
+        startHealthCheck()
 
         if savedEnabled {
             // No prompt on init — permission was granted previously when the
@@ -110,6 +104,64 @@ final class ScrollDenoiserController: ObservableObject {
             // also dodges the post-login race where TCC briefly reports
             // not-trusted (and would falsely re-prompt).
             startWithRetry(initialPrompt: false)
+        }
+    }
+
+    /// CGEventTap dies silently for more than just S3 sleep — display sleep,
+    /// screen lock, fast user switching, and WindowServer restarts can all
+    /// invalidate the tap without firing `.tapDisabledByUserInput`. Listen on
+    /// every recovery edge we know about; each one routes through `handleWake`
+    /// which rebuilds the tap after a short TCC settle delay.
+    private func registerRecoveryObservers() {
+        let workspaceCenter = NSWorkspace.shared.notificationCenter
+        let wakeHandler: @Sendable (Notification) -> Void = { [weak self] _ in
+            Task { @MainActor [weak self] in self?.handleWake() }
+        }
+
+        wakeObserver = workspaceCenter.addObserver(
+            forName: NSWorkspace.didWakeNotification,
+            object: nil, queue: nil, using: wakeHandler
+        )
+        screensWakeObserver = workspaceCenter.addObserver(
+            forName: NSWorkspace.screensDidWakeNotification,
+            object: nil, queue: nil, using: wakeHandler
+        )
+        sessionActiveObserver = workspaceCenter.addObserver(
+            forName: NSWorkspace.sessionDidBecomeActiveNotification,
+            object: nil, queue: nil, using: wakeHandler
+        )
+
+        // `com.apple.screenIsUnlocked` is posted by loginwindow when the user
+        // unlocks the screen — not covered by NSWorkspace's wake/session
+        // notifications, but a frequent killer of long-lived event taps.
+        screenUnlockObserver = DistributedNotificationCenter.default().addObserver(
+            forName: Notification.Name("com.apple.screenIsUnlocked"),
+            object: nil, queue: .main, using: wakeHandler
+        )
+    }
+
+    /// Polls `CGEventTapIsEnabled` every 5s. The callback-driven recovery only
+    /// fires when macOS sends `.tapDisabledBy*` events, which doesn't happen
+    /// for every silent-death path (TCC drift, WindowServer restart, ad-hoc
+    /// signature re-evaluation on local builds). The poll cost is negligible
+    /// and it's the only way to catch those cases without user interaction.
+    private func startHealthCheck() {
+        healthCheckTask?.cancel()
+        healthCheckTask = Task { @MainActor [weak self] in
+            while !Task.isCancelled {
+                try? await Task.sleep(nanoseconds: 5_000_000_000)
+                guard let self else { return }
+                guard self.isEnabled else { continue }
+
+                let healthy: Bool = {
+                    guard let tap = self.tap else { return false }
+                    return CGEvent.tapIsEnabled(tap: tap)
+                }()
+                if healthy { continue }
+
+                self.stop()
+                self.startWithRetry(initialPrompt: false)
+            }
         }
     }
 
