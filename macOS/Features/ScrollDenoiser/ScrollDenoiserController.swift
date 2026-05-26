@@ -86,6 +86,12 @@ final class ScrollDenoiserController: ObservableObject {
     private var sessionActiveObserver: NSObjectProtocol?
     private var screenUnlockObserver: NSObjectProtocol?
     private var healthCheckTask: Task<Void, Never>?
+    private var restartTask: Task<Void, Never>?
+    // True from the moment a recovery rebuild is scheduled until its backoff
+    // loop settles. Set/read only on MainActor, so the flag is the cheap,
+    // race-free way for the notification storm and the health-check poll to
+    // coalesce onto the single in-flight restart instead of piling on.
+    private var restartInFlight = false
 
     init() {
         let savedEnabled = UserDefaults.standard.bool(forKey: DefaultsKeys.scrollDenoiserEnabled)
@@ -100,10 +106,10 @@ final class ScrollDenoiserController: ObservableObject {
 
         if savedEnabled {
             // No prompt on init — permission was granted previously when the
-            // user enabled the feature. A bare `AXIsProcessTrusted()` here
-            // also dodges the post-login race where TCC briefly reports
-            // not-trusted (and would falsely re-prompt).
-            startWithRetry(initialPrompt: false)
+            // user enabled the feature. The silent retry path also dodges the
+            // post-login race where TCC briefly reports not-trusted (and would
+            // falsely re-prompt).
+            scheduleRestart(settleMs: 0)
         }
     }
 
@@ -140,29 +146,29 @@ final class ScrollDenoiserController: ObservableObject {
         )
     }
 
-    /// Polls `CGEventTapIsEnabled` every 5s. The callback-driven recovery only
+    /// Polls `CGEventTapIsEnabled` every 2s. The callback-driven recovery only
     /// fires when macOS sends `.tapDisabledBy*` events, which doesn't happen
     /// for every silent-death path (TCC drift, WindowServer restart, ad-hoc
     /// signature re-evaluation on local builds). The poll cost is negligible
     /// and it's the only way to catch those cases without user interaction.
+    /// Defers to any restart already in flight so it never resets a backoff
+    /// that's mid-wait.
     private func startHealthCheck() {
         healthCheckTask?.cancel()
         healthCheckTask = Task { @MainActor [weak self] in
             while !Task.isCancelled {
-                try? await Task.sleep(nanoseconds: 5_000_000_000)
+                try? await Task.sleep(nanoseconds: 2_000_000_000)
                 guard let self else { return }
-                guard self.isEnabled else { continue }
-
-                let healthy: Bool = {
-                    guard let tap = self.tap else { return false }
-                    return CGEvent.tapIsEnabled(tap: tap)
-                }()
-                if healthy { continue }
-
-                self.stop()
-                self.startWithRetry(initialPrompt: false)
+                guard self.isEnabled, !self.restartInFlight else { continue }
+                if self.isTapHealthy { continue }
+                self.scheduleRestart(settleMs: 0)
             }
         }
+    }
+
+    private var isTapHealthy: Bool {
+        guard let tap else { return false }
+        return CGEvent.tapIsEnabled(tap: tap)
     }
 
     // No deinit: this service lives for the app's lifetime
@@ -170,41 +176,79 @@ final class ScrollDenoiserController: ObservableObject {
     // non-Sendable CFMachPort from a nonisolated deinit,
     // and the process teardown reclaims the tap regardless.
 
+    /// User-initiated enable (toggle on). Prompt once, then hand off to the
+    /// silent retry path if TCC isn't ready yet so the toggle doesn't bounce
+    /// back to a permission banner during the brief trust-DB load.
     func start() {
-        startWithRetry(initialPrompt: true)
-    }
-
-    /// 500ms settle delay lets WindowServer/TCC re-establish trust state
-    /// post-wake — without it, `AXIsProcessTrusted()` can briefly return
-    /// false even when permission is granted.
-    private func handleWake() {
-        guard isEnabled else { return }
-        stop()
-        Task { @MainActor [weak self] in
-            try? await Task.sleep(nanoseconds: 500_000_000)
-            guard let self, self.isEnabled else { return }
-            self.startWithRetry(initialPrompt: false)
-        }
-    }
-
-    /// TCC can take several seconds to load the trust DB after fresh login
-    /// (and occasionally after wake), so a single AX check right at process
-    /// launch returns false even when permission was previously granted.
-    /// Retry silently with backoff before leaving the user with an error
-    /// banner — the next-day-after-login case where the feature "just
-    /// stopped working" was this.
-    private func startWithRetry(initialPrompt: Bool) {
-        startInternal(promptIfNeeded: initialPrompt)
+        restartTask?.cancel()
+        restartTask = nil
+        restartInFlight = false
+        ensureHealthy(promptIfNeeded: true)
         if isRunning { return }
+        scheduleRestart(settleMs: 0)
+    }
 
-        Task { @MainActor [weak self] in
-            for delaySec: UInt64 in [1, 2, 4] {
-                try? await Task.sleep(nanoseconds: delaySec * 1_000_000_000)
-                guard let self, self.isEnabled, !self.isRunning else { return }
-                self.startInternal(promptIfNeeded: false)
-                if self.isRunning { return }
+    /// Every recovery edge (display/system wake, session activation, screen
+    /// unlock) funnels here. A 600ms settle lets WindowServer/TCC re-establish
+    /// trust before the first probe.
+    private func handleWake() {
+        scheduleRestart(settleMs: 600)
+    }
+
+    /// THE single, coalesced recovery entry point. macOS fires a burst of
+    /// notifications at unlock — didWake + screensDidWake +
+    /// sessionDidBecomeActive + screenIsUnlocked — often spread across a
+    /// couple of seconds. The old code ran `stop()` + a delayed rebuild on
+    /// each one, so every later notification tore down the tap the previous
+    /// one had just built, leaving repeated unfiltered-scroll gaps: the
+    /// "works, then doesn't, never smooth" symptom. The `restartInFlight`
+    /// guard collapses the whole storm into one rebuild.
+    ///
+    /// The backoff loop covers the post-login case where TCC's trust DB loads
+    /// several seconds after the session becomes active, and — because each
+    /// pass only rebuilds when the tap is actually unhealthy — it also catches
+    /// a late invalidation that lands after the first probe found things fine.
+    private func scheduleRestart(settleMs: UInt64) {
+        guard isEnabled, !restartInFlight else { return }
+        restartInFlight = true
+        restartTask = Task { @MainActor [weak self] in
+            defer { self?.restartInFlight = false }
+            if settleMs > 0 {
+                try? await Task.sleep(nanoseconds: settleMs * 1_000_000)
+            }
+            for backoffMs: UInt64 in [0, 500, 1_000, 2_000, 4_000] {
+                if backoffMs > 0 {
+                    try? await Task.sleep(nanoseconds: backoffMs * 1_000_000)
+                }
+                guard let self, self.isEnabled, !Task.isCancelled else { return }
+                self.ensureHealthy(promptIfNeeded: false)
+                if self.isTapHealthy { return }
             }
         }
+    }
+
+    /// Brings the tap to a healthy state with the least disruption possible:
+    /// a live tap is left alone; a merely-disabled tap (the common lock/unlock
+    /// case) is re-enabled in place with no teardown gap and no TCC round-trip;
+    /// only a missing or orphaned tap triggers a full rebuild.
+    private func ensureHealthy(promptIfNeeded: Bool) {
+        if let tap {
+            if CGEvent.tapIsEnabled(tap: tap) {
+                isRunning = true
+                lastError = nil
+                return
+            }
+            CGEvent.tapEnable(tap: tap, enable: true)
+            if CGEvent.tapIsEnabled(tap: tap) {
+                isRunning = true
+                lastError = nil
+                return
+            }
+            // Re-enable didn't take — tap is orphaned (WindowServer restart,
+            // session switch). Drop it and build fresh below.
+            teardownTap()
+        }
+        startInternal(promptIfNeeded: promptIfNeeded)
     }
 
     private func startInternal(promptIfNeeded: Bool) {
@@ -255,7 +299,20 @@ final class ScrollDenoiserController: ObservableObject {
         self.lastError = nil
     }
 
+    /// User-initiated disable (toggle off). Cancels any pending recovery so a
+    /// scheduled rebuild can't resurrect the tap after the user turned it off,
+    /// then tears the tap down.
     func stop() {
+        restartTask?.cancel()
+        restartTask = nil
+        restartInFlight = false
+        teardownTap()
+    }
+
+    /// Releases the CG tap + run-loop source without touching the recovery
+    /// machinery. Shared by the public `stop()` and the in-place rebuild in
+    /// `ensureHealthy`, which must not cancel the restart task it runs inside.
+    private func teardownTap() {
         if let tap {
             CGEvent.tapEnable(tap: tap, enable: false)
         }
