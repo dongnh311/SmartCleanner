@@ -391,7 +391,10 @@ final class PaintState: ObservableObject {
         return out
     }
 
-    func open() {
+    /// `viewport` is the visible canvas area; the freshly opened image is
+    /// zoomed to fit it (matching the "Fit" command) so the whole picture is
+    /// on screen by default. Pass `.zero` to keep the current zoom.
+    func open(viewport: CGSize = .zero) {
         let panel = NSOpenPanel()
         panel.allowedContentTypes = [.png, .jpeg, .tiff, .bmp, .gif]
         panel.allowsMultipleSelection = false
@@ -404,6 +407,7 @@ final class PaintState: ObservableObject {
         NSGraphicsContext.restoreGraphicsState()
         currentURL = url
         version &+= 1
+        zoomToFit(viewport: viewport)
     }
 
     /// `background == nil` keeps the canvas transparent (checker pattern

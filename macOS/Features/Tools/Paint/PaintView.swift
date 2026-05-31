@@ -54,7 +54,7 @@ struct PaintView: View {
                 Label("New…", systemImage: "doc.badge.plus")
             }
             .keyboardShortcut("n", modifiers: .command)
-            Button { state.open() } label: {
+            Button { state.open(viewport: viewportSize) } label: {
                 Label("Open…", systemImage: "folder")
             }
             .keyboardShortcut("o", modifiers: .command)
@@ -198,9 +198,11 @@ struct PaintView: View {
             }
 
             SectionHeading("Color")
-            ColorPicker("Current", selection: $state.color, supportsOpacity: false)
-                .labelsHidden()
-                .frame(maxWidth: .infinity, alignment: .leading)
+            HStack(spacing: 6) {
+                ColorPicker("Current", selection: $state.color, supportsOpacity: false)
+                    .labelsHidden()
+                HexColorField(color: $state.color)
+            }
 
             LazyVGrid(columns: Array(repeating: GridItem(.fixed(22), spacing: 4), count: 5), spacing: 4) {
                 ForEach(palette, id: \.self) { swatch in
