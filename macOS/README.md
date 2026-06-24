@@ -19,6 +19,14 @@ Not for distribution. Single-user, ad-hoc signed.
 - **System monitor** — SMC sensors (temperatures, fans, power),
   GPU utilization, per-core CPU history, network history with VPN
   detection, Bluetooth devices, disk I/O.
+- **Realtime protection** (opt-in) — a userspace layer on the menu-bar
+  agent that watches LaunchAgents/Daemons, hashes new downloads against a
+  local SHA-256 blocklist, and guards your documents with ransomware
+  canaries + a write-burst detector. DANGER hits auto-quarantine
+  (reversible); reviews and ransomware signals alert only. No kernel hooks
+  (Endpoint Security needs an entitlement this ad-hoc build can't carry),
+  so detection is reactive, not block-before-exec. Toggle on the Malware
+  Removal page.
 - **Quarantine with restore** — anything cleaned moves to a 7-day
   quarantine before being permanently deleted; one-click restore.
 - **Smart Care** orchestrator runs Cleanup / Protection / Speed in

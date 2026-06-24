@@ -1,6 +1,11 @@
 import Foundation
 import AppKit
 
+private struct SmokeError: LocalizedError {
+    let message: String
+    var errorDescription: String? { message }
+}
+
 private func smokeLog(_ message: String) {
     Log.app.notice("[smoke] \(message, privacy: .public)")
     if let data = "[smoke] \(message)\n".data(using: .utf8) {
@@ -116,6 +121,18 @@ enum SmokeTest {
         await report("MalwareScanner.scan") {
             let threats = await container.malwareScanner.scan()
             return "\(threats.count) persistence items, \(threats.filter { $0.severity == .danger }.count) danger"
+        }
+
+        await report("RealtimeProtection.engine") {
+            let svc = container.realtimeProtection
+            // EICAR — the industry-standard *harmless* AV test string. Its
+            // digest must be on the bundled blocklist or the file-hash path
+            // is broken.
+            let eicar = "X5O!P%@AP[4\\PZX54(P^)7CC)7}$EICAR-STANDARD-ANTIVIRUS-TEST-FILE!$H+H*"
+            let hash = MalwareHashStore.sha256Hex(of: Data(eicar.utf8))
+            guard svc.signatureCount > 0 else { throw SmokeError(message: "blocklist empty") }
+            guard svc.isOnBlocklist(hash) else { throw SmokeError(message: "EICAR signature missing from blocklist") }
+            return "\(svc.signatureCount) signatures, EICAR matched, watcher=\(svc.isRunning ? "on" : "off")"
         }
 
         await report("PrivacyCleaner.scan") {
