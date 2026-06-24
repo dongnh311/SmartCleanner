@@ -117,7 +117,11 @@ final class RealtimeProtectionService: ObservableObject {
             guardian.plantCanaries(in: canaries)
             let count = allPaths.filter { FileManager.default.fileExists(atPath: $0) }.count
             watcher.start(paths: allPaths)
-            await MainActor.run { self?.watchedPathCount = count }
+            // Hop back via a @MainActor method rather than `MainActor.run {
+            // self?... }` — capturing self in that closure trips Swift 6's
+            // region-isolation "sending 'self' risks data races" check on
+            // newer toolchains (CI's Xcode caught it; local's didn't).
+            await self?.setWatchedPathCount(count)
         }
         Log.scanner.info("Realtime protection starting")
     }
@@ -131,6 +135,8 @@ final class RealtimeProtectionService: ObservableObject {
     }
 
     func clearEvents() { recentEvents.removeAll() }
+
+    private func setWatchedPathCount(_ count: Int) { watchedPathCount = count }
 
     /// Diagnostic/smoke-test hook — is this digest on the active blocklist?
     func isOnBlocklist(_ hash: String) -> Bool { hashStore.contains(hash) }
