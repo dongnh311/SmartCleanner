@@ -24,6 +24,7 @@ final class AppContainer: ObservableObject {
     let memoryService: MemoryService
     let batteryService: BatteryService
     let malwareScanner: MalwareScanner
+    let realtimeProtection: RealtimeProtectionService
     let privacyCleaner: PrivacyCleaner
     let permissionsReader: PermissionsReader
     let smartCareOrchestrator: SmartCareOrchestrator
@@ -87,6 +88,7 @@ final class AppContainer: ObservableObject {
         self.memoryService = MemoryService()
         self.batteryService = BatteryService()
         self.malwareScanner = MalwareScanner(quarantine: quarantine)
+        self.realtimeProtection = RealtimeProtectionService(quarantine: quarantine)
         self.privacyCleaner = PrivacyCleaner(quarantine: quarantine)
         self.permissionsReader = PermissionsReader()
         self.systemMetrics = SystemMetrics()
@@ -122,6 +124,7 @@ final class AppContainer: ObservableObject {
         Log.app.info("AppContainer initialised")
 
         menuBarStatus.start()
+        realtimeProtection.startIfEnabled()
         Task { [appUsageLogger] in await appUsageLogger.start() }
 
         Task { [ruleEngine, quarantine] in

@@ -45,6 +45,13 @@ enum DefaultsKeys {
     /// Paint right-side panel (Layers + History) visibility.
     static let paintPanelVisible = "Paint.panelVisible.v1"
 
+    /// Realtime protection master switch. Off by default — background
+    /// file-watching + auto-quarantine is a deliberate opt-in. Bool.
+    static let realtimeProtectionEnabled = "RealtimeProtection.enabled.v1"
+    /// User-contributed malware SHA-256 blocklist merged on top of the
+    /// bundled list. v1 = JSON-encoded array of lowercase hex strings.
+    static let realtimeProtectionUserHashes = "RealtimeProtection.userHashes.v1"
+
     /// Scroll Denoiser master enable. Bool.
     static let scrollDenoiserEnabled = "ScrollDenoiser.enabled.v1"
     /// Scroll Denoiser tunable settings — JSON-encoded `DirectionLockSettings`.

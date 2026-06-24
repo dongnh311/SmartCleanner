@@ -175,6 +175,8 @@ private struct GeneralSettings: View {
     @AppStorage("appearance.preference") private var appearance: String = "system"
     @AppStorage("startup.runSmartCare") private var runSmartCareOnLaunch: Bool = false
     @AppStorage("language.preference") private var language: String = "system"
+    @State private var launchAtLogin = false
+    @State private var launchNeedsApproval = false
 
     var body: some View {
         Form {
@@ -183,6 +185,18 @@ private struct GeneralSettings: View {
                     Text("Match System").tag("system")
                     Text("Light").tag("light")
                     Text("Dark").tag("dark")
+                }
+                Toggle("Open MacCleaner at login", isOn: $launchAtLogin)
+                    .onChange(of: launchAtLogin) { newValue in
+                        LaunchAtLogin.setEnabled(newValue)
+                        // Re-sync from the OS — it may reject the change or
+                        // park it in "requires approval".
+                        launchAtLogin = LaunchAtLogin.isEnabled
+                        launchNeedsApproval = LaunchAtLogin.needsApproval
+                    }
+                if launchNeedsApproval {
+                    Text("Approve MacCleaner under System Settings › General › Login Items to finish enabling this.")
+                        .font(.caption2).foregroundStyle(.secondary)
                 }
                 Toggle("Run Smart Care at launch", isOn: $runSmartCareOnLaunch)
             } header: {
@@ -206,6 +220,10 @@ private struct GeneralSettings: View {
         }
         .formStyle(.grouped)
         .padding()
+        .onAppear {
+            launchAtLogin = LaunchAtLogin.isEnabled
+            launchNeedsApproval = LaunchAtLogin.needsApproval
+        }
     }
 
     /// AppleLanguages drives every Foundation/SwiftUI localization lookup.
