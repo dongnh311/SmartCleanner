@@ -37,6 +37,12 @@ final class RealtimeProtectionService: ObservableObject {
     private var recentlyHandled: [String: Date] = [:]
     private let dedupWindow: TimeInterval = 30
 
+    /// Notification debounce — events arriving within this window collapse
+    /// into a single banner so a malware dump can't spam Notification Center.
+    private var pendingNotify: [RealtimeEvent] = []
+    private var notifyTask: Task<Void, Never>?
+    private let notifyDebounce: TimeInterval = 1.5
+
     private static let maxEvents = 60
 
     init(quarantine: QuarantineService) {
@@ -150,6 +156,8 @@ final class RealtimeProtectionService: ObservableObject {
         watcher?.stop()
         watcher = nil
         guardian.removeCanaries()
+        notifyTask?.cancel()
+        pendingNotify.removeAll()
         isRunning = false
         Log.scanner.info("Realtime protection stopped")
     }
@@ -291,6 +299,7 @@ final class RealtimeProtectionService: ObservableObject {
 
     private func apply(_ detections: [Detection]) async {
         let now = Date()
+        var surfaced: [RealtimeEvent] = []
         for d in detections {
             let key = "\(d.kind.rawValue)|\(d.path)"
             if let last = recentlyHandled[key], now.timeIntervalSince(last) < dedupWindow { continue }
@@ -310,21 +319,57 @@ final class RealtimeProtectionService: ObservableObject {
                 path: d.path, title: d.title, detail: d.detail, action: action)
             recentEvents.insert(event, at: 0)
             if recentEvents.count > Self.maxEvents { recentEvents.removeLast() }
-
-            notify(event)
+            surfaced.append(event)
             Log.scanner.warning("Realtime: \(d.title, privacy: .public) — \(action.rawValue, privacy: .public)")
+        }
+        // Buffer + debounce so a bulk drop (even across several FSEvents
+        // batches) raises a single banner, not one per file.
+        if !surfaced.isEmpty { scheduleNotify(surfaced) }
+    }
+
+    private func scheduleNotify(_ events: [RealtimeEvent]) {
+        pendingNotify.append(contentsOf: events)
+        notifyTask?.cancel()
+        let delay = notifyDebounce
+        notifyTask = Task { [weak self] in
+            try? await Task.sleep(nanoseconds: UInt64(delay * 1_000_000_000))
+            guard !Task.isCancelled else { return }
+            self?.flushNotify()
         }
     }
 
-    private func notify(_ event: RealtimeEvent) {
+    private func flushNotify() {
+        let batch = pendingNotify
+        pendingNotify.removeAll()
+        guard !batch.isEmpty else { return }
+        notify(batch)
+    }
+
+    private func notify(_ events: [RealtimeEvent]) {
         let content = UNMutableNotificationContent()
-        content.title = event.title
-        content.body = event.action == .quarantined
-            ? "Moved to quarantine. \(event.detail)"
-            : event.detail
+        let quarantined = events.filter { $0.action == .quarantined }.count
+
+        if events.count == 1 {
+            let e = events[0]
+            let name = (e.path as NSString).lastPathComponent
+            if e.action == .quarantined {
+                content.title = "🛡️ MacCleaner — Threat quarantined"
+                content.body = "“\(name)” was malicious and moved to Quarantine (restorable for 7 days)."
+            } else {
+                content.title = "🛡️ MacCleaner — Threat detected"
+                content.body = "\(e.title). Review it on the Malware Removal page."
+            }
+        } else {
+            content.title = "🛡️ MacCleaner — \(events.count) threats handled"
+            var parts: [String] = []
+            if quarantined > 0 { parts.append("\(quarantined) quarantined") }
+            let alerted = events.count - quarantined
+            if alerted > 0 { parts.append("\(alerted) flagged") }
+            content.body = "\(parts.joined(separator: ", ")). Open the Malware Removal page to review them."
+        }
         content.sound = .default
         content.categoryIdentifier = "MacCleaner.realtime"
-        let req = UNNotificationRequest(identifier: "rt-" + event.id.uuidString, content: content, trigger: nil)
+        let req = UNNotificationRequest(identifier: "rt-" + UUID().uuidString, content: content, trigger: nil)
         // No completion handler — UN dispatches it off-main and that trips
         // Swift 6's executor assertion (see AlertEngine for the same note).
         UNUserNotificationCenter.current().add(req)
