@@ -368,6 +368,16 @@ private struct RealtimeEnginesSettings: View {
                 Text(status).font(.caption).foregroundStyle(.secondary)
                     .fixedSize(horizontal: false, vertical: true)
             }
+
+            Divider()
+
+            Text("YARA engine — \(YaraRuleStore.shared.ruleCount) rules loaded. Drop your own .yar files into:")
+                .font(.caption2).foregroundStyle(.secondary)
+                .fixedSize(horizontal: false, vertical: true)
+            Text(YaraRuleStore.userRulesDir().path)
+                .font(.system(size: 10, design: .monospaced))
+                .foregroundStyle(.tertiary)
+                .textSelection(.enabled)
         } header: {
             Text("Realtime detection engines")
         }

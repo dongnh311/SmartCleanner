@@ -24,6 +24,8 @@ packages:
   GRDB:
     url: https://github.com/groue/GRDB.swift
     from: "7.0.0"
+  Yara:
+    path: Vendor/Yara
 
 targets:
   MacCleaner:
@@ -44,6 +46,8 @@ targets:
           - "Localizable.xcstrings"
     dependencies:
       - package: GRDB
+      - package: Yara
+        product: Yara
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.dong.MacCleaner

@@ -262,10 +262,22 @@ final class RealtimeProtectionService: ObservableObject {
                             title: "Known-malicious file: \((path as NSString).lastPathComponent)",
                             detail: "SHA-256 matches the local blocklist.",
                             quarantine: true))
-                    } else if hasQuarantineXattr(path) {
-                        // Only internet-downloaded files (quarantine xattr)
-                        // are sent to VirusTotal — conserves the API quota.
-                        result.vtCandidates.append(VTCandidate(path: path, hash: hash))
+                    } else {
+                        // Local YARA rule match → REVIEW (rules are broad, so
+                        // alert-only, never auto-quarantine).
+                        let yara = YaraRuleStore.shared.scanFile(path)
+                        if !yara.isEmpty {
+                            result.detections.append(Detection(
+                                kind: .maliciousFile, severity: .warn, path: path,
+                                title: "YARA match: \((path as NSString).lastPathComponent)",
+                                detail: "Matched rule(s): \(yara.joined(separator: ", ")).",
+                                quarantine: false))
+                        }
+                        // Internet-downloaded files (quarantine xattr) also go
+                        // to VirusTotal — conserves the API quota.
+                        if hasQuarantineXattr(path) {
+                            result.vtCandidates.append(VTCandidate(path: path, hash: hash))
+                        }
                     }
                 }
                 continue
