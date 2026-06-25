@@ -44,6 +44,9 @@ final class YaraRuleStore: @unchecked Sendable {
 
     /// Names of rules matching the file (deduped across rule files), or [].
     func scanFile(_ path: String) -> [String] {
+        // Rule files trivially match their own pattern strings — don't scan them.
+        let ext = (path as NSString).pathExtension.lowercased()
+        if ext == "yar" || ext == "yara" { return [] }
         lock.lock(); let es = engines; lock.unlock()
         guard !es.isEmpty else { return [] }
         if let size = try? FileManager.default.attributesOfItem(atPath: path)[.size] as? Int64,
