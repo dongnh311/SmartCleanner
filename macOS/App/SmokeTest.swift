@@ -123,6 +123,14 @@ enum SmokeTest {
             return "\(threats.count) persistence items, \(threats.filter { $0.severity == .danger }.count) danger"
         }
 
+        await report("MalwareScanner.fullScan") {
+            var files = 0, items = 0
+            for await event in container.malwareScanner.fullScan() {
+                if case .finished(let threats, let scanned) = event { files = scanned; items = threats.count }
+            }
+            return "\(files) files swept, \(items) flagged"
+        }
+
         await report("RealtimeProtection.engine") {
             let svc = container.realtimeProtection
             // EICAR — the industry-standard *harmless* AV test string. Its
