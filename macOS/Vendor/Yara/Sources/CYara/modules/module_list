@@ -1,0 +1,6 @@
+MODULE(hash)
+MODULE(macho)
+MODULE(math)
+MODULE(time)
+MODULE(console)
+MODULE(string)
