@@ -23,12 +23,14 @@ final class RealtimeProtectionService: ObservableObject {
     @Published private(set) var isRunning = false
     @Published private(set) var watchedPathCount = 0
     @Published private(set) var recentEvents: [RealtimeEvent] = []
-
-    let signatureCount: Int
+    @Published private(set) var signatureCount: Int = 0
 
     private let quarantine: QuarantineService
     private let hashStore: MalwareHashStore
     private let guardian = RansomwareGuard()
+    private let vtClient = VirusTotalClient()
+    /// Exposed so Settings can trigger a manual blocklist feed refresh.
+    let feedUpdater: MalwareFeedUpdater
     private var watcher: FileSystemWatcher?
 
     /// path|kind → last surfaced; suppresses FSEvents duplicates.
@@ -41,6 +43,7 @@ final class RealtimeProtectionService: ObservableObject {
         self.quarantine = quarantine
         let store = MalwareHashStore()
         self.hashStore = store
+        self.feedUpdater = MalwareFeedUpdater(store: store)
         self.signatureCount = store.count
         self.isEnabled = UserDefaults.standard.bool(forKey: DefaultsKeys.realtimeProtectionEnabled)
     }
@@ -95,9 +98,10 @@ final class RealtimeProtectionService: ObservableObject {
         let canaries = canaryDirs
         let allPaths = Array(Set(persistenceDirs + fileDropDirs + canaryDirs))
 
+        let vtClient = self.vtClient
         let watcher = FileSystemWatcher { [weak self] events in
             Task.detached(priority: .utility) {
-                let detections = Self.analyze(
+                let result = Self.analyze(
                     events,
                     hashStore: hashStore,
                     guardian: guardian,
@@ -105,6 +109,22 @@ final class RealtimeProtectionService: ObservableObject {
                     fileDropDirs: drops,
                     burstDirs: bursts
                 )
+                var detections = result.detections
+                // Unknown downloaded files → ask VirusTotal (opt-in, rate-limited).
+                if VirusTotalClient.isEnabled {
+                    for cand in result.vtCandidates {
+                        guard case .success(let v) = await vtClient.lookup(sha256: cand.hash),
+                              v.malicious > 0 else { continue }
+                        let danger = v.malicious >= VirusTotalClient.quarantineThreshold
+                        detections.append(Detection(
+                            kind: .maliciousFile,
+                            severity: danger ? .danger : .warn,
+                            path: cand.path,
+                            title: "VirusTotal: \(v.malicious)/\(v.total) flagged \((cand.path as NSString).lastPathComponent)",
+                            detail: "\(v.malicious) of \(v.total) engines on VirusTotal flagged this download as malicious.",
+                            quarantine: danger))
+                    }
+                }
                 guard !detections.isEmpty else { return }
                 await self?.apply(detections)
             }
@@ -141,6 +161,19 @@ final class RealtimeProtectionService: ObservableObject {
     /// Diagnostic/smoke-test hook — is this digest on the active blocklist?
     func isOnBlocklist(_ hash: String) -> Bool { hashStore.contains(hash) }
 
+    /// Settings "Update now" — downloads the configured feed and refreshes
+    /// the published signature count.
+    func updateFeed() async -> Result<MalwareFeedUpdater.Summary, MalwareFeedUpdater.UpdateError> {
+        let result = await feedUpdater.update()
+        signatureCount = hashStore.count
+        return result
+    }
+
+    /// Settings "Test key" — true if the VirusTotal key authenticates.
+    func validateVirusTotalKey() async -> Bool {
+        await vtClient.validateKey()
+    }
+
     // MARK: - Analysis (off the main actor)
 
     private struct Detection: Sendable {
@@ -153,6 +186,19 @@ final class RealtimeProtectionService: ObservableObject {
         let quarantine: Bool
     }
 
+    /// An unknown (not locally blocklisted) downloaded file whose hash is
+    /// worth a VirusTotal lookup. Hashing happens during analysis; the
+    /// (rate-limited, async) VT call happens after, off the main actor.
+    private struct VTCandidate: Sendable {
+        let path: String
+        let hash: String
+    }
+
+    private struct AnalyzeResult: Sendable {
+        var detections: [Detection] = []
+        var vtCandidates: [VTCandidate] = []
+    }
+
     private nonisolated static func analyze(
         _ events: [RealtimeFileEvent],
         hashStore: MalwareHashStore,
@@ -160,8 +206,8 @@ final class RealtimeProtectionService: ObservableObject {
         persistenceDirs: Set<String>,
         fileDropDirs: Set<String>,
         burstDirs: Set<String>
-    ) -> [Detection] {
-        var out: [Detection] = []
+    ) -> AnalyzeResult {
+        var result = AnalyzeResult()
         for event in events {
             let path = event.path
             let parent = (path as NSString).deletingLastPathComponent
@@ -171,7 +217,7 @@ final class RealtimeProtectionService: ObservableObject {
             // alarm; only a real content change or deletion does.
             if guardian.isCanary(path) {
                 if guardian.isCanaryTampered(path) {
-                    out.append(Detection(
+                    result.detections.append(Detection(
                         kind: .ransomwareCanary, severity: .danger, path: path,
                         title: "Ransomware canary altered",
                         detail: "A decoy file's contents changed or it was deleted. Mass file encryption may be in progress — disconnect from the network and check running processes.",
@@ -188,7 +234,7 @@ final class RealtimeProtectionService: ObservableObject {
                 let kind: ThreatItem.ThreatKind = parent.hasSuffix("LaunchDaemons") ? .launchDaemon : .launchAgent
                 if let threat = MalwareScanner.evaluatePlist(at: URL(fileURLWithPath: path), kind: kind),
                    threat.severity >= .warn {
-                    out.append(Detection(
+                    result.detections.append(Detection(
                         kind: .persistence, severity: threat.severity, path: path,
                         title: "New persistence item: \(threat.title)",
                         detail: threat.signals.joined(separator: " · "),
@@ -197,16 +243,22 @@ final class RealtimeProtectionService: ObservableObject {
                 continue
             }
 
-            // 3) File dropped into a watched folder → hash blocklist.
+            // 3) File dropped into a watched folder → local hash blocklist,
+            //    then (for actually-downloaded files) queue a VT lookup.
             if event.isFile, (event.isCreated || event.isRenamed),
                isUnder(parent, roots: fileDropDirs) {
-                if let hash = MalwareHashStore.sha256Hex(ofFileAt: URL(fileURLWithPath: path)),
-                   hashStore.contains(hash) {
-                    out.append(Detection(
-                        kind: .maliciousFile, severity: .danger, path: path,
-                        title: "Known-malicious file: \((path as NSString).lastPathComponent)",
-                        detail: "SHA-256 matches the local blocklist.",
-                        quarantine: true))
+                if let hash = MalwareHashStore.sha256Hex(ofFileAt: URL(fileURLWithPath: path)) {
+                    if hashStore.contains(hash) {
+                        result.detections.append(Detection(
+                            kind: .maliciousFile, severity: .danger, path: path,
+                            title: "Known-malicious file: \((path as NSString).lastPathComponent)",
+                            detail: "SHA-256 matches the local blocklist.",
+                            quarantine: true))
+                    } else if hasQuarantineXattr(path) {
+                        // Only internet-downloaded files (quarantine xattr)
+                        // are sent to VirusTotal — conserves the API quota.
+                        result.vtCandidates.append(VTCandidate(path: path, hash: hash))
+                    }
                 }
                 continue
             }
@@ -215,18 +267,24 @@ final class RealtimeProtectionService: ObservableObject {
             if event.isFile, event.isModified, !event.isCreated,
                isUnder(parent, roots: burstDirs),
                guardian.noteModificationAndCheckBurst() {
-                out.append(Detection(
+                result.detections.append(Detection(
                     kind: .ransomwareBurst, severity: .warn, path: parent,
                     title: "Unusual burst of file changes",
                     detail: "Many documents in \((parent as NSString).lastPathComponent) changed at once — consistent with bulk encryption. Review what is writing to this folder.",
                     quarantine: false))
             }
         }
-        return out
+        return result
     }
 
     private nonisolated static func isUnder(_ path: String, roots: Set<String>) -> Bool {
         roots.contains { path == $0 || path.hasPrefix($0 + "/") }
+    }
+
+    /// True when the file carries the `com.apple.quarantine` xattr — i.e.
+    /// it was downloaded from the internet rather than created locally.
+    private nonisolated static func hasQuarantineXattr(_ path: String) -> Bool {
+        getxattr(path, "com.apple.quarantine", nil, 0, 0, 0) > 0
     }
 
     // MARK: - Response (main actor)
@@ -240,7 +298,10 @@ final class RealtimeProtectionService: ObservableObject {
 
             var action: RealtimeEvent.Action = .alerted
             if d.quarantine {
-                let result = await quarantine.quarantine([URL(fileURLWithPath: d.path)])
+                // allowProtected: confirmed-malicious DANGER files may sit in
+                // ~/Downloads etc. which the cleanup whitelist guards — but a
+                // virus there is a threat to neutralise, reversibly.
+                let result = await quarantine.quarantine([URL(fileURLWithPath: d.path)], allowProtected: true)
                 action = result.succeeded.isEmpty ? .failed : .quarantined
             }
 

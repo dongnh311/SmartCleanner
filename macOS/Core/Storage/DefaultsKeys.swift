@@ -51,6 +51,16 @@ enum DefaultsKeys {
     /// User-contributed malware SHA-256 blocklist merged on top of the
     /// bundled list. v1 = JSON-encoded array of lowercase hex strings.
     static let realtimeProtectionUserHashes = "RealtimeProtection.userHashes.v1"
+    /// Opt-in VirusTotal lookups for unknown downloaded files. Off by
+    /// default — sends file *hashes* (never the file) to VirusTotal. Bool.
+    static let virusTotalEnabled = "RealtimeProtection.virusTotal.enabled.v1"
+    /// VirusTotal API key (free tier works). Plain string.
+    static let virusTotalAPIKey = "RealtimeProtection.virusTotal.apiKey.v1"
+    /// URL of a newline-separated SHA-256 feed to merge into the blocklist
+    /// (e.g. an abuse.ch export or a personal list). Plain string.
+    static let malwareFeedURL = "RealtimeProtection.feedURL.v1"
+    /// ISO-8601 timestamp of the last successful feed update. Plain string.
+    static let malwareFeedUpdatedAt = "RealtimeProtection.feedUpdatedAt.v1"
 
     /// Scroll Denoiser master enable. Bool.
     static let scrollDenoiserEnabled = "ScrollDenoiser.enabled.v1"
