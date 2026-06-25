@@ -131,6 +131,20 @@ enum SmokeTest {
             return "\(files) files swept, \(items) flagged"
         }
 
+        await report("YaraEngine.scan") {
+            let store = YaraRuleStore.shared
+            guard store.ruleCount > 0 else { throw SmokeError(message: "no YARA rules compiled") }
+            let tmp = NSTemporaryDirectory() + "mc_yara_eicar_\(UUID().uuidString).txt"
+            try "X5O!P%@AP[4\\PZX54(P^)7CC)7}$EICAR-STANDARD-ANTIVIRUS-TEST-FILE!$H+H*"
+                .write(toFile: tmp, atomically: true, encoding: .utf8)
+            defer { try? FileManager.default.removeItem(atPath: tmp) }
+            let matches = store.scanFile(tmp)
+            guard matches.contains("EICAR_Test_File") else {
+                throw SmokeError(message: "YARA didn't match EICAR (\(matches))")
+            }
+            return "\(store.ruleCount) rules, EICAR matched"
+        }
+
         await report("RealtimeProtection.engine") {
             let svc = container.realtimeProtection
             // EICAR — the industry-standard *harmless* AV test string. Its

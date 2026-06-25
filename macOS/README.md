@@ -24,10 +24,15 @@ Not for distribution. Single-user, ad-hoc signed.
   local SHA-256 blocklist, and guards your documents with ransomware
   canaries + a write-burst detector. Two extra engines for downloaded
   files (Settings › Protection): **VirusTotal** reputation lookup (you
-  paste a free API key — only the file's hash leaves the machine), and an
+  paste a free API key — only the file's hash leaves the machine), an
   **updatable blocklist feed** (point it at any SHA-256 list / abuse.ch
-  export). DANGER hits auto-quarantine (reversible); reviews and ransomware
-  signals alert only. No kernel hooks (Endpoint Security needs an
+  export), and a **YARA engine** (vendored libyara — bundled macOS rules
+  plus your own `.yar` files) for offline pattern/byte matching that
+  catches malware *families*, not just exact hashes. DANGER hits
+  auto-quarantine (reversible); YARA / review / ransomware signals alert
+  only. The Malware Removal **Scan** is a full sweep (auto-run items +
+  hashing + YARA over Downloads/Desktop/Documents/tmp); Smart Care keeps a
+  fast persistence-only check. No kernel hooks (Endpoint Security needs an
   entitlement this ad-hoc build can't carry), so detection is reactive,
   not block-before-exec. Toggle on the Malware Removal page.
 - **Quarantine with restore** — anything cleaned moves to a 7-day

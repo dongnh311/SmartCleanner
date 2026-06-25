@@ -1,0 +1,5 @@
+module CYara {
+    header "yara.h"
+    header "cyara_shim.h"
+    export *
+}
