@@ -48,7 +48,12 @@ actor QuarantineService {
     }
 
     /// Moves URLs into a timestamped quarantine session. Used for non-cache items.
-    func quarantine(_ urls: [URL], onProgress: CleanProgressHandler? = nil) async -> MoveResult {
+    /// `allowProtected` bypasses the cleanup whitelist (which guards
+    /// ~/Downloads, ~/Desktop, ~/Documents, etc. from the *cleaner*). The
+    /// realtime engine sets it for confirmed-malicious DANGER files: a known
+    /// virus sitting in Downloads is a threat to neutralise, not personal
+    /// data to protect — and the move is reversible from quarantine anyway.
+    func quarantine(_ urls: [URL], onProgress: CleanProgressHandler? = nil, allowProtected: Bool = false) async -> MoveResult {
         await MainActor.run { WhitelistGuard.refreshLiveProcesses(force: true) }
         let sessionID = timestampString()
         let session = root.appendingPathComponent(sessionID, isDirectory: true)
@@ -64,7 +69,7 @@ actor QuarantineService {
         var entries: [Manifest.Entry] = []
 
         for url in urls {
-            if WhitelistGuard.isProtected(url) {
+            if !allowProtected, WhitelistGuard.isProtected(url) {
                 failed.append((url, "Refused: protected path"))
                 Log.scanner.fault("quarantine refused on protected \(url.path, privacy: .public)")
                 onProgress?(url)

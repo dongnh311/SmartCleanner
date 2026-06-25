@@ -23,17 +23,25 @@ final class RealtimeProtectionService: ObservableObject {
     @Published private(set) var isRunning = false
     @Published private(set) var watchedPathCount = 0
     @Published private(set) var recentEvents: [RealtimeEvent] = []
-
-    let signatureCount: Int
+    @Published private(set) var signatureCount: Int = 0
 
     private let quarantine: QuarantineService
     private let hashStore: MalwareHashStore
     private let guardian = RansomwareGuard()
+    private let vtClient = VirusTotalClient()
+    /// Exposed so Settings can trigger a manual blocklist feed refresh.
+    let feedUpdater: MalwareFeedUpdater
     private var watcher: FileSystemWatcher?
 
     /// path|kind → last surfaced; suppresses FSEvents duplicates.
     private var recentlyHandled: [String: Date] = [:]
     private let dedupWindow: TimeInterval = 30
+
+    /// Notification debounce — events arriving within this window collapse
+    /// into a single banner so a malware dump can't spam Notification Center.
+    private var pendingNotify: [RealtimeEvent] = []
+    private var notifyTask: Task<Void, Never>?
+    private let notifyDebounce: TimeInterval = 1.5
 
     private static let maxEvents = 60
 
@@ -41,6 +49,7 @@ final class RealtimeProtectionService: ObservableObject {
         self.quarantine = quarantine
         let store = MalwareHashStore()
         self.hashStore = store
+        self.feedUpdater = MalwareFeedUpdater(store: store)
         self.signatureCount = store.count
         self.isEnabled = UserDefaults.standard.bool(forKey: DefaultsKeys.realtimeProtectionEnabled)
     }
@@ -95,9 +104,10 @@ final class RealtimeProtectionService: ObservableObject {
         let canaries = canaryDirs
         let allPaths = Array(Set(persistenceDirs + fileDropDirs + canaryDirs))
 
+        let vtClient = self.vtClient
         let watcher = FileSystemWatcher { [weak self] events in
             Task.detached(priority: .utility) {
-                let detections = Self.analyze(
+                let result = Self.analyze(
                     events,
                     hashStore: hashStore,
                     guardian: guardian,
@@ -105,6 +115,22 @@ final class RealtimeProtectionService: ObservableObject {
                     fileDropDirs: drops,
                     burstDirs: bursts
                 )
+                var detections = result.detections
+                // Unknown downloaded files → ask VirusTotal (opt-in, rate-limited).
+                if VirusTotalClient.isEnabled {
+                    for cand in result.vtCandidates {
+                        guard case .success(let v) = await vtClient.lookup(sha256: cand.hash),
+                              v.malicious > 0 else { continue }
+                        let danger = v.malicious >= VirusTotalClient.quarantineThreshold
+                        detections.append(Detection(
+                            kind: .maliciousFile,
+                            severity: danger ? .danger : .warn,
+                            path: cand.path,
+                            title: "VirusTotal: \(v.malicious)/\(v.total) flagged \((cand.path as NSString).lastPathComponent)",
+                            detail: "\(v.malicious) of \(v.total) engines on VirusTotal flagged this download as malicious.",
+                            quarantine: danger))
+                    }
+                }
                 guard !detections.isEmpty else { return }
                 await self?.apply(detections)
             }
@@ -130,6 +156,8 @@ final class RealtimeProtectionService: ObservableObject {
         watcher?.stop()
         watcher = nil
         guardian.removeCanaries()
+        notifyTask?.cancel()
+        pendingNotify.removeAll()
         isRunning = false
         Log.scanner.info("Realtime protection stopped")
     }
@@ -140,6 +168,19 @@ final class RealtimeProtectionService: ObservableObject {
 
     /// Diagnostic/smoke-test hook — is this digest on the active blocklist?
     func isOnBlocklist(_ hash: String) -> Bool { hashStore.contains(hash) }
+
+    /// Settings "Update now" — downloads the configured feed and refreshes
+    /// the published signature count.
+    func updateFeed() async -> Result<MalwareFeedUpdater.Summary, MalwareFeedUpdater.UpdateError> {
+        let result = await feedUpdater.update()
+        signatureCount = hashStore.count
+        return result
+    }
+
+    /// Settings "Test key" — true if the VirusTotal key authenticates.
+    func validateVirusTotalKey() async -> Bool {
+        await vtClient.validateKey()
+    }
 
     // MARK: - Analysis (off the main actor)
 
@@ -153,6 +194,19 @@ final class RealtimeProtectionService: ObservableObject {
         let quarantine: Bool
     }
 
+    /// An unknown (not locally blocklisted) downloaded file whose hash is
+    /// worth a VirusTotal lookup. Hashing happens during analysis; the
+    /// (rate-limited, async) VT call happens after, off the main actor.
+    private struct VTCandidate: Sendable {
+        let path: String
+        let hash: String
+    }
+
+    private struct AnalyzeResult: Sendable {
+        var detections: [Detection] = []
+        var vtCandidates: [VTCandidate] = []
+    }
+
     private nonisolated static func analyze(
         _ events: [RealtimeFileEvent],
         hashStore: MalwareHashStore,
@@ -160,8 +214,8 @@ final class RealtimeProtectionService: ObservableObject {
         persistenceDirs: Set<String>,
         fileDropDirs: Set<String>,
         burstDirs: Set<String>
-    ) -> [Detection] {
-        var out: [Detection] = []
+    ) -> AnalyzeResult {
+        var result = AnalyzeResult()
         for event in events {
             let path = event.path
             let parent = (path as NSString).deletingLastPathComponent
@@ -171,7 +225,7 @@ final class RealtimeProtectionService: ObservableObject {
             // alarm; only a real content change or deletion does.
             if guardian.isCanary(path) {
                 if guardian.isCanaryTampered(path) {
-                    out.append(Detection(
+                    result.detections.append(Detection(
                         kind: .ransomwareCanary, severity: .danger, path: path,
                         title: "Ransomware canary altered",
                         detail: "A decoy file's contents changed or it was deleted. Mass file encryption may be in progress — disconnect from the network and check running processes.",
@@ -188,7 +242,7 @@ final class RealtimeProtectionService: ObservableObject {
                 let kind: ThreatItem.ThreatKind = parent.hasSuffix("LaunchDaemons") ? .launchDaemon : .launchAgent
                 if let threat = MalwareScanner.evaluatePlist(at: URL(fileURLWithPath: path), kind: kind),
                    threat.severity >= .warn {
-                    out.append(Detection(
+                    result.detections.append(Detection(
                         kind: .persistence, severity: threat.severity, path: path,
                         title: "New persistence item: \(threat.title)",
                         detail: threat.signals.joined(separator: " · "),
@@ -197,16 +251,22 @@ final class RealtimeProtectionService: ObservableObject {
                 continue
             }
 
-            // 3) File dropped into a watched folder → hash blocklist.
+            // 3) File dropped into a watched folder → local hash blocklist,
+            //    then (for actually-downloaded files) queue a VT lookup.
             if event.isFile, (event.isCreated || event.isRenamed),
                isUnder(parent, roots: fileDropDirs) {
-                if let hash = MalwareHashStore.sha256Hex(ofFileAt: URL(fileURLWithPath: path)),
-                   hashStore.contains(hash) {
-                    out.append(Detection(
-                        kind: .maliciousFile, severity: .danger, path: path,
-                        title: "Known-malicious file: \((path as NSString).lastPathComponent)",
-                        detail: "SHA-256 matches the local blocklist.",
-                        quarantine: true))
+                if let hash = MalwareHashStore.sha256Hex(ofFileAt: URL(fileURLWithPath: path)) {
+                    if hashStore.contains(hash) {
+                        result.detections.append(Detection(
+                            kind: .maliciousFile, severity: .danger, path: path,
+                            title: "Known-malicious file: \((path as NSString).lastPathComponent)",
+                            detail: "SHA-256 matches the local blocklist.",
+                            quarantine: true))
+                    } else if hasQuarantineXattr(path) {
+                        // Only internet-downloaded files (quarantine xattr)
+                        // are sent to VirusTotal — conserves the API quota.
+                        result.vtCandidates.append(VTCandidate(path: path, hash: hash))
+                    }
                 }
                 continue
             }
@@ -215,24 +275,31 @@ final class RealtimeProtectionService: ObservableObject {
             if event.isFile, event.isModified, !event.isCreated,
                isUnder(parent, roots: burstDirs),
                guardian.noteModificationAndCheckBurst() {
-                out.append(Detection(
+                result.detections.append(Detection(
                     kind: .ransomwareBurst, severity: .warn, path: parent,
                     title: "Unusual burst of file changes",
                     detail: "Many documents in \((parent as NSString).lastPathComponent) changed at once — consistent with bulk encryption. Review what is writing to this folder.",
                     quarantine: false))
             }
         }
-        return out
+        return result
     }
 
     private nonisolated static func isUnder(_ path: String, roots: Set<String>) -> Bool {
         roots.contains { path == $0 || path.hasPrefix($0 + "/") }
     }
 
+    /// True when the file carries the `com.apple.quarantine` xattr — i.e.
+    /// it was downloaded from the internet rather than created locally.
+    private nonisolated static func hasQuarantineXattr(_ path: String) -> Bool {
+        getxattr(path, "com.apple.quarantine", nil, 0, 0, 0) > 0
+    }
+
     // MARK: - Response (main actor)
 
     private func apply(_ detections: [Detection]) async {
         let now = Date()
+        var surfaced: [RealtimeEvent] = []
         for d in detections {
             let key = "\(d.kind.rawValue)|\(d.path)"
             if let last = recentlyHandled[key], now.timeIntervalSince(last) < dedupWindow { continue }
@@ -240,7 +307,10 @@ final class RealtimeProtectionService: ObservableObject {
 
             var action: RealtimeEvent.Action = .alerted
             if d.quarantine {
-                let result = await quarantine.quarantine([URL(fileURLWithPath: d.path)])
+                // allowProtected: confirmed-malicious DANGER files may sit in
+                // ~/Downloads etc. which the cleanup whitelist guards — but a
+                // virus there is a threat to neutralise, reversibly.
+                let result = await quarantine.quarantine([URL(fileURLWithPath: d.path)], allowProtected: true)
                 action = result.succeeded.isEmpty ? .failed : .quarantined
             }
 
@@ -249,21 +319,57 @@ final class RealtimeProtectionService: ObservableObject {
                 path: d.path, title: d.title, detail: d.detail, action: action)
             recentEvents.insert(event, at: 0)
             if recentEvents.count > Self.maxEvents { recentEvents.removeLast() }
-
-            notify(event)
+            surfaced.append(event)
             Log.scanner.warning("Realtime: \(d.title, privacy: .public) — \(action.rawValue, privacy: .public)")
+        }
+        // Buffer + debounce so a bulk drop (even across several FSEvents
+        // batches) raises a single banner, not one per file.
+        if !surfaced.isEmpty { scheduleNotify(surfaced) }
+    }
+
+    private func scheduleNotify(_ events: [RealtimeEvent]) {
+        pendingNotify.append(contentsOf: events)
+        notifyTask?.cancel()
+        let delay = notifyDebounce
+        notifyTask = Task { [weak self] in
+            try? await Task.sleep(nanoseconds: UInt64(delay * 1_000_000_000))
+            guard !Task.isCancelled else { return }
+            self?.flushNotify()
         }
     }
 
-    private func notify(_ event: RealtimeEvent) {
+    private func flushNotify() {
+        let batch = pendingNotify
+        pendingNotify.removeAll()
+        guard !batch.isEmpty else { return }
+        notify(batch)
+    }
+
+    private func notify(_ events: [RealtimeEvent]) {
         let content = UNMutableNotificationContent()
-        content.title = event.title
-        content.body = event.action == .quarantined
-            ? "Moved to quarantine. \(event.detail)"
-            : event.detail
+        let quarantined = events.filter { $0.action == .quarantined }.count
+
+        if events.count == 1 {
+            let e = events[0]
+            let name = (e.path as NSString).lastPathComponent
+            if e.action == .quarantined {
+                content.title = "🛡️ MacCleaner — Threat quarantined"
+                content.body = "“\(name)” was malicious and moved to Quarantine (restorable for 7 days)."
+            } else {
+                content.title = "🛡️ MacCleaner — Threat detected"
+                content.body = "\(e.title). Review it on the Malware Removal page."
+            }
+        } else {
+            content.title = "🛡️ MacCleaner — \(events.count) threats handled"
+            var parts: [String] = []
+            if quarantined > 0 { parts.append("\(quarantined) quarantined") }
+            let alerted = events.count - quarantined
+            if alerted > 0 { parts.append("\(alerted) flagged") }
+            content.body = "\(parts.joined(separator: ", ")). Open the Malware Removal page to review them."
+        }
         content.sound = .default
         content.categoryIdentifier = "MacCleaner.realtime"
-        let req = UNNotificationRequest(identifier: "rt-" + event.id.uuidString, content: content, trigger: nil)
+        let req = UNNotificationRequest(identifier: "rt-" + UUID().uuidString, content: content, trigger: nil)
         // No completion handler — UN dispatches it off-main and that trips
         // Swift 6's executor assertion (see AlertEngine for the same note).
         UNUserNotificationCenter.current().add(req)

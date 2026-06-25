@@ -14,7 +14,7 @@ struct SettingsView: View {
                 .tabItem { Label("Alerts", systemImage: "bell.badge") }
             QuarantineSettings()
                 .tabItem { Label("Quarantine", systemImage: "tray.full") }
-            ProtectionSettings()
+            ProtectionSettings(realtime: container.realtimeProtection)
                 .tabItem { Label("Protection", systemImage: "lock.shield") }
             AboutSettings()
                 .tabItem { Label("About", systemImage: "info.circle") }
@@ -321,12 +321,94 @@ private struct QuarantineSettings: View {
     }
 }
 
+private struct RealtimeEnginesSettings: View {
+
+    @ObservedObject var realtime: RealtimeProtectionService
+
+    @State private var vtEnabled = VirusTotalClient.isEnabled
+    @State private var vtKey = VirusTotalClient.apiKey
+    @State private var feedURL = MalwareFeedUpdater.feedURL
+    @State private var status: String?
+    @State private var busy = false
+
+    var body: some View {
+        Section {
+            Toggle("VirusTotal lookups for downloads", isOn: $vtEnabled)
+                .onChange(of: vtEnabled) { newValue in VirusTotalClient.isEnabled = newValue }
+            SecureField("VirusTotal API key", text: $vtKey)
+                .onChange(of: vtKey) { newValue in VirusTotalClient.apiKey = newValue }
+            HStack {
+                Button("Test key") { Task { await testKey() } }
+                    .disabled(busy || vtKey.isEmpty)
+                Spacer()
+                Link("Get a free key", destination: URL(string: "https://www.virustotal.com/gui/join-us")!)
+                    .font(.caption)
+            }
+            Text("Sends only a file's SHA-256 (never the file) to VirusTotal, and only for internet-downloaded files. A free key allows ~4 lookups/min.")
+                .font(.caption2).foregroundStyle(.secondary)
+                .fixedSize(horizontal: false, vertical: true)
+
+            Divider()
+
+            TextField("Blocklist feed URL (one SHA-256 per line)", text: $feedURL)
+                .onChange(of: feedURL) { newValue in MalwareFeedUpdater.feedURL = newValue }
+                .textFieldStyle(.roundedBorder)
+            HStack {
+                Button("Update now") { Task { await update() } }
+                    .disabled(busy || feedURL.isEmpty)
+                Spacer()
+                Text("\(realtime.signatureCount) signatures")
+                    .font(.caption).foregroundStyle(.secondary)
+            }
+            if let last = MalwareFeedUpdater.lastUpdated {
+                Text("Feed updated \(last.formatted(date: .abbreviated, time: .shortened))")
+                    .font(.caption2).foregroundStyle(.tertiary)
+            }
+            if let status {
+                Text(status).font(.caption).foregroundStyle(.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+        } header: {
+            Text("Realtime detection engines")
+        }
+    }
+
+    private func testKey() async {
+        busy = true; status = "Testing…"
+        let ok = await realtime.validateVirusTotalKey()
+        status = ok ? "✓ VirusTotal key works." : "✗ Key rejected — check it and try again."
+        busy = false
+    }
+
+    private func update() async {
+        busy = true; status = "Downloading feed…"
+        switch await realtime.updateFeed() {
+        case .success(let s): status = "✓ Added \(s.added) new hashes (\(s.total) total)."
+        case .failure(let e): status = "✗ Update failed: \(Self.describe(e))."
+        }
+        busy = false
+    }
+
+    private static func describe(_ e: MalwareFeedUpdater.UpdateError) -> String {
+        switch e {
+        case .noURL: return "no URL set"
+        case .badURL: return "invalid URL"
+        case .http(let c): return "HTTP \(c)"
+        case .empty: return "no hashes found"
+        case .network: return "network error"
+        }
+    }
+}
+
 private struct ProtectionSettings: View {
 
     @ObservedObject private var config = ProtectionConfig.shared
+    let realtime: RealtimeProtectionService
 
     var body: some View {
         Form {
+            RealtimeEnginesSettings(realtime: realtime)
+
             Section {
                 Text("These dev tools are always protected while running — caches and tied paths are skipped automatically so a Clean can't crash the IDE or kill an emulator. Hardcoded for safety; can't be disabled.")
                     .font(.caption).foregroundStyle(.secondary)

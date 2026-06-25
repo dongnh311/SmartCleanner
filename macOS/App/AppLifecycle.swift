@@ -1,5 +1,6 @@
 import AppKit
 import SwiftUI
+import UserNotifications
 
 /// Keeps the menu-bar agent alive when the user "Quit"s the main window.
 ///
@@ -15,6 +16,16 @@ import SwiftUI
 final class MacCleanerAppDelegate: NSObject, NSApplicationDelegate {
 
     nonisolated(unsafe) static var quitForReal = false
+
+    /// Become the notification delegate at launch so alerts (malware
+    /// detections, threshold alerts) surface as banners **even while the app
+    /// is active or running as a menu-bar agent** — without a delegate macOS
+    /// silently swallows foreground notifications. Also prompts for
+    /// permission once so the very first detection can actually show.
+    nonisolated func applicationDidFinishLaunching(_ notification: Notification) {
+        UNUserNotificationCenter.current().delegate = self
+        Task { @MainActor in await AlertEngine.shared.requestAuthorizationIfNeeded() }
+    }
 
     nonisolated func applicationShouldTerminate(_ sender: NSApplication) -> NSApplication.TerminateReply {
         if Self.quitForReal { return .terminateNow }
@@ -41,6 +52,19 @@ final class MacCleanerAppDelegate: NSObject, NSApplicationDelegate {
             }
             window.orderOut(nil)
         }
+    }
+}
+
+extension MacCleanerAppDelegate: UNUserNotificationCenterDelegate {
+    /// Present malware/alert banners even when MacCleaner is the active app
+    /// or sitting in the menu bar — otherwise the OS only files them quietly
+    /// in Notification Center and the user never sees the threat.
+    nonisolated func userNotificationCenter(
+        _ center: UNUserNotificationCenter,
+        willPresent notification: UNNotification,
+        withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void
+    ) {
+        completionHandler([.banner, .sound, .list])
     }
 }
 
