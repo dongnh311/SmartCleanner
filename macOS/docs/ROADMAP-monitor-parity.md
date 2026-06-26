@@ -203,7 +203,7 @@ Mỗi sprint kết thúc khi build pass + user sanity-test ở môi trường th
 - [x] Tier 2 — Menu bar widget picker + Alerts engine + Bluetooth — **shipped 2026-05-08**.
 - [x] Tier 3 — Localization VN + Disk I/O page + Top processes popover — **shipped 2026-05-08**.
 - [x] Tier 4 (T4.1–T4.3) — Multi-timezone clock + Sleep/uptime panel + Per-sensor history sparkline — **shipped 2026-05-08**. T4.4 (fan control) deferred.
-- [ ] App permission prompt cho Maintenance commands (DNS flush yêu cầu sudo) — chưa hook PrivilegedHelper.
-- [ ] Updater (Sparkle) wiring — UI có nhưng feed URL chưa cấu hình.
-- [ ] Smart Care: parallel scan thay vì sequential pillar scan để tăng tốc.
-- [ ] Localization xcstrings: hiện dịch ~120 chuỗi visible nhất; còn ~200+ chuỗi sâu trong từng module chưa cover. Bổ sung dần khi đụng.
+- [x] App permission prompt cho Maintenance commands (DNS flush yêu cầu sudo) — **shipped 2026-06-26 (PR #12)**. `MaintenanceRunner` chạy lệnh trong app: non-admin qua `zsh`, admin qua `do shell script … with administrator privileges` (prompt hệ thống — không cần PrivilegedHelper/SMJobBless/Developer ID, hợp bản ad-hoc).
+- [x] Updater (Sparkle) wiring — **đã có sẵn**. `UpdaterView` + `SparkleUpdater` (đọc `SUFeedURL` từ Info.plist mỗi app) + `HomebrewUpdater` đã hoạt động: cask có Upgrade, Sparkle app có Download/Notes. *Self-update của chính MacCleaner* không khả thi trên bản ad-hoc (Gatekeeper chặn bản cập nhật chưa notarize) — defer như ESF.
+- [x] Smart Care: parallel scan — **đã có sẵn**. `SmartCareOrchestrator.run()` dùng `async let` chạy 4 pillar (junk/trash/malware/processes) đồng thời.
+- [x] Localization xcstrings — **shipped 2026-06-26 (PR #13)**. Dịch nốt 197 chuỗi sâu còn lại → **324/324 keys có tiếng Việt**. Proper noun/abbrev/unit giữ nguyên.
