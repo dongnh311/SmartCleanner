@@ -45,6 +45,7 @@ public sealed partial class MainWindow : Window
             "sensors"    => typeof(SensorsPage),
             "loginitems" => typeof(LoginItemsPage),
             "maintenance"=> typeof(MaintenancePage),
+            "malware"    => typeof(MalwarePage),
             "uninstaller"=> typeof(UninstallerPage),
             "updater"    => typeof(UpdaterPage),
             "quickclean" => typeof(QuickCleanPage),
