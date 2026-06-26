@@ -1,133 +1,3246 @@
 {
-  "sourceLanguage" : "en",
-  "version" : "1.0",
-  "strings" : {
-    "About" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Giới thiệu" } } } },
-    "Add Files…" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Thêm file…" } } } },
-    "Alerts" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Cảnh báo" } } } },
-    "App Permissions" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Quyền ứng dụng" } } } },
-    "APPLICATIONS" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "ỨNG DỤNG" } } } },
-    "Auto-pick newest" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Tự chọn bản mới nhất" } } } },
-    "Battery" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Pin" } } } },
-    "Bluetooth" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Bluetooth" } } } },
-    "Caches & logs" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Cache & log" } } } },
-    "Caches & logs — safe to delete, will regenerate" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Cache & log — an toàn xoá, sẽ tự tạo lại" } } } },
-    "Caches and logs regenerate as apps run." : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Cache và log sẽ tự tạo lại khi app chạy." } } } },
-    "Caches, logs and trash — safe to delete, will regenerate" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Cache, log và thùng rác — an toàn xoá, sẽ tự tạo lại" } } } },
-    "Cancel" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Huỷ" } } } },
-    "Charging" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Đang sạc" } } } },
-    "Check Now" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Kiểm tra ngay" } } } },
-    "Checking…" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Đang kiểm tra…" } } } },
-    "Clean Now" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Dọn ngay" } } } },
-    "Cleaned successfully" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Dọn xong" } } } },
-    "Cleaning…" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Đang dọn…" } } } },
-    "CLEANUP" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "DỌN" } } } },
-    "Click Scan to list installed apps" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Bấm Quét để liệt kê app đã cài" } } } },
-    "Computing feature prints…" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Đang tính dấu vân ảnh…" } } } },
-    "Condition" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Tình trạng" } } } },
-    "Confirm uninstall" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Xác nhận gỡ" } } } },
-    "Connected" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Đã kết nối" } } } },
-    "Continue" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Tiếp tục" } } } },
-    "CPU" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "CPU" } } } },
-    "Cycle count" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Số chu kỳ sạc" } } } },
-    "Dark" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Tối" } } } },
-    "Dashboard" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Bảng điều khiển" } } } },
-    "Delete" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Xoá" } } } },
-    "Delete Session" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Xoá phiên" } } } },
-    "Deselect All" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Bỏ chọn tất cả" } } } },
-    "DETAILS" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "CHI TIẾT" } } } },
-    "Disk" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Ổ đĩa" } } } },
-    "Download" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Tải về" } } } },
-    "Duplicate Finder" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Tìm trùng lặp" } } } },
-    "Duplicates" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Trùng lặp" } } } },
-    "Empty All" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Xoá tất cả" } } } },
-    "Everything up to date" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Mọi thứ đã mới nhất" } } } },
-    "Fetching…" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Đang tải…" } } } },
-    "FILES" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "TỆP" } } } },
-    "Free Up" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Giải phóng" } } } },
-    "Full Disk Access required" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Cần Full Disk Access" } } } },
-    "General" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Chung" } } } },
-    "GPU" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "GPU" } } } },
-    "Grant permissions" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Cấp quyền" } } } },
-    "Hashing files…" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Đang tính hash file…" } } } },
-    "HEALTH" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "TÌNH TRẠNG" } } } },
-    "Hide" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Ẩn" } } } },
-    "Inspecting…" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Đang kiểm tra…" } } } },
-    "INTERFACES" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "GIAO DIỆN MẠNG" } } } },
-    "Language" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Ngôn ngữ" } } } },
-    "Large & Old" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Lớn & Cũ" } } } },
-    "Last fired: %@" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Lần cuối: %@" } } } },
-    "Last scan: %@" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Lần quét gần nhất: %@" } } } },
-    "LEFTOVERS" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "DỮ LIỆU CÒN SÓT" } } } },
-    "Light" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Sáng" } } } },
-    "Live IOKit power source data" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Dữ liệu pin từ IOKit" } } } },
-    "Live RAM breakdown via host_statistics64" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Phân bổ RAM qua host_statistics64" } } } },
-    "Live SMC readings — temperatures, fans, power, voltage" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Đọc SMC trực tiếp — nhiệt độ, quạt, điện, điện áp" } } } },
-    "Loading…" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Đang tải…" } } } },
-    "Login Items" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "App khởi động cùng máy" } } } },
-    "Mac Overview" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Tổng quan Mac" } } } },
-    "MacCleaner" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "MacCleaner" } } } },
-    "Mail Attachments" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "File đính kèm Mail" } } } },
-    "Maintenance" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Bảo trì" } } } },
-    "Malware Removal" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Gỡ malware" } } } },
-    "Match System" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Theo hệ thống" } } } },
-    "Memory" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Bộ nhớ" } } } },
-    "Menu Bar" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Thanh menu" } } } },
-    "Menu bar metrics" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Số liệu hiển thị trên thanh menu" } } } },
-    "My Tools" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Công cụ của tôi" } } } },
-    "Network" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Mạng" } } } },
-    "No active interfaces" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Không có giao diện mạng hoạt động" } } } },
-    "No battery detected" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Không phát hiện pin" } } } },
-    "No duplicates found" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Không tìm thấy file trùng" } } } },
-    "No items match this filter" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Không có mục nào khớp bộ lọc" } } } },
-    "No paired devices" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Chưa ghép cặp thiết bị nào" } } } },
-    "No SMC sensors available" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Không đọc được cảm biến SMC" } } } },
-    "Nothing to clean" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Không có gì để dọn" } } } },
-    "Not charging" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Không sạc" } } } },
-    "Notifications permission needed" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Cần quyền thông báo" } } } },
-    "Open →" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Mở →" } } } },
-    "Open MacCleaner" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Mở MacCleaner" } } } },
-    "Order preview" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Xem trước thứ tự" } } } },
-    "Paired devices, battery levels" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Thiết bị đã ghép cặp, mức pin" } } } },
-    "PERFORMANCE" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "HIỆU NĂNG" } } } },
-    "Pick Folder…" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Chọn thư mục…" } } } },
-    "Privacy" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Riêng tư" } } } },
-    "Process Monitor" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Theo dõi tiến trình" } } } },
-    "Probing SMC keys…" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Đang dò SMC…" } } } },
-    "PROTECTION" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "BẢO VỆ" } } } },
-    "Photo Junk" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Rác ảnh" } } } },
-    "PUBLIC IP" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "IP CÔNG KHAI" } } } },
-    "Quarantine" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Cách ly" } } } },
-    "Quick Clean" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Dọn nhanh" } } } },
-    "Quit" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Thoát" } } } },
-    "Quit MacCleaner" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Thoát MacCleaner" } } } },
-    "Ready to clean" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Sẵn sàng dọn" } } } },
-    "Refresh" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Làm mới" } } } },
-    "Reveal Folder" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Mở thư mục" } } } },
-    "Rescan" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Quét lại" } } } },
-    "Restored to %@" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Đã khôi phục về %@" } } } },
-    "Run Smart Care" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Chạy Smart Care" } } } },
-    "Running: %@" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Đang chạy: %@" } } } },
-    "SCAN" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "QUÉT" } } } },
-    "Scan" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Quét" } } } },
-    "Scanning…" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Đang quét…" } } } },
-    "Scanning safe-to-delete items…" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Đang quét các mục an toàn để xoá…" } } } },
-    "Select All" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Chọn tất cả" } } } },
-    "Sensors" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Cảm biến" } } } },
-    "Settings…" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Cài đặt…" } } } },
-    "Show All Windows" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Hiện tất cả cửa sổ" } } } },
-    "Shredder" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Huỷ vĩnh viễn" } } } },
-    "Similar Photos" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Ảnh tương tự" } } } },
-    "Smart Care" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Smart Care" } } } },
-    "Space Lens" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Bản đồ ổ đĩa" } } } },
-    "Start Scan" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Bắt đầu quét" } } } },
-    "System Junk" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Rác hệ thống" } } } },
-    "TOOLS" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "CÔNG CỤ" } } } },
-    "Throughput, interfaces, public IP — last 60s rolling" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Băng thông, giao diện, IP công khai — 60 giây gần nhất" } } } },
-    "Trash Bins" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Thùng rác" } } } },
-    "Uninstaller" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Gỡ ứng dụng" } } } },
-    "Updater" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Cập nhật" } } } },
-    "Upload" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "Tải lên" } } } },
-    "VPN" : { "localizations" : { "vi" : { "stringUnit" : { "state" : "translated", "value" : "VPN" } } } }
+  "sourceLanguage": "en",
+  "version": "1.0",
+  "strings": {
+    "0": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "0"
+          }
+        }
+      }
+    },
+    "24-hour": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "24 giờ"
+          }
+        }
+      }
+    },
+    "ADMIN": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ADMIN"
+          }
+        }
+      }
+    },
+    "APPLICATIONS": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ỨNG DỤNG"
+          }
+        }
+      }
+    },
+    "AVAILABLE MODULES": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "MÔ-ĐUN KHẢ DỤNG"
+          }
+        }
+      }
+    },
+    "About": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Giới thiệu"
+          }
+        }
+      }
+    },
+    "Activity Monitor": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Activity Monitor"
+          }
+        }
+      }
+    },
+    "Actual Size (100%)": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kích thước thật (100%)"
+          }
+        }
+      }
+    },
+    "Add": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Thêm"
+          }
+        }
+      }
+    },
+    "Add Files…": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Thêm file…"
+          }
+        }
+      }
+    },
+    "Add Time Zone": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Thêm múi giờ"
+          }
+        }
+      }
+    },
+    "Add app…": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Thêm ứng dụng…"
+          }
+        }
+      }
+    },
+    "Add file…": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Thêm tệp…"
+          }
+        }
+      }
+    },
+    "Add folder…": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Thêm thư mục…"
+          }
+        }
+      }
+    },
+    "Admin commands ask for your macOS password and run with administrator privileges via the system prompt. Nothing leaves your Mac. Prefer the terminal? Use Copy or Open in Terminal instead.": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lệnh admin sẽ hỏi mật khẩu macOS của bạn và chạy với quyền quản trị qua hộp thoại hệ thống. Không có gì rời khỏi máy Mac. Thích dùng terminal? Hãy dùng Sao chép hoặc Mở trong Terminal."
+          }
+        }
+      }
+    },
+    "Age:": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tuổi:"
+          }
+        }
+      }
+    },
+    "Alerts": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cảnh báo"
+          }
+        }
+      }
+    },
+    "Always on": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Luôn bật"
+          }
+        }
+      }
+    },
+    "App Permissions": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quyền ứng dụng"
+          }
+        }
+      }
+    },
+    "Appearance": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Giao diện"
+          }
+        }
+      }
+    },
+    "Appearance & startup": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Giao diện & khởi động"
+          }
+        }
+      }
+    },
+    "AppleSMC declined every catalog key. Some VMs and stripped-down installs hide the service entirely.": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AppleSMC từ chối mọi khóa. Một số máy ảo và bản cài rút gọn ẩn hoàn toàn dịch vụ này."
+          }
+        }
+      }
+    },
+    "Approve MacCleaner under System Settings › General › Login Items to finish enabling this.": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hãy phê duyệt MacCleaner trong Cài đặt hệ thống › Cài đặt chung › Mục đăng nhập để hoàn tất bật tính năng này."
+          }
+        }
+      }
+    },
+    "Auto-pick largest": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tự chọn cái lớn nhất"
+          }
+        }
+      }
+    },
+    "Auto-pick newest": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tự chọn bản mới nhất"
+          }
+        }
+      }
+    },
+    "BG": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "BG"
+          }
+        }
+      }
+    },
+    "Background": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nền"
+          }
+        }
+      }
+    },
+    "Background apps": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ứng dụng chạy nền"
+          }
+        }
+      }
+    },
+    "Battery": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pin"
+          }
+        }
+      }
+    },
+    "Battery info is only available on laptops.": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Thông tin pin chỉ có trên laptop."
+          }
+        }
+      }
+    },
+    "Bluetooth": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bluetooth"
+          }
+        }
+      }
+    },
+    "Built-in protections": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bảo vệ tích hợp sẵn"
+          }
+        }
+      }
+    },
+    "Built-in rules": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quy tắc tích hợp sẵn"
+          }
+        }
+      }
+    },
+    "CATEGORY RATIONALE": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "LÝ DO PHÂN LOẠI"
+          }
+        }
+      }
+    },
+    "CLEANUP": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "DỌN"
+          }
+        }
+      }
+    },
+    "CPU": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CPU"
+          }
+        }
+      }
+    },
+    "Cache items are removed directly. Other items move to a 7-day quarantine.": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mục cache bị xoá thẳng. Các mục khác chuyển vào cách ly 7 ngày."
+          }
+        }
+      }
+    },
+    "Caches & data for these tools will be skipped to avoid crashing the IDE or killing the emulator.": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cache & dữ liệu của các công cụ này sẽ được bỏ qua để tránh làm sập IDE hoặc tắt emulator."
+          }
+        }
+      }
+    },
+    "Caches & logs": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cache & log"
+          }
+        }
+      }
+    },
+    "Caches & logs — safe to delete, will regenerate": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cache & log — an toàn xoá, sẽ tự tạo lại"
+          }
+        }
+      }
+    },
+    "Caches and logs regenerate as apps run.": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cache và log sẽ tự tạo lại khi app chạy."
+          }
+        }
+      }
+    },
+    "Caches, logs and trash — safe to delete, will regenerate": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cache, log và thùng rác — an toàn xoá, sẽ tự tạo lại"
+          }
+        }
+      }
+    },
+    "Cancel": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Huỷ"
+          }
+        }
+      }
+    },
+    "Charging": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Đang sạc"
+          }
+        }
+      }
+    },
+    "Cheap optical/mechanical wheel encoders can't keep up at high rotational speed and emit interleaved reverse ticks. The filter locks the dominant direction for a short window, drops the obvious noise, and releases on idle. Trackpad gestures and any continuous scroll are passed through untouched.": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bộ mã hóa con lăn quang/cơ giá rẻ không theo kịp khi quay nhanh và sinh ra các nhịp ngược xen kẽ. Bộ lọc khóa hướng chính trong một khoảng ngắn, loại bỏ nhiễu rõ ràng, và nhả ra khi ngừng. Cử chỉ trackpad và mọi thao tác cuộn liên tục được giữ nguyên."
+          }
+        }
+      }
+    },
+    "Check Now": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kiểm tra ngay"
+          }
+        }
+      }
+    },
+    "Checking…": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Đang kiểm tra…"
+          }
+        }
+      }
+    },
+    "Choose Folder…": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chọn thư mục…"
+          }
+        }
+      }
+    },
+    "Clean Now": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dọn ngay"
+          }
+        }
+      }
+    },
+    "Cleaned successfully": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dọn xong"
+          }
+        }
+      }
+    },
+    "Cleaning…": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Đang dọn…"
+          }
+        }
+      }
+    },
+    "Cleanup Log": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nhật ký dọn dẹp"
+          }
+        }
+      }
+    },
+    "Cleanup removes junk, Protection neutralises threats, Speed quits heavy apps. Review each, then hit Run.": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dọn dẹp xoá rác, Bảo vệ vô hiệu hóa mối đe dọa, Tăng tốc thoát các app nặng. Xem từng mục rồi bấm Chạy."
+          }
+        }
+      }
+    },
+    "Clear": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Xoá"
+          }
+        }
+      }
+    },
+    "Click Scan for a full check — auto-run items plus a malware hash sweep of Downloads, Desktop, Documents and temp folders.": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bấm Quét để kiểm tra toàn diện — các mục tự chạy cùng lượt quét hash mã độc ở Downloads, Desktop, Documents và các thư mục tạm."
+          }
+        }
+      }
+    },
+    "Click Scan to list installed apps": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bấm Quét để liệt kê app đã cài"
+          }
+        }
+      }
+    },
+    "Computing feature prints…": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Đang tính dấu vân ảnh…"
+          }
+        }
+      }
+    },
+    "Condition": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tình trạng"
+          }
+        }
+      }
+    },
+    "Confirm uninstall": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Xác nhận gỡ"
+          }
+        }
+      }
+    },
+    "Connected": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Đã kết nối"
+          }
+        }
+      }
+    },
+    "Continue": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tiếp tục"
+          }
+        }
+      }
+    },
+    "Copied to clipboard": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Đã sao chép vào clipboard"
+          }
+        }
+      }
+    },
+    "Copy": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sao chép"
+          }
+        }
+      }
+    },
+    "Copy path": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sao chép đường dẫn"
+          }
+        }
+      }
+    },
+    "Create": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tạo"
+          }
+        }
+      }
+    },
+    "Custom": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tùy chỉnh"
+          }
+        }
+      }
+    },
+    "Cycle count": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Số chu kỳ sạc"
+          }
+        }
+      }
+    },
+    "DETAILS": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CHI TIẾT"
+          }
+        }
+      }
+    },
+    "Dark": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tối"
+          }
+        }
+      }
+    },
+    "Dashboard": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bảng điều khiển"
+          }
+        }
+      }
+    },
+    "Delete": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Xoá"
+          }
+        }
+      }
+    },
+    "Delete (move to Quarantine)": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Xoá (chuyển vào Cách ly)"
+          }
+        }
+      }
+    },
+    "Delete All": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Xoá tất cả"
+          }
+        }
+      }
+    },
+    "Delete Session": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Xoá phiên"
+          }
+        }
+      }
+    },
+    "Deselect All": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bỏ chọn tất cả"
+          }
+        }
+      }
+    },
+    "Disabled — toggle on to fetch from api.ipify.org. Off by default for privacy.": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Đang tắt — bật lên để lấy từ api.ipify.org. Mặc định tắt để bảo vệ riêng tư."
+          }
+        }
+      }
+    },
+    "Disk": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ổ đĩa"
+          }
+        }
+      }
+    },
+    "Display": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hiển thị"
+          }
+        }
+      }
+    },
+    "Done": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Xong"
+          }
+        }
+      }
+    },
+    "Download": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tải về"
+          }
+        }
+      }
+    },
+    "Drag files here or press Add Files…": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kéo tệp vào đây hoặc bấm Thêm tệp…"
+          }
+        }
+      }
+    },
+    "Drops obvious reverse-direction ticks while you spin the wheel fast in one direction.": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Loại bỏ các nhịp ngược hướng rõ ràng khi bạn lăn nhanh một chiều."
+          }
+        }
+      }
+    },
+    "Duplicate Finder": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tìm trùng lặp"
+          }
+        }
+      }
+    },
+    "Duplicates": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trùng lặp"
+          }
+        }
+      }
+    },
+    "Each rule has its own cooldown so you won't get spammed if a metric stays elevated.": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mỗi quy tắc có thời gian chờ riêng nên bạn sẽ không bị spam nếu một chỉ số cứ cao mãi."
+          }
+        }
+      }
+    },
+    "Edit pins": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sửa ghim"
+          }
+        }
+      }
+    },
+    "Empty All": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Xoá tất cả"
+          }
+        }
+      }
+    },
+    "Enable filter": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bật bộ lọc"
+          }
+        }
+      }
+    },
+    "Enable system alerts": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bật cảnh báo hệ thống"
+          }
+        }
+      }
+    },
+    "English": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "English"
+          }
+        }
+      }
+    },
+    "Everything has been used recently.": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mọi thứ đều vừa được dùng gần đây."
+          }
+        }
+      }
+    },
+    "Everything up to date": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mọi thứ đã mới nhất"
+          }
+        }
+      }
+    },
+    "FILES": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "TỆP"
+          }
+        }
+      }
+    },
+    "Fetching…": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Đang tải…"
+          }
+        }
+      }
+    },
+    "Fill shape": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tô đầy hình"
+          }
+        }
+      }
+    },
+    "Find Leftovers": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tìm tệp sót lại"
+          }
+        }
+      }
+    },
+    "Fit": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vừa khung"
+          }
+        }
+      }
+    },
+    "Folders / files listed here are skipped by every cleanup module — useful for documents, vault folders, or any custom dir outside the standard app locations.": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Thư mục / tệp liệt kê ở đây được mọi mô-đun dọn dẹp bỏ qua — hữu ích cho tài liệu, thư mục bảo mật, hay bất kỳ thư mục tùy chỉnh nào nằm ngoài vị trí app tiêu chuẩn."
+          }
+        }
+      }
+    },
+    "Force Quit": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buộc thoát"
+          }
+        }
+      }
+    },
+    "Free Up": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Giải phóng"
+          }
+        }
+      }
+    },
+    "Full Disk Access required": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cần Full Disk Access"
+          }
+        }
+      }
+    },
+    "GPU": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "GPU"
+          }
+        }
+      }
+    },
+    "General": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chung"
+          }
+        }
+      }
+    },
+    "Grant permissions": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cấp quyền"
+          }
+        }
+      }
+    },
+    "HEALTH": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "TÌNH TRẠNG"
+          }
+        }
+      }
+    },
+    "HOMEBREW CASKS": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "HOMEBREW CASKS"
+          }
+        }
+      }
+    },
+    "Hashing files…": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Đang tính hash file…"
+          }
+        }
+      }
+    },
+    "Height": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chiều cao"
+          }
+        }
+      }
+    },
+    "Hidden removes the menu-bar item entirely. Open the main window or relaunch the app to bring it back.": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ẩn sẽ gỡ hẳn biểu tượng trên thanh menu. Mở cửa sổ chính hoặc khởi động lại app để đưa nó trở lại."
+          }
+        }
+      }
+    },
+    "Hide": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ẩn"
+          }
+        }
+      }
+    },
+    "Homebrew not detected — cask updates skipped. Install from https://brew.sh.": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Không phát hiện Homebrew — bỏ qua cập nhật cask. Cài từ https://brew.sh."
+          }
+        }
+      }
+    },
+    "INTERFACES": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "GIAO DIỆN MẠNG"
+          }
+        }
+      }
+    },
+    "If a single quick reverse flick gets eaten, lower the fast-scroll lock. If noise still gets through, raise it.": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nếu một cú lăn ngược nhanh bị nuốt mất, hãy giảm mức khóa cuộn nhanh. Nếu vẫn còn nhiễu lọt qua, hãy tăng lên."
+          }
+        }
+      }
+    },
+    "Inferred from filename — will fail safely if path is wrong": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Suy ra từ tên tệp — sẽ dừng an toàn nếu đường dẫn sai"
+          }
+        }
+      }
+    },
+    "Inspecting…": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Đang kiểm tra…"
+          }
+        }
+      }
+    },
+    "Inspects junk + trash, malware persistence, and high-memory apps in parallel.": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kiểm tra rác + thùng rác, mã độc tồn tại dai dẳng, và app ngốn bộ nhớ — song song."
+          }
+        }
+      }
+    },
+    "Installed but not seen in this window": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Đã cài nhưng không thấy trong cửa sổ này"
+          }
+        }
+      }
+    },
+    "Irreversible.": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Không thể hoàn tác."
+          }
+        }
+      }
+    },
+    "Keyboard Settings…": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cài đặt bàn phím…"
+          }
+        }
+      }
+    },
+    "LEFTOVERS": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "DỮ LIỆU CÒN SÓT"
+          }
+        }
+      }
+    },
+    "Label style": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kiểu nhãn"
+          }
+        }
+      }
+    },
+    "Language": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ngôn ngữ"
+          }
+        }
+      }
+    },
+    "Large & Old": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lớn & Cũ"
+          }
+        }
+      }
+    },
+    "Last fired: %@": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lần cuối: %@"
+          }
+        }
+      }
+    },
+    "Last scan: %@": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lần quét gần nhất: %@"
+          }
+        }
+      }
+    },
+    "Light": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sáng"
+          }
+        }
+      }
+    },
+    "Live IOKit power source data": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dữ liệu pin từ IOKit"
+          }
+        }
+      }
+    },
+    "Live RAM breakdown via host_statistics64": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Phân bổ RAM qua host_statistics64"
+          }
+        }
+      }
+    },
+    "Live SMC readings — temperatures, fans, power, voltage": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Đọc SMC trực tiếp — nhiệt độ, quạt, điện, điện áp"
+          }
+        }
+      }
+    },
+    "Loading…": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Đang tải…"
+          }
+        }
+      }
+    },
+    "Login Items": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "App khởi động cùng máy"
+          }
+        }
+      }
+    },
+    "MAS": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "MAS"
+          }
+        }
+      }
+    },
+    "MEMORY": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "BỘ NHỚ"
+          }
+        }
+      }
+    },
+    "Mac Overview": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tổng quan Mac"
+          }
+        }
+      }
+    },
+    "MacCleaner": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "MacCleaner"
+          }
+        }
+      }
+    },
+    "MacCleaner needs Full Disk Access to read TCC.db.\nGrant access in System Settings, then click Reload.": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "MacCleaner cần Full Disk Access để đọc TCC.db.\nHãy cấp quyền trong Cài đặt hệ thống rồi bấm Tải lại."
+          }
+        }
+      }
+    },
+    "MacCleaner needs the following to fully analyse your Mac. You can skip and grant later from Settings.": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "MacCleaner cần các quyền sau để phân tích đầy đủ máy Mac của bạn. Bạn có thể bỏ qua và cấp sau trong Cài đặt."
+          }
+        }
+      }
+    },
+    "Mail Attachments": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "File đính kèm Mail"
+          }
+        }
+      }
+    },
+    "Maintenance": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bảo trì"
+          }
+        }
+      }
+    },
+    "Malware Removal": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gỡ malware"
+          }
+        }
+      }
+    },
+    "Manage": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quản lý"
+          }
+        }
+      }
+    },
+    "Master switch": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Công tắc chính"
+          }
+        }
+      }
+    },
+    "Match System": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Theo hệ thống"
+          }
+        }
+      }
+    },
+    "Memory": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bộ nhớ"
+          }
+        }
+      }
+    },
+    "Menu Bar": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Thanh menu"
+          }
+        }
+      }
+    },
+    "Menu bar metrics": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Số liệu hiển thị trên thanh menu"
+          }
+        }
+      }
+    },
+    "Menu bar visibility": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hiển thị thanh menu"
+          }
+        }
+      }
+    },
+    "Min size:": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cỡ tối thiểu:"
+          }
+        }
+      }
+    },
+    "Move to Quarantine": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chuyển vào Cách ly"
+          }
+        }
+      }
+    },
+    "My Tools": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Công cụ của tôi"
+          }
+        }
+      }
+    },
+    "Network": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mạng"
+          }
+        }
+      }
+    },
+    "New Document": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tài liệu mới"
+          }
+        }
+      }
+    },
+    "New…": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mới…"
+          }
+        }
+      }
+    },
+    "No SMC sensors available": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Không đọc được cảm biến SMC"
+          }
+        }
+      }
+    },
+    "No active interfaces": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Không có giao diện mạng hoạt động"
+          }
+        }
+      }
+    },
+    "No apps added yet.": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chưa thêm ứng dụng nào."
+          }
+        }
+      }
+    },
+    "No battery detected": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Không phát hiện pin"
+          }
+        }
+      }
+    },
+    "No content": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Không có nội dung"
+          }
+        }
+      }
+    },
+    "No custom paths yet — built-in protections are always on.": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chưa có đường dẫn tùy chỉnh — bảo vệ tích hợp luôn bật."
+          }
+        }
+      }
+    },
+    "No data in this window yet": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chưa có dữ liệu trong khoảng này"
+          }
+        }
+      }
+    },
+    "No duplicates found": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Không tìm thấy file trùng"
+          }
+        }
+      }
+    },
+    "No files match these filters": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Không có tệp khớp các bộ lọc này"
+          }
+        }
+      }
+    },
+    "No history yet": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chưa có lịch sử"
+          }
+        }
+      }
+    },
+    "No items match": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Không có mục nào khớp"
+          }
+        }
+      }
+    },
+    "No items match this filter": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Không có mục nào khớp bộ lọc"
+          }
+        }
+      }
+    },
+    "No leftovers found": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Không tìm thấy tệp sót"
+          }
+        }
+      }
+    },
+    "No location selected": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chưa chọn vị trí"
+          }
+        }
+      }
+    },
+    "No metrics enabled — only the ✦ glyph will show.": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chưa bật chỉ số nào — chỉ hiển thị biểu tượng ✦."
+          }
+        }
+      }
+    },
+    "No paired devices": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chưa ghép cặp thiết bị nào"
+          }
+        }
+      }
+    },
+    "No permissions granted to any app": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chưa cấp quyền cho ứng dụng nào"
+          }
+        }
+      }
+    },
+    "No scans yet": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chưa có lần quét nào"
+          }
+        }
+      }
+    },
+    "No similar photos found": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Không tìm thấy ảnh tương tự"
+          }
+        }
+      }
+    },
+    "No threats found": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Không tìm thấy mối đe dọa"
+          }
+        }
+      }
+    },
+    "No time zones added": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chưa thêm múi giờ"
+          }
+        }
+      }
+    },
+    "Not charging": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Không sạc"
+          }
+        }
+      }
+    },
+    "Notes": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ghi chú"
+          }
+        }
+      }
+    },
+    "Nothing to clean": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Không có gì để dọn"
+          }
+        }
+      }
+    },
+    "Notifications permission needed": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cần quyền thông báo"
+          }
+        }
+      }
+    },
+    "Open": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mở"
+          }
+        }
+      }
+    },
+    "Open MacCleaner": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mở MacCleaner"
+          }
+        }
+      }
+    },
+    "Open MacCleaner at login": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mở MacCleaner khi đăng nhập"
+          }
+        }
+      }
+    },
+    "Open Settings": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mở Cài đặt"
+          }
+        }
+      }
+    },
+    "Open System Settings → Full Disk Access": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mở Cài đặt hệ thống → Full Disk Access"
+          }
+        }
+      }
+    },
+    "Open System Settings → Notifications → MacCleaner to allow alerts.": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mở Cài đặt hệ thống → Thông báo → MacCleaner để cho phép cảnh báo."
+          }
+        }
+      }
+    },
+    "Open in Terminal": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mở trong Terminal"
+          }
+        }
+      }
+    },
+    "Open →": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mở →"
+          }
+        }
+      }
+    },
+    "Open…": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mở…"
+          }
+        }
+      }
+    },
+    "Order preview": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Xem trước thứ tự"
+          }
+        }
+      }
+    },
+    "Origin unknown (legacy item — restore manually via Reveal Folder)": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Không rõ nguồn gốc (mục cũ — khôi phục thủ công qua Hiện thư mục)"
+          }
+        }
+      }
+    },
+    "PERFORMANCE": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "HIỆU NĂNG"
+          }
+        }
+      }
+    },
+    "PID": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PID"
+          }
+        }
+      }
+    },
+    "PROCESS": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "TIẾN TRÌNH"
+          }
+        }
+      }
+    },
+    "PROTECTION": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "BẢO VỆ"
+          }
+        }
+      }
+    },
+    "PUBLIC IP": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "IP CÔNG KHAI"
+          }
+        }
+      }
+    },
+    "Pair Bluetooth devices in System Settings; they'll appear here.": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ghép thiết bị Bluetooth trong Cài đặt hệ thống; chúng sẽ xuất hiện ở đây."
+          }
+        }
+      }
+    },
+    "Paired devices, battery levels": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Thiết bị đã ghép cặp, mức pin"
+          }
+        }
+      }
+    },
+    "Passes": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Số lượt"
+          }
+        }
+      }
+    },
+    "Persistence inspector available": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Có sẵn trình kiểm tra persistence"
+          }
+        }
+      }
+    },
+    "Persistence threats": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mối đe dọa persistence"
+          }
+        }
+      }
+    },
+    "Personal macOS cleaner — feature-parity with CMM 5": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trình dọn dẹp macOS cá nhân — ngang tính năng với CMM 5"
+          }
+        }
+      }
+    },
+    "Photo Junk": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rác ảnh"
+          }
+        }
+      }
+    },
+    "Pick Folder…": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chọn thư mục…"
+          }
+        }
+      }
+    },
+    "Pick a folder and press Scan": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chọn thư mục rồi bấm Quét"
+          }
+        }
+      }
+    },
+    "Pick a folder of images and press Scan": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chọn thư mục ảnh rồi bấm Quét"
+          }
+        }
+      }
+    },
+    "Pick a volume or folder to begin": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chọn ổ đĩa hoặc thư mục để bắt đầu"
+          }
+        }
+      }
+    },
+    "Pick apps whose ~/Library data should never be cleaned. Same effect as the built-in Android Studio / Xcode rules, but you choose the apps.": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chọn các app mà dữ liệu trong ~/Library không bao giờ bị dọn. Hiệu quả như quy tắc Android Studio / Xcode tích hợp sẵn, nhưng bạn tự chọn app."
+          }
+        }
+      }
+    },
+    "Pick which metrics show next to the icon. Drag to reorder.": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chọn chỉ số hiển thị cạnh biểu tượng. Kéo để sắp xếp lại."
+          }
+        }
+      }
+    },
+    "Pin tools you reach for often": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ghim công cụ bạn hay dùng"
+          }
+        }
+      }
+    },
+    "Plist + program file go to ~/.MacCleanerQuarantine for 7 days.": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plist + tệp chương trình chuyển vào ~/.MacCleanerQuarantine trong 7 ngày."
+          }
+        }
+      }
+    },
+    "Preset": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cài sẵn"
+          }
+        }
+      }
+    },
+    "Press Check Now to look for updates": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bấm Kiểm tra ngay để tìm bản cập nhật"
+          }
+        }
+      }
+    },
+    "Press Find Leftovers to inspect": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bấm Tìm tệp sót để kiểm tra"
+          }
+        }
+      }
+    },
+    "Pressure": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Áp lực"
+          }
+        }
+      }
+    },
+    "Privacy": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Riêng tư"
+          }
+        }
+      }
+    },
+    "Probing SMC keys…": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Đang dò SMC…"
+          }
+        }
+      }
+    },
+    "Process Monitor": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Theo dõi tiến trình"
+          }
+        }
+      }
+    },
+    "Processing": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Đang xử lý"
+          }
+        }
+      }
+    },
+    "Protected": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Được bảo vệ"
+          }
+        }
+      }
+    },
+    "Protected apps": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ứng dụng được bảo vệ"
+          }
+        }
+      }
+    },
+    "Protected paths": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Đường dẫn được bảo vệ"
+          }
+        }
+      }
+    },
+    "Protection": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bảo vệ"
+          }
+        }
+      }
+    },
+    "Quarantine": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cách ly"
+          }
+        }
+      }
+    },
+    "Quarantine is empty": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cách ly trống"
+          }
+        }
+      }
+    },
+    "Quarantine retention 7 days": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Giữ cách ly 7 ngày"
+          }
+        }
+      }
+    },
+    "Quarantine selected": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cách ly mục đã chọn"
+          }
+        }
+      }
+    },
+    "Quick Clean": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dọn nhanh"
+          }
+        }
+      }
+    },
+    "Quit": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Thoát"
+          }
+        }
+      }
+    },
+    "Quit MacCleaner": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Thoát MacCleaner"
+          }
+        }
+      }
+    },
+    "RISK SIGNALS": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "DẤU HIỆU RỦI RO"
+          }
+        }
+      }
+    },
+    "RO": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RO"
+          }
+        }
+      }
+    },
+    "Range": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Khoảng"
+          }
+        }
+      }
+    },
+    "Re-check": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kiểm tra lại"
+          }
+        }
+      }
+    },
+    "Reading LaunchAgents…": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Đang đọc LaunchAgents…"
+          }
+        }
+      }
+    },
+    "Reading TCC database…": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Đang đọc cơ sở dữ liệu TCC…"
+          }
+        }
+      }
+    },
+    "Reading quarantine…": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Đang đọc cách ly…"
+          }
+        }
+      }
+    },
+    "Reading volumes…": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Đang đọc ổ đĩa…"
+          }
+        }
+      }
+    },
+    "Ready to clean": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sẵn sàng dọn"
+          }
+        }
+      }
+    },
+    "Realtime Protection": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bảo vệ thời gian thực"
+          }
+        }
+      }
+    },
+    "Realtime detection engines": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Engine phát hiện thời gian thực"
+          }
+        }
+      }
+    },
+    "Recent activity": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hoạt động gần đây"
+          }
+        }
+      }
+    },
+    "Recent detections": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Phát hiện gần đây"
+          }
+        }
+      }
+    },
+    "Redo": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Làm lại"
+          }
+        }
+      }
+    },
+    "Refresh": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Làm mới"
+          }
+        }
+      }
+    },
+    "Refreshing…": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Đang làm mới…"
+          }
+        }
+      }
+    },
+    "Reload": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tải lại"
+          }
+        }
+      }
+    },
+    "Rescan": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quét lại"
+          }
+        }
+      }
+    },
+    "Reset stats": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Đặt lại thống kê"
+          }
+        }
+      }
+    },
+    "Reset to defaults": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Khôi phục mặc định"
+          }
+        }
+      }
+    },
+    "Restart MacCleaner for the change to apply across every screen.": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Khởi động lại MacCleaner để thay đổi áp dụng cho mọi màn hình."
+          }
+        }
+      }
+    },
+    "Restore": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Khôi phục"
+          }
+        }
+      }
+    },
+    "Restored to %@": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Đã khôi phục về %@"
+          }
+        }
+      }
+    },
+    "Reveal": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hiện ra"
+          }
+        }
+      }
+    },
+    "Reveal Folder": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mở thư mục"
+          }
+        }
+      }
+    },
+    "Reveal Plist": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hiện Plist"
+          }
+        }
+      }
+    },
+    "Reveal in Finder": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hiện trong Finder"
+          }
+        }
+      }
+    },
+    "Run": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chạy"
+          }
+        }
+      }
+    },
+    "Run Smart Care": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chạy Smart Care"
+          }
+        }
+      }
+    },
+    "Run Smart Care at launch": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chạy Smart Care khi khởi động"
+          }
+        }
+      }
+    },
+    "Run Smart Care to scan your Mac": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chạy Smart Care để quét máy Mac"
+          }
+        }
+      }
+    },
+    "Run any module to populate this panel.": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chạy bất kỳ mô-đun nào để hiển thị bảng này."
+          }
+        }
+      }
+    },
+    "Running all scans…": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Đang chạy tất cả lần quét…"
+          }
+        }
+      }
+    },
+    "Running: %@": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Đang chạy: %@"
+          }
+        }
+      }
+    },
+    "SCAN": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "QUÉT"
+          }
+        }
+      }
+    },
+    "SPARKLE APPS": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ỨNG DỤNG SPARKLE"
+          }
+        }
+      }
+    },
+    "STARTUP DISK": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ổ ĐĨA KHỞI ĐỘNG"
+          }
+        }
+      }
+    },
+    "SYSTEM ACTIVITY": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "HOẠT ĐỘNG HỆ THỐNG"
+          }
+        }
+      }
+    },
+    "Save": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lưu"
+          }
+        }
+      }
+    },
+    "Save As…": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lưu thành…"
+          }
+        }
+      }
+    },
+    "Scan": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quét"
+          }
+        }
+      }
+    },
+    "Scanning Applications…": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Đang quét Ứng dụng…"
+          }
+        }
+      }
+    },
+    "Scanning installed apps…": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Đang quét ứng dụng đã cài…"
+          }
+        }
+      }
+    },
+    "Scanning safe-to-delete items…": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Đang quét các mục an toàn để xoá…"
+          }
+        }
+      }
+    },
+    "Scanning…": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Đang quét…"
+          }
+        }
+      }
+    },
+    "Searching…": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Đang tìm…"
+          }
+        }
+      }
+    },
+    "Select All": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chọn tất cả"
+          }
+        }
+      }
+    },
+    "Select a category on the left to see details": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chọn một danh mục bên trái để xem chi tiết"
+          }
+        }
+      }
+    },
+    "Select a session to view items": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chọn một phiên để xem các mục"
+          }
+        }
+      }
+    },
+    "Select an app to see details": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chọn một ứng dụng để xem chi tiết"
+          }
+        }
+      }
+    },
+    "Sends only a file's SHA-256 (never the file) to VirusTotal, and only for internet-downloaded files. A free key allows ~4 lookups/min.": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chỉ gửi SHA-256 của tệp (không bao giờ gửi tệp) tới VirusTotal, và chỉ với tệp tải từ internet. Khóa miễn phí cho phép ~4 lượt tra/phút."
+          }
+        }
+      }
+    },
+    "Sensors": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cảm biến"
+          }
+        }
+      }
+    },
+    "Separator": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dấu phân cách"
+          }
+        }
+      }
+    },
+    "Settings…": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cài đặt…"
+          }
+        }
+      }
+    },
+    "Show All Windows": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hiện tất cả cửa sổ"
+          }
+        }
+      }
+    },
+    "Show log": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hiện nhật ký"
+          }
+        }
+      }
+    },
+    "Shred Now": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hủy vĩnh viễn ngay"
+          }
+        }
+      }
+    },
+    "Shredder": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Huỷ vĩnh viễn"
+          }
+        }
+      }
+    },
+    "Shredding…": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Đang hủy…"
+          }
+        }
+      }
+    },
+    "Similar Photos": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ảnh tương tự"
+          }
+        }
+      }
+    },
+    "Skip for now": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bỏ qua lúc này"
+          }
+        }
+      }
+    },
+    "Smart Care": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Smart Care"
+          }
+        }
+      }
+    },
+    "Space Lens": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bản đồ ổ đĩa"
+          }
+        }
+      }
+    },
+    "Start Scan": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bắt đầu quét"
+          }
+        }
+      }
+    },
+    "Stats only count time MacCleaner was running. First samples flush after ~5 minutes; full hours land on the next hour-roll. Old data drops after 90 days.": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Thống kê chỉ tính thời gian MacCleaner đang chạy. Mẫu đầu tiên ghi sau ~5 phút; số liệu theo giờ chốt vào lần chuyển giờ kế tiếp. Dữ liệu cũ bị bỏ sau 90 ngày."
+          }
+        }
+      }
+    },
+    "Summary": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tóm tắt"
+          }
+        }
+      }
+    },
+    "System Junk": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rác hệ thống"
+          }
+        }
+      }
+    },
+    "TOOLS": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CÔNG CỤ"
+          }
+        }
+      }
+    },
+    "TOP PROCESSES": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "TIẾN TRÌNH HÀNG ĐẦU"
+          }
+        }
+      }
+    },
+    "Test key": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kiểm tra khóa"
+          }
+        }
+      }
+    },
+    "These dev tools are always protected while running — caches and tied paths are skipped automatically so a Clean can't crash the IDE or kill an emulator. Hardcoded for safety; can't be disabled.": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Các công cụ dev này luôn được bảo vệ khi đang chạy — cache và đường dẫn liên quan tự động được bỏ qua để một lần Dọn không làm sập IDE hay tắt emulator. Cố định để an toàn; không thể tắt."
+          }
+        }
+      }
+    },
+    "Threshold:": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ngưỡng:"
+          }
+        }
+      }
+    },
+    "Throughput, interfaces, public IP — last 60s rolling": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Băng thông, giao diện, IP công khai — 60 giây gần nhất"
+          }
+        }
+      }
+    },
+    "Tip: right-click rows to Quit / Force Quit. System processes need admin.": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mẹo: chuột phải vào hàng để Thoát / Buộc thoát. Tiến trình hệ thống cần quyền admin."
+          }
+        }
+      }
+    },
+    "Tiếng Việt": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tiếng Việt"
+          }
+        }
+      }
+    },
+    "Trash Bins": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Thùng rác"
+          }
+        }
+      }
+    },
+    "USER": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "NGƯỜI DÙNG"
+          }
+        }
+      }
+    },
+    "Undo": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hoàn tác"
+          }
+        }
+      }
+    },
+    "Uninstall": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gỡ cài đặt"
+          }
+        }
+      }
+    },
+    "Uninstaller": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gỡ ứng dụng"
+          }
+        }
+      }
+    },
+    "Unused apps": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ứng dụng không dùng"
+          }
+        }
+      }
+    },
+    "Update now": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cập nhật ngay"
+          }
+        }
+      }
+    },
+    "Updater": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cập nhật"
+          }
+        }
+      }
+    },
+    "Upgrade": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nâng cấp"
+          }
+        }
+      }
+    },
+    "Upload": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tải lên"
+          }
+        }
+      }
+    },
+    "VPN": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "VPN"
+          }
+        }
+      }
+    },
+    "View details": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Xem chi tiết"
+          }
+        }
+      }
+    },
+    "VirusTotal lookups for downloads": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tra VirusTotal cho tệp tải về"
+          }
+        }
+      }
+    },
+    "WHAT THIS IS": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ĐÂY LÀ GÌ"
+          }
+        }
+      }
+    },
+    "WHY THIS IS HERE": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "VÌ SAO MỤC NÀY Ở ĐÂY"
+          }
+        }
+      }
+    },
+    "Watches LaunchAgents/Daemons, scans new downloads against a local hash blocklist, and guards your documents with ransomware canaries. DANGER hits are auto-quarantined (reversible, 7 days); reviews and ransomware signals alert only.": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Theo dõi LaunchAgents/Daemons, quét tệp tải về so với danh sách chặn hash cục bộ, và canh tài liệu bằng mồi nhử ransomware. Mục NGUY HIỂM tự động cách ly (hoàn tác được, 7 ngày); mục cần xem lại và tín hiệu ransomware chỉ cảnh báo."
+          }
+        }
+      }
+    },
+    "Width": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chiều rộng"
+          }
+        }
+      }
+    },
+    "admin": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "admin"
+          }
+        }
+      }
+    },
+    "by CPU": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "theo CPU"
+          }
+        }
+      }
+    },
+    "px": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "px"
+          }
+        }
+      }
+    },
+    "used": {
+      "localizations": {
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "đã dùng"
+          }
+        }
+      }
+    }
   }
 }
