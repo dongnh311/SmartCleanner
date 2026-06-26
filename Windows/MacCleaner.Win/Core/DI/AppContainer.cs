@@ -49,6 +49,7 @@ public static class AppContainer
         services.AddSingleton<IQuarantineService, QuarantineService>();
         services.AddSingleton<IMalwareHashStore, MalwareHashStore>();
         services.AddSingleton<IMalwareScanner, MalwareScanner>();
+        services.AddSingleton<IRealtimeProtectionService, RealtimeProtectionService>();
         services.AddSingleton<IMyToolsService, MyToolsService>();
         services.AddSingleton<IScrollDenoiserService, ScrollDenoiserService>();
 
