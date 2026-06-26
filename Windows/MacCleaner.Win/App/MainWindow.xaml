@@ -47,6 +47,12 @@
                     <NavigationViewItem.Icon><FontIcon Glyph="&#xE7E8;" /></NavigationViewItem.Icon>
                 </NavigationViewItem>
 
+                <!-- System -->
+                <NavigationViewItemHeader Content="System" />
+                <NavigationViewItem Content="Maintenance"      Tag="maintenance">
+                    <NavigationViewItem.Icon><FontIcon Glyph="&#xE90F;" /></NavigationViewItem.Icon>
+                </NavigationViewItem>
+
                 <!-- Applications -->
                 <NavigationViewItemHeader Content="Applications" />
                 <NavigationViewItem Content="Uninstaller"      Tag="uninstaller">
