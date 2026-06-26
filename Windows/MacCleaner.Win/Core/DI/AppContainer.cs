@@ -3,6 +3,7 @@ using MacCleaner.Win.Core.Cleanup;
 using MacCleaner.Win.Core.Files;
 using MacCleaner.Win.Core.FileSystem;
 using MacCleaner.Win.Core.Performance;
+using MacCleaner.Win.Core.Protection;
 using MacCleaner.Win.Core.Storage;
 using MacCleaner.Win.Core.Tools;
 using Microsoft.Extensions.DependencyInjection;
@@ -46,6 +47,8 @@ public static class AppContainer
         services.AddSingleton<ISimilarPhotosService, SimilarPhotosService>();
         services.AddSingleton<IShredderService, ShredderService>();
         services.AddSingleton<IQuarantineService, QuarantineService>();
+        services.AddSingleton<IMalwareHashStore, MalwareHashStore>();
+        services.AddSingleton<IMalwareScanner, MalwareScanner>();
         services.AddSingleton<IMyToolsService, MyToolsService>();
         services.AddSingleton<IScrollDenoiserService, ScrollDenoiserService>();
 

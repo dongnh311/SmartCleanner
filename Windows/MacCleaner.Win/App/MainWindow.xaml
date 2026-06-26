@@ -53,6 +53,12 @@
                     <NavigationViewItem.Icon><FontIcon Glyph="&#xE90F;" /></NavigationViewItem.Icon>
                 </NavigationViewItem>
 
+                <!-- Protection -->
+                <NavigationViewItemHeader Content="Protection" />
+                <NavigationViewItem Content="Malware Removal"  Tag="malware">
+                    <NavigationViewItem.Icon><FontIcon Glyph="&#xE730;" /></NavigationViewItem.Icon>
+                </NavigationViewItem>
+
                 <!-- Applications -->
                 <NavigationViewItemHeader Content="Applications" />
                 <NavigationViewItem Content="Uninstaller"      Tag="uninstaller">
