@@ -1,3 +1,4 @@
+using MacCleaner.Win.App.Localization;
 using MacCleaner.Win.App.Views;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -11,7 +12,29 @@ public sealed partial class MainWindow : Window
     {
         InitializeComponent();
         Title = "MacCleaner for Windows";
+        LocalizeNav();
         NavigateTo("dashboard");
+    }
+
+    /// <summary>
+    /// Translates the navigation pane (items + section headers) from the
+    /// resource catalogue. Done in code with an English fallback so a missing
+    /// resource never blanks the sidebar.
+    /// </summary>
+    private void LocalizeNav()
+    {
+        foreach (var entry in Nav.MenuItems)
+        {
+            switch (entry)
+            {
+                case NavigationViewItem item when item.Tag is string tag:
+                    item.Content = Loc.Get("Nav_" + tag, item.Content as string ?? tag);
+                    break;
+                case NavigationViewItemHeader header when header.Content is string text:
+                    header.Content = Loc.Get("NavSection_" + text, text);
+                    break;
+            }
+        }
     }
 
     private void Nav_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)

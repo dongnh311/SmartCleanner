@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+
+  <data name="NavSection_Performance" xml:space="preserve"><value>Performance</value></data>
+  <data name="NavSection_System" xml:space="preserve"><value>System</value></data>
+  <data name="NavSection_Protection" xml:space="preserve"><value>Protection</value></data>
+  <data name="NavSection_Applications" xml:space="preserve"><value>Applications</value></data>
+  <data name="NavSection_Cleanup" xml:space="preserve"><value>Cleanup</value></data>
+  <data name="NavSection_Files" xml:space="preserve"><value>Files</value></data>
+  <data name="NavSection_Tools" xml:space="preserve"><value>Tools</value></data>
+
+  <data name="Nav_dashboard" xml:space="preserve"><value>Dashboard</value></data>
+  <data name="Nav_processes" xml:space="preserve"><value>Process Monitor</value></data>
+  <data name="Nav_trends" xml:space="preserve"><value>Usage Trends</value></data>
+  <data name="Nav_memory" xml:space="preserve"><value>Memory</value></data>
+  <data name="Nav_battery" xml:space="preserve"><value>Battery</value></data>
+  <data name="Nav_sensors" xml:space="preserve"><value>Sensors</value></data>
+  <data name="Nav_network" xml:space="preserve"><value>Network</value></data>
+  <data name="Nav_bluetooth" xml:space="preserve"><value>Bluetooth</value></data>
+  <data name="Nav_diskmon" xml:space="preserve"><value>Disk Monitor</value></data>
+  <data name="Nav_loginitems" xml:space="preserve"><value>Login Items</value></data>
+  <data name="Nav_maintenance" xml:space="preserve"><value>Maintenance</value></data>
+  <data name="Nav_malware" xml:space="preserve"><value>Malware Removal</value></data>
+  <data name="Nav_uninstaller" xml:space="preserve"><value>Uninstaller</value></data>
+  <data name="Nav_updater" xml:space="preserve"><value>Updater</value></data>
+  <data name="Nav_quickclean" xml:space="preserve"><value>Quick Clean</value></data>
+  <data name="Nav_recyclebin" xml:space="preserve"><value>Recycle Bin</value></data>
+  <data name="Nav_spacelens" xml:space="preserve"><value>Space Lens</value></data>
+  <data name="Nav_largeold" xml:space="preserve"><value>Large &amp; Old</value></data>
+  <data name="Nav_duplicates" xml:space="preserve"><value>Duplicates</value></data>
+  <data name="Nav_similar" xml:space="preserve"><value>Similar Photos</value></data>
+  <data name="Nav_shredder" xml:space="preserve"><value>Shredder</value></data>
+  <data name="Nav_quarantine" xml:space="preserve"><value>Quarantine</value></data>
+  <data name="Nav_mytools" xml:space="preserve"><value>My Tools</value></data>
+  <data name="Nav_clock" xml:space="preserve"><value>Clock</value></data>
+  <data name="Nav_paint" xml:space="preserve"><value>Paint</value></data>
+  <data name="Nav_scroll" xml:space="preserve"><value>Scroll Denoiser</value></data>
+
+  <data name="Settings_Language" xml:space="preserve"><value>Language</value></data>
+  <data name="Settings_LanguageNote" xml:space="preserve"><value>Restart MacCleaner to apply the change across every screen.</value></data>
+</root>

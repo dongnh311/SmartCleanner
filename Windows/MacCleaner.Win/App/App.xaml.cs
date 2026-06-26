@@ -1,6 +1,7 @@
 using MacCleaner.Win.App.Hosts;
 using MacCleaner.Win.Core.DI;
 using MacCleaner.Win.Core.Protection;
+using MacCleaner.Win.Core.Storage;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Xaml;
 
@@ -24,6 +25,15 @@ public partial class App : Application
             .AddCoreServices()
             .AddAppServices()
             .BuildServiceProvider();
+
+        // Apply the saved UI language before any window/resource is built, so
+        // the MRT resource loader resolves to it (mirrors macOS AppleLanguages).
+        var lang = Services.GetRequiredService<ILanguageService>().Code;
+        if (!string.IsNullOrEmpty(lang))
+        {
+            try { Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = lang; }
+            catch { /* invalid code — fall back to system language */ }
+        }
     }
 
     protected override void OnLaunched(LaunchActivatedEventArgs args)
