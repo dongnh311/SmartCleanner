@@ -13,12 +13,15 @@ public sealed partial class SettingsPage : Page
 {
     private readonly ISqliteService _sqlite;
     private readonly IQuarantineService _quarantine;
+    private readonly IStartupService _startup;
+    private bool _initializing;
 
     public SettingsPage()
     {
         InitializeComponent();
         _sqlite = App.Services.GetRequiredService<ISqliteService>();
         _quarantine = App.Services.GetRequiredService<IQuarantineService>();
+        _startup = App.Services.GetRequiredService<IStartupService>();
     }
 
     protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -26,6 +29,17 @@ public sealed partial class SettingsPage : Page
         base.OnNavigatedTo(e);
         var version = Assembly.GetExecutingAssembly().GetName().Version;
         VersionText.Text = $"Version {version} · {RuntimeInformation()}";
+
+        // Reflect current state without bouncing the Toggled handler back at us.
+        _initializing = true;
+        StartupToggle.IsOn = _startup.IsEnabled;
+        _initializing = false;
+    }
+
+    private void StartupToggle_Toggled(object sender, RoutedEventArgs e)
+    {
+        if (_initializing) return;
+        _startup.SetEnabled(StartupToggle.IsOn);
     }
 
     private static string RuntimeInformation() =>

@@ -35,6 +35,18 @@
 
                 <Border Style="{StaticResource Card}">
                     <StackPanel Spacing="8">
+                        <TextBlock Text="Startup" FontSize="13" FontWeight="SemiBold" Opacity="0.6" />
+                        <ToggleSwitch x:Name="StartupToggle" Header="Open MacCleaner at login" Toggled="StartupToggle_Toggled" />
+                        <TextBlock
+                            Text="Adds MacCleaner to your per-user Run list so it starts with Windows. No admin rights needed."
+                            FontSize="12"
+                            Opacity="0.6"
+                            TextWrapping="Wrap" />
+                    </StackPanel>
+                </Border>
+
+                <Border Style="{StaticResource Card}">
+                    <StackPanel Spacing="8">
                         <TextBlock Text="Data locations" FontSize="13" FontWeight="SemiBold" Opacity="0.6" />
                         <Button Content="Open Quarantine folder" Click="OpenQuarantine_Click" />
                         <Button Content="Open trends database folder" Click="OpenTrends_Click" />
