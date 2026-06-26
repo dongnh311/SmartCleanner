@@ -77,10 +77,15 @@ struct MaintenanceView: View {
                 .controlSize(.small)
                 if runningIDs.contains(cmd.id) {
                     ProgressView().controlSize(.small)
-                } else {
+                } else if MaintenanceRunner.isAvailable(cmd) {
                     Button("Run") { runCommand(cmd) }
                         .controlSize(.small)
                         .buttonStyle(.borderedProminent)
+                } else {
+                    Text("Not on this macOS")
+                        .font(.system(size: 10))
+                        .foregroundStyle(.secondary)
+                        .help("This command isn't available on your macOS version.")
                 }
             }
             Text(cmd.summary).font(.caption).foregroundStyle(.secondary)
