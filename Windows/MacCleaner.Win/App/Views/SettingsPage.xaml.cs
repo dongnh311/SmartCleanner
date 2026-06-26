@@ -14,6 +14,7 @@ public sealed partial class SettingsPage : Page
     private readonly ISqliteService _sqlite;
     private readonly IQuarantineService _quarantine;
     private readonly IStartupService _startup;
+    private readonly ILanguageService _language;
     private bool _initializing;
 
     public SettingsPage()
@@ -22,6 +23,7 @@ public sealed partial class SettingsPage : Page
         _sqlite = App.Services.GetRequiredService<ISqliteService>();
         _quarantine = App.Services.GetRequiredService<IQuarantineService>();
         _startup = App.Services.GetRequiredService<IStartupService>();
+        _language = App.Services.GetRequiredService<ILanguageService>();
     }
 
     protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -30,9 +32,11 @@ public sealed partial class SettingsPage : Page
         var version = Assembly.GetExecutingAssembly().GetName().Version;
         VersionText.Text = $"Version {version} · {RuntimeInformation()}";
 
-        // Reflect current state without bouncing the Toggled handler back at us.
+        // Reflect current state without bouncing the change handlers back at us.
         _initializing = true;
         StartupToggle.IsOn = _startup.IsEnabled;
+        LanguageTitle.Text = Localization.Loc.Get("Settings_Language", "Language");
+        LanguageCombo.SelectedIndex = _language.Code == "vi" ? 1 : 0;
         _initializing = false;
     }
 
@@ -40,6 +44,16 @@ public sealed partial class SettingsPage : Page
     {
         if (_initializing) return;
         _startup.SetEnabled(StartupToggle.IsOn);
+    }
+
+    private void Language_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (_initializing) return;
+        var code = (LanguageCombo.SelectedItem as ComboBoxItem)?.Tag as string ?? "en";
+        _language.SetCode(code);
+        LanguageNote.Text = Localization.Loc.Get("Settings_LanguageNote",
+            "Restart MacCleaner to apply the change across every screen.");
+        LanguageNote.Visibility = Visibility.Visible;
     }
 
     private static string RuntimeInformation() =>

@@ -35,6 +35,17 @@
 
                 <Border Style="{StaticResource Card}">
                     <StackPanel Spacing="8">
+                        <TextBlock x:Name="LanguageTitle" Text="Language" FontSize="13" FontWeight="SemiBold" Opacity="0.6" />
+                        <ComboBox x:Name="LanguageCombo" MinWidth="180" SelectionChanged="Language_SelectionChanged">
+                            <ComboBoxItem Content="English" Tag="en" />
+                            <ComboBoxItem Content="Tiếng Việt" Tag="vi" />
+                        </ComboBox>
+                        <TextBlock x:Name="LanguageNote" FontSize="12" Opacity="0.6" TextWrapping="Wrap" Visibility="Collapsed" />
+                    </StackPanel>
+                </Border>
+
+                <Border Style="{StaticResource Card}">
+                    <StackPanel Spacing="8">
                         <TextBlock Text="Startup" FontSize="13" FontWeight="SemiBold" Opacity="0.6" />
                         <ToggleSwitch x:Name="StartupToggle" Header="Open MacCleaner at login" Toggled="StartupToggle_Toggled" />
                         <TextBlock

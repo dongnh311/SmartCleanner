@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+
+  <data name="NavSection_Performance" xml:space="preserve"><value>Hiệu năng</value></data>
+  <data name="NavSection_System" xml:space="preserve"><value>Hệ thống</value></data>
+  <data name="NavSection_Protection" xml:space="preserve"><value>Bảo vệ</value></data>
+  <data name="NavSection_Applications" xml:space="preserve"><value>Ứng dụng</value></data>
+  <data name="NavSection_Cleanup" xml:space="preserve"><value>Dọn dẹp</value></data>
+  <data name="NavSection_Files" xml:space="preserve"><value>Tệp</value></data>
+  <data name="NavSection_Tools" xml:space="preserve"><value>Công cụ</value></data>
+
+  <data name="Nav_dashboard" xml:space="preserve"><value>Bảng điều khiển</value></data>
+  <data name="Nav_processes" xml:space="preserve"><value>Giám sát tiến trình</value></data>
+  <data name="Nav_trends" xml:space="preserve"><value>Xu hướng sử dụng</value></data>
+  <data name="Nav_memory" xml:space="preserve"><value>Bộ nhớ</value></data>
+  <data name="Nav_battery" xml:space="preserve"><value>Pin</value></data>
+  <data name="Nav_sensors" xml:space="preserve"><value>Cảm biến</value></data>
+  <data name="Nav_network" xml:space="preserve"><value>Mạng</value></data>
+  <data name="Nav_bluetooth" xml:space="preserve"><value>Bluetooth</value></data>
+  <data name="Nav_diskmon" xml:space="preserve"><value>Giám sát ổ đĩa</value></data>
+  <data name="Nav_loginitems" xml:space="preserve"><value>Mục đăng nhập</value></data>
+  <data name="Nav_maintenance" xml:space="preserve"><value>Bảo trì</value></data>
+  <data name="Nav_malware" xml:space="preserve"><value>Gỡ mã độc</value></data>
+  <data name="Nav_uninstaller" xml:space="preserve"><value>Gỡ cài đặt</value></data>
+  <data name="Nav_updater" xml:space="preserve"><value>Cập nhật</value></data>
+  <data name="Nav_quickclean" xml:space="preserve"><value>Dọn nhanh</value></data>
+  <data name="Nav_recyclebin" xml:space="preserve"><value>Thùng rác</value></data>
+  <data name="Nav_spacelens" xml:space="preserve"><value>Bản đồ dung lượng</value></data>
+  <data name="Nav_largeold" xml:space="preserve"><value>Tệp lớn &amp; cũ</value></data>
+  <data name="Nav_duplicates" xml:space="preserve"><value>Tệp trùng lặp</value></data>
+  <data name="Nav_similar" xml:space="preserve"><value>Ảnh tương tự</value></data>
+  <data name="Nav_shredder" xml:space="preserve"><value>Hủy tệp</value></data>
+  <data name="Nav_quarantine" xml:space="preserve"><value>Cách ly</value></data>
+  <data name="Nav_mytools" xml:space="preserve"><value>Công cụ của tôi</value></data>
+  <data name="Nav_clock" xml:space="preserve"><value>Đồng hồ</value></data>
+  <data name="Nav_paint" xml:space="preserve"><value>Vẽ</value></data>
+  <data name="Nav_scroll" xml:space="preserve"><value>Lọc nhiễu cuộn</value></data>
+
+  <data name="Settings_Language" xml:space="preserve"><value>Ngôn ngữ</value></data>
+  <data name="Settings_LanguageNote" xml:space="preserve"><value>Khởi động lại MacCleaner để áp dụng thay đổi trên mọi màn hình.</value></data>
+</root>
