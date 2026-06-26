@@ -32,6 +32,7 @@ public static class AppContainer
         services.AddSingleton<IDiskMonitorService, DiskMonitorService>();
         services.AddSingleton<IBluetoothService, BluetoothService>();
         services.AddSingleton<ISensorsService, SensorsService>();
+        services.AddSingleton<IMaintenanceService, MaintenanceService>();
         services.AddSingleton<IDriveService, DriveService>();
         services.AddSingleton<IRegistryService, RegistryService>();
         services.AddSingleton<IStartupService, StartupService>();
