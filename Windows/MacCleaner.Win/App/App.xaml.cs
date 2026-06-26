@@ -1,5 +1,6 @@
 using MacCleaner.Win.App.Hosts;
 using MacCleaner.Win.Core.DI;
+using MacCleaner.Win.Core.Protection;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Xaml;
 
@@ -40,5 +41,10 @@ public partial class App : Application
                 _window.Activate();
             },
             exitApp: Exit);
+
+        // Resume realtime protection if the user left it on (mirrors the macOS
+        // AppContainer.startIfEnabled()).
+        var realtime = Services.GetRequiredService<IRealtimeProtectionService>();
+        if (realtime.IsEnabled) realtime.Start();
     }
 }
