@@ -5,6 +5,8 @@ import AppKit
 struct MaintenanceView: View {
 
     @State private var copiedID: String?
+    @State private var runningIDs = Set<String>()
+    @State private var results: [String: MaintenanceRunResult] = [:]
 
     private var grouped: [(MaintenanceCommand.Category, [MaintenanceCommand])] {
         let dict = Dictionary(grouping: MaintenanceCommand.all, by: { $0.category })
@@ -33,7 +35,7 @@ struct MaintenanceView: View {
         ModuleHeader(
             icon: "wrench.and.screwdriver",
             title: "Maintenance",
-            subtitle: "System scripts — admin items must be run with sudo",
+            subtitle: "Run system scripts in-app — admin items prompt for your macOS password",
             accent: .teal
         )
     }
@@ -73,6 +75,13 @@ struct MaintenanceView: View {
                     openInTerminal(cmd.command)
                 }
                 .controlSize(.small)
+                if runningIDs.contains(cmd.id) {
+                    ProgressView().controlSize(.small)
+                } else {
+                    Button("Run") { runCommand(cmd) }
+                        .controlSize(.small)
+                        .buttonStyle(.borderedProminent)
+                }
             }
             Text(cmd.summary).font(.caption).foregroundStyle(.secondary)
             Text(cmd.command)
@@ -85,6 +94,19 @@ struct MaintenanceView: View {
             if copiedID == cmd.id {
                 Text("Copied to clipboard").font(.caption2).foregroundStyle(.green)
             }
+            if let result = results[cmd.id] {
+                HStack(alignment: .top, spacing: 6) {
+                    Image(systemName: result.success ? "checkmark.circle.fill" : "xmark.circle.fill")
+                        .foregroundStyle(result.success ? .green : .red)
+                        .font(.caption)
+                    Text(resultText(result))
+                        .font(.caption2)
+                        .foregroundStyle(.secondary)
+                        .textSelection(.enabled)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+                .padding(.top, 2)
+            }
         }
         .padding(12)
         .cardStyle(radius: 8, withShadow: false)
@@ -92,13 +114,31 @@ struct MaintenanceView: View {
 
     private var helperBanner: some View {
         HStack(spacing: 8) {
-            Image(systemName: "info.circle").foregroundStyle(.blue)
-            Text("Privileged Helper integration is on the roadmap. Once installed, MacCleaner will execute admin commands directly without leaving the app.")
+            Image(systemName: "lock.shield").foregroundStyle(.blue)
+            Text("Admin commands ask for your macOS password and run with administrator privileges via the system prompt. Nothing leaves your Mac. Prefer the terminal? Use Copy or Open in Terminal instead.")
                 .font(.caption).foregroundStyle(.secondary)
         }
         .padding(10)
         .background(Color.blue.opacity(0.06))
         .clipShape(RoundedRectangle(cornerRadius: 8))
+    }
+
+    private func runCommand(_ cmd: MaintenanceCommand) {
+        runningIDs.insert(cmd.id)
+        results[cmd.id] = nil
+        Task { @MainActor in
+            let result = await MaintenanceRunner.run(cmd)
+            results[cmd.id] = result
+            runningIDs.remove(cmd.id)
+            Log.app.info("Maintenance '\(cmd.id, privacy: .public)' \(result.success ? "ok" : "failed", privacy: .public)")
+        }
+    }
+
+    private func resultText(_ result: MaintenanceRunResult) -> String {
+        if result.success {
+            return result.output.isEmpty ? "Done." : "Done. \(result.output)"
+        }
+        return result.output.isEmpty ? "Failed." : result.output
     }
 
     private func copy(_ cmd: MaintenanceCommand) {

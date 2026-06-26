@@ -200,6 +200,19 @@ enum SmokeTest {
             return "\(report.totalIssueCount) issues, \(report.totalCleanableBytes.formattedBytes) cleanable"
         }
 
+        await report("MaintenanceRunner.run (non-admin)") {
+            // Exercise the shell path with a benign command — never the admin
+            // path, which would block on the GUI password prompt.
+            let probe = MaintenanceCommand(
+                id: "smoke_probe", title: "probe", summary: "probe",
+                command: "echo maccleaner-smoke", requiresAdmin: false, category: .dock)
+            let result = await MaintenanceRunner.run(probe)
+            guard result.success, result.output.contains("maccleaner-smoke") else {
+                throw NSError(domain: "Smoke", code: 1, userInfo: [NSLocalizedDescriptionKey: "runner output: \(result.output)"])
+            }
+            return "shell path ok"
+        }
+
         let exitStatus: Int32
         if failures.isEmpty {
             smokeLog("OK — all checks passed")
