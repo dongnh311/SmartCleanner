@@ -34,6 +34,7 @@ public static class AppContainer
         services.AddSingleton<ISensorsService, SensorsService>();
         services.AddSingleton<IDriveService, DriveService>();
         services.AddSingleton<IRegistryService, RegistryService>();
+        services.AddSingleton<IStartupService, StartupService>();
         services.AddSingleton<ISqliteService, SqliteService>();
         services.AddSingleton<IWingetService, WingetService>();
         services.AddSingleton<ICleanupService, CleanupService>();
