@@ -17,6 +17,7 @@
         </Grid.RowDefinitions>
 
         <controls:ModuleHeader
+            x:Name="Header"
             Grid.Row="0"
             Title="Paint"
             Subtitle="Canvas — InkCanvas wiring deferred"
@@ -25,11 +26,13 @@
         <Border Grid.Row="1" Style="{StaticResource Card}" Margin="16,0,16,0">
             <StackPanel Spacing="12" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <TextBlock
+                    x:Name="PendingTitle"
                     Text="Paint canvas pending"
                     FontSize="17"
                     FontWeight="SemiBold"
                     HorizontalAlignment="Center" />
                 <TextBlock
+                    x:Name="PendingDesc"
                     Text="A SkiaSharp-backed canvas will replace the InkCanvas placeholder in a follow-up commit once a working build configuration is identified."
                     TextWrapping="Wrap"
                     MaxWidth="420"

@@ -12,6 +12,7 @@
         </Grid.RowDefinitions>
 
         <controls:ModuleHeader
+            x:Name="Header"
             Grid.Row="0"
             Title="Shredder"
             Subtitle="Overwrite then delete"
@@ -20,6 +21,7 @@
         <Border Grid.Row="1" Style="{StaticResource Card}" Margin="16,0,16,0">
             <StackPanel Spacing="12">
                 <TextBlock
+                    x:Name="SsdWarning"
                     Text="On SSDs, wear leveling may relocate blocks, so overwrite-then-delete cannot guarantee the original ciphertext is destroyed. Use full-disk BitLocker for SSDs you intend to dispose of."
                     TextWrapping="Wrap"
                     Opacity="0.7"
@@ -35,7 +37,7 @@
                 </Grid>
 
                 <StackPanel Orientation="Horizontal" Spacing="8">
-                    <TextBlock Text="Passes:" VerticalAlignment="Center" FontSize="12" />
+                    <TextBlock x:Name="PassesLabel" Text="Passes:" VerticalAlignment="Center" FontSize="12" />
                     <NumberBox x:Name="PassesBox" Value="3" Minimum="1" Maximum="35" Width="100" />
                 </StackPanel>
 

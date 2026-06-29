@@ -13,6 +13,7 @@
         </Grid.RowDefinitions>
 
         <controls:ModuleHeader
+            x:Name="Header"
             Grid.Row="0"
             Title="Space Lens"
             Subtitle="Drill into the largest folders"

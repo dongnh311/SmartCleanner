@@ -14,6 +14,10 @@ public sealed partial class ScrollDenoiserPage : Page
     {
         InitializeComponent();
         _svc = App.Services.GetRequiredService<IScrollDenoiserService>();
+        Header.Title = Localization.Loc.Get("Scroll_Title", "Scroll Denoiser");
+        Header.Subtitle = Localization.Loc.Get("Scroll_Subtitle", "Direction-lock filter for cheap mouse wheels");
+        Description.Text = Localization.Loc.Get("Scroll_Desc", "Suppresses wheel events whose direction reverses within 80 ms of the previous one — the classic encoder bounce on budget mice.");
+        EnableToggle.Header = Localization.Loc.Get("Scroll_Active", "Active");
     }
 
     protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -33,7 +37,7 @@ public sealed partial class ScrollDenoiserPage : Page
     private void UpdateStatus()
     {
         StatusText.Text = _svc.IsEnabled
-            ? "Hook installed — bouncing wheel events will be suppressed."
-            : "Hook not active.";
+            ? Localization.Loc.Get("Scroll_HookOn", "Hook installed — bouncing wheel events will be suppressed.")
+            : Localization.Loc.Get("Scroll_HookOff", "Hook not active.");
     }
 }

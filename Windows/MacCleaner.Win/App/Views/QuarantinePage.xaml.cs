@@ -14,6 +14,9 @@ public sealed partial class QuarantinePage : Page
     {
         InitializeComponent();
         _quarantine = App.Services.GetRequiredService<IQuarantineService>();
+        Header.Title = Localization.Loc.Get("Quarantine_Title", "Quarantine");
+        Header.Subtitle = Localization.Loc.Get("Quarantine_Subtitle", "Held-back files awaiting restore or purge");
+        PurgeButton.Content = Localization.Loc.Get("Quarantine_Purge", "Purge > 7 days");
     }
 
     protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -31,7 +34,7 @@ public sealed partial class QuarantinePage : Page
         {
             RecordsList.Items.Add(new TextBlock
             {
-                Text = "No files in quarantine.",
+                Text = Localization.Loc.Get("Quarantine_Empty", "No files in quarantine."),
                 Padding = new Thickness(12, 16, 12, 16),
                 Opacity = 0.65,
                 HorizontalAlignment = HorizontalAlignment.Center
@@ -59,7 +62,7 @@ public sealed partial class QuarantinePage : Page
         });
         stack.Children.Add(new TextBlock
         {
-            Text = $"{Core.FileSystem.Bytes.Format(r.SizeBytes)} · quarantined {r.QuarantinedAt:yyyy-MM-dd HH:mm} UTC",
+            Text = string.Format(Localization.Loc.Get("Quarantine_RowFormat", "{0} · quarantined {1} UTC"), Core.FileSystem.Bytes.Format(r.SizeBytes), r.QuarantinedAt.ToString("yyyy-MM-dd HH:mm")),
             FontSize = 11,
             Opacity = 0.65
         });
@@ -73,7 +76,7 @@ public sealed partial class QuarantinePage : Page
         });
         Grid.SetColumn(stack, 0); grid.Children.Add(stack);
 
-        var restore = new Button { Content = "Restore", Tag = r };
+        var restore = new Button { Content = Localization.Loc.Get("Common_Restore", "Restore"), Tag = r };
         restore.Click += async (_, _) =>
         {
             restore.IsEnabled = false;
@@ -82,9 +85,9 @@ public sealed partial class QuarantinePage : Page
             {
                 await new ContentDialog
                 {
-                    Title = "Restore failed",
+                    Title = Localization.Loc.Get("Quarantine_RestoreFailed", "Restore failed"),
                     Content = ex.Message,
-                    CloseButtonText = "Close",
+                    CloseButtonText = Localization.Loc.Get("Common_Close", "Close"),
                     XamlRoot = this.XamlRoot
                 }.ShowAsync();
                 restore.IsEnabled = true;

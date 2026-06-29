@@ -16,6 +16,8 @@ public sealed partial class SensorsPage : Page
     {
         InitializeComponent();
         _sensors = App.Services.GetRequiredService<ISensorsService>();
+        Header.Title = Localization.Loc.Get("Sensors_Title", "Sensors");
+        Header.Subtitle = Localization.Loc.Get("Sensors_Subtitle", "Temperatures, voltages and fan speeds (admin required for most sensors)");
     }
 
     protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -41,12 +43,12 @@ public sealed partial class SensorsPage : Page
         var readings = _sensors.ReadAll();
         if (readings.Count == 0)
         {
-            StatusText.Text = "No sensors available. Run as administrator to expose temperatures and voltages.";
+            StatusText.Text = Localization.Loc.Get("Sensors_None", "No sensors available. Run as administrator to expose temperatures and voltages.");
             SensorList.Items.Clear();
             return;
         }
 
-        StatusText.Text = $"{readings.Count} sensors";
+        StatusText.Text = string.Format(Localization.Loc.Get("Sensors_CountFormat", "{0} sensors"), readings.Count);
         SensorList.Items.Clear();
         foreach (var grouping in readings.GroupBy(r => r.HardwareName))
         {

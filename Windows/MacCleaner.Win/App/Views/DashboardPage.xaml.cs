@@ -20,6 +20,15 @@ public sealed partial class DashboardPage : Page
         InitializeComponent();
         _metrics = App.Services.GetRequiredService<ISystemMetricsService>();
         _drives = App.Services.GetRequiredService<IDriveService>();
+        Localize();
+    }
+
+    private void Localize()
+    {
+        Header.Title = Localization.Loc.Get("Dashboard_Title", "Dashboard");
+        Header.Subtitle = Localization.Loc.Get("Dashboard_Subtitle", "CPU, memory and disk at a glance");
+        MemoryLabel.Text = Localization.Loc.Get("Common_Memory", "Memory");
+        DrivesLabel.Text = Localization.Loc.Get("Dashboard_Drives", "Drives");
     }
 
     protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -50,7 +59,10 @@ public sealed partial class DashboardPage : Page
         var mem = _metrics.SampleMemory();
         RamValueText.Text = $"{mem.UsedPercent:F0}%";
         RamBar.Value = mem.UsedPercent;
-        RamSubText.Text = $"{Core.FileSystem.Bytes.Format((long)mem.UsedBytes)} of {Core.FileSystem.Bytes.Format((long)mem.TotalBytes)}";
+        RamSubText.Text = string.Format(
+            Localization.Loc.Get("Common_UsedOfFormat", "{0} of {1}"),
+            Core.FileSystem.Bytes.Format((long)mem.UsedBytes),
+            Core.FileSystem.Bytes.Format((long)mem.TotalBytes));
 
         DriveList.Items.Clear();
         foreach (var d in _drives.List())
@@ -69,8 +81,11 @@ public sealed partial class DashboardPage : Page
         var subText = new TextBlock
         {
             Text = d.IsReady
-                ? $"{Core.FileSystem.Bytes.Format(d.FreeBytes)} free of {Core.FileSystem.Bytes.Format(d.TotalBytes)}"
-                : "Not ready",
+                ? string.Format(
+                    Localization.Loc.Get("Common_FreeOfFormat", "{0} free of {1}"),
+                    Core.FileSystem.Bytes.Format(d.FreeBytes),
+                    Core.FileSystem.Bytes.Format(d.TotalBytes))
+                : Localization.Loc.Get("Common_NotReady", "Not ready"),
             FontSize = 12,
             Opacity = 0.65
         };

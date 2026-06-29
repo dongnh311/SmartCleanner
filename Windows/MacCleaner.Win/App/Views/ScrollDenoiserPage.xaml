@@ -12,6 +12,7 @@
         </Grid.RowDefinitions>
 
         <controls:ModuleHeader
+            x:Name="Header"
             Grid.Row="0"
             Title="Scroll Denoiser"
             Subtitle="Direction-lock filter for cheap mouse wheels"
@@ -20,6 +21,7 @@
         <Border Grid.Row="1" Style="{StaticResource Card}" Margin="16,0,16,0">
             <StackPanel Spacing="12" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <TextBlock
+                    x:Name="Description"
                     Text="Suppresses wheel events whose direction reverses within 80 ms of the previous one — the classic encoder bounce on budget mice."
                     TextWrapping="Wrap"
                     FontSize="13"

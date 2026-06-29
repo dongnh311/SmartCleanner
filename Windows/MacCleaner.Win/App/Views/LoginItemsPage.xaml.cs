@@ -15,13 +15,17 @@ public sealed partial class LoginItemsPage : Page
     {
         InitializeComponent();
         _registry = App.Services.GetRequiredService<IRegistryService>();
+        Header.Title = Localization.Loc.Get("LoginItems_Title", "Login Items");
+        Header.Subtitle = Localization.Loc.Get("LoginItems_Subtitle", "Programs that start with Windows");
     }
 
     protected override void OnNavigatedTo(NavigationEventArgs e)
     {
         base.OnNavigatedTo(e);
         var items = _registry.ListLoginItems();
-        CountText.Text = $"{items.Count} entries across HKCU and HKLM (64-bit + WoW64)";
+        CountText.Text = string.Format(
+            Localization.Loc.Get("LoginItems_CountFormat", "{0} entries across HKCU and HKLM (64-bit + WoW64)"),
+            items.Count);
 
         ItemsList.Items.Clear();
         foreach (var item in items.OrderBy(i => i.Hive).ThenBy(i => i.Name, StringComparer.OrdinalIgnoreCase))

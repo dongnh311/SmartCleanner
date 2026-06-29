@@ -15,6 +15,11 @@ public sealed partial class SimilarPhotosPage : Page
     {
         InitializeComponent();
         _svc = App.Services.GetRequiredService<ISimilarPhotosService>();
+        Header.Title = Localization.Loc.Get("Similar_Title", "Similar Photos");
+        Header.Subtitle = Localization.Loc.Get("Similar_Subtitle", "Perceptual (average) hash clustering");
+        PathBox.PlaceholderText = Localization.Loc.Get("Common_PathToScan", "Path to scan");
+        ScanButton.Content = Localization.Loc.Get("Common_Scan", "Scan");
+        MaxDistLabel.Text = Localization.Loc.Get("Similar_MaxDistance", "Max distance:");
     }
 
     protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -38,19 +43,19 @@ public sealed partial class SimilarPhotosPage : Page
         var ct = _cts.Token;
 
         ScanButton.IsEnabled = false;
-        StatusText.Text = "Hashing photos…";
+        StatusText.Text = Localization.Loc.Get("Similar_Hashing", "Hashing photos…");
         GroupsList.Items.Clear();
 
         try
         {
             var groups = await _svc.FindAsync(PathBox.Text, (int)MaxDist.Value, ct);
             if (ct.IsCancellationRequested) return;
-            StatusText.Text = $"{groups.Count} cluster(s)";
+            StatusText.Text = string.Format(Localization.Loc.Get("Similar_CountFormat", "{0} cluster(s)"), groups.Count);
             foreach (var g in groups) GroupsList.Items.Add(BuildGroup(g));
         }
         catch (Exception ex)
         {
-            StatusText.Text = $"Scan failed: {ex.Message}";
+            StatusText.Text = string.Format(Localization.Loc.Get("Common_ScanFailedFormat", "Scan failed: {0}"), ex.Message);
         }
         finally
         {
@@ -63,7 +68,7 @@ public sealed partial class SimilarPhotosPage : Page
         var stack = new StackPanel { Spacing = 2, Padding = new Thickness(12, 6, 12, 6) };
         stack.Children.Add(new TextBlock
         {
-            Text = $"{g.Paths.Count} similar (worst distance {g.RepresentativeDistance})",
+            Text = string.Format(Localization.Loc.Get("Similar_GroupFormat", "{0} similar (worst distance {1})"), g.Paths.Count, g.RepresentativeDistance),
             FontWeight = Microsoft.UI.Text.FontWeights.SemiBold
         });
         foreach (var p in g.Paths)

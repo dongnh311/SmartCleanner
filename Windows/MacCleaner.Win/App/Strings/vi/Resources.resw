@@ -50,4 +50,228 @@
 
   <data name="Settings_Language" xml:space="preserve"><value>Ngôn ngữ</value></data>
   <data name="Settings_LanguageNote" xml:space="preserve"><value>Khởi động lại MacCleaner để áp dụng thay đổi trên mọi màn hình.</value></data>
+  <!-- FEATURE-PAGES-START (generated) -->
+  <data name="Common_Memory" xml:space="preserve"><value>Bộ nhớ</value></data>
+  <data name="Common_NotReady" xml:space="preserve"><value>Chưa sẵn sàng</value></data>
+  <data name="Common_UsedOfFormat" xml:space="preserve"><value>{0} trên {1}</value></data>
+  <data name="Common_FreeOfFormat" xml:space="preserve"><value>{0} trống trên {1}</value></data>
+  <data name="Dashboard_Title" xml:space="preserve"><value>Bảng điều khiển</value></data>
+  <data name="Dashboard_Subtitle" xml:space="preserve"><value>CPU, bộ nhớ và ổ đĩa trong nháy mắt</value></data>
+  <data name="Dashboard_Drives" xml:space="preserve"><value>Ổ đĩa</value></data>
+  <data name="Processes_Title" xml:space="preserve"><value>Giám sát tiến trình</value></data>
+  <data name="Processes_Subtitle" xml:space="preserve"><value>Ảnh chụp tiến trình trực tiếp, làm mới mỗi 2 giây</value></data>
+  <data name="Processes_FilterPlaceholder" xml:space="preserve"><value>Lọc theo tên…</value></data>
+  <data name="Processes_CountFormat" xml:space="preserve"><value>{0} tiến trình</value></data>
+  <data name="Memory_Title" xml:space="preserve"><value>Bộ nhớ</value></data>
+  <data name="Memory_Subtitle" xml:space="preserve"><value>Mức dùng RAM vật lý, làm mới mỗi giây</value></data>
+  <data name="Memory_UsedFormat" xml:space="preserve"><value>{0} đã dùng</value></data>
+  <data name="Memory_AvailTotalFormat" xml:space="preserve"><value>{0} còn trống · {1} tổng cộng</value></data>
+  <data name="Battery_Title" xml:space="preserve"><value>Pin</value></data>
+  <data name="Battery_Subtitle" xml:space="preserve"><value>Trạng thái nguồn và dung lượng còn lại</value></data>
+  <data name="Battery_NoBattery" xml:space="preserve"><value>Không phát hiện pin</value></data>
+  <data name="Battery_Charging" xml:space="preserve"><value>Đang sạc</value></data>
+  <data name="Battery_OnAC" xml:space="preserve"><value>Đang dùng điện lưới</value></data>
+  <data name="Battery_OnBattery" xml:space="preserve"><value>Đang dùng pin</value></data>
+  <data name="Battery_RemainingFormat" xml:space="preserve"><value>≈ còn {0} giờ {1} phút</value></data>
+  <data name="Battery_TimeUnavailable" xml:space="preserve"><value>Không ước tính được thời gian</value></data>
+  <data name="Sensors_Title" xml:space="preserve"><value>Cảm biến</value></data>
+  <data name="Sensors_Subtitle" xml:space="preserve"><value>Nhiệt độ, điện áp và tốc độ quạt (đa số cảm biến cần quyền quản trị)</value></data>
+  <data name="Sensors_None" xml:space="preserve"><value>Không có cảm biến nào. Chạy bằng quyền quản trị để xem nhiệt độ và điện áp.</value></data>
+  <data name="Sensors_CountFormat" xml:space="preserve"><value>{0} cảm biến</value></data>
+  <data name="Network_Title" xml:space="preserve"><value>Mạng</value></data>
+  <data name="Network_Subtitle" xml:space="preserve"><value>Giao diện mạng đang hoạt động và tổng lưu lượng</value></data>
+  <data name="Common_Download" xml:space="preserve"><value>Tải về</value></data>
+  <data name="Common_Upload" xml:space="preserve"><value>Tải lên</value></data>
+  <data name="Network_Interfaces" xml:space="preserve"><value>Giao diện mạng</value></data>
+  <data name="Bluetooth_Title" xml:space="preserve"><value>Bluetooth</value></data>
+  <data name="Bluetooth_Subtitle" xml:space="preserve"><value>Thiết bị Classic + LE đã ghép nối</value></data>
+  <data name="Common_Scanning" xml:space="preserve"><value>Đang quét…</value></data>
+  <data name="Bluetooth_None" xml:space="preserve"><value>Không tìm thấy thiết bị đã ghép nối.</value></data>
+  <data name="Bluetooth_CountFormat" xml:space="preserve"><value>{0} thiết bị đã ghép nối</value></data>
+  <data name="Bluetooth_ScanFailedFormat" xml:space="preserve"><value>Quét Bluetooth thất bại: {0}</value></data>
+  <data name="Common_Connected" xml:space="preserve"><value>Đã kết nối</value></data>
+  <data name="Common_Disconnected" xml:space="preserve"><value>Mất kết nối</value></data>
+  <data name="Common_Paired" xml:space="preserve"><value>Đã ghép nối</value></data>
+  <data name="Common_Unpaired" xml:space="preserve"><value>Chưa ghép nối</value></data>
+  <data name="DiskMon_Title" xml:space="preserve"><value>Giám sát ổ đĩa</value></data>
+  <data name="DiskMon_Subtitle" xml:space="preserve"><value>Lưu lượng đọc/ghi và độ sâu hàng đợi theo từng ổ vật lý</value></data>
+  <data name="DiskMon_RowFormat" xml:space="preserve"><value>↓ {0}  ·  ↑ {1}  ·  hàng đợi {2}</value></data>
+  <data name="LoginItems_Title" xml:space="preserve"><value>Mục khởi động</value></data>
+  <data name="LoginItems_Subtitle" xml:space="preserve"><value>Chương trình khởi động cùng Windows</value></data>
+  <data name="LoginItems_CountFormat" xml:space="preserve"><value>{0} mục trong HKCU và HKLM (64-bit + WoW64)</value></data>
+  <data name="Uninstaller_Title" xml:space="preserve"><value>Gỡ ứng dụng</value></data>
+  <data name="Uninstaller_Subtitle" xml:space="preserve"><value>Chương trình đã cài trong HKCU và HKLM (64-bit + WoW64)</value></data>
+  <data name="Uninstaller_FilterPlaceholder" xml:space="preserve"><value>Lọc theo tên hoặc nhà phát hành…</value></data>
+  <data name="Uninstaller_CountFormat" xml:space="preserve"><value>{0} chương trình</value></data>
+  <data name="Updater_Title" xml:space="preserve"><value>Cập nhật</value></data>
+  <data name="Updater_Subtitle" xml:space="preserve"><value>Bản cập nhật đang chờ qua winget</value></data>
+  <data name="Common_Refresh" xml:space="preserve"><value>Làm mới</value></data>
+  <data name="Updater_Querying" xml:space="preserve"><value>Đang truy vấn winget…</value></data>
+  <data name="Updater_NotInstalled" xml:space="preserve"><value>Chưa cài winget. Cài "App Installer" từ Microsoft Store.</value></data>
+  <data name="Updater_UpToDate" xml:space="preserve"><value>Mọi thứ đã được cập nhật.</value></data>
+  <data name="Updater_CountFormat" xml:space="preserve"><value>{0} gói có bản cập nhật</value></data>
+  <data name="Common_FailedFormat" xml:space="preserve"><value>Thất bại: {0}</value></data>
+  <data name="Maintenance_Title" xml:space="preserve"><value>Bảo trì</value></data>
+  <data name="Maintenance_Subtitle" xml:space="preserve"><value>Chạy bảo trì Windows ngay trong ứng dụng — mục cần quyền quản trị sẽ nhắc qua UAC</value></data>
+  <data name="Maintenance_Unavailable" xml:space="preserve"><value>Không khả dụng</value></data>
+  <data name="Common_Copy" xml:space="preserve"><value>Sao chép</value></data>
+  <data name="Common_Run" xml:space="preserve"><value>Chạy</value></data>
+  <data name="Common_Running" xml:space="preserve"><value>Đang chạy…</value></data>
+  <data name="MaintenanceCat_SystemFiles" xml:space="preserve"><value>Tệp hệ thống</value></data>
+  <data name="MaintenanceCat_Disk" xml:space="preserve"><value>Ổ đĩa</value></data>
+  <data name="MaintenanceCat_Network" xml:space="preserve"><value>Mạng</value></data>
+  <data name="MaintenanceCat_Policy" xml:space="preserve"><value>Chính sách</value></data>
+  <data name="MaintenanceCat_Shell" xml:space="preserve"><value>Shell</value></data>
+  <data name="Maint_flush_dns_Title" xml:space="preserve"><value>Xoá bộ nhớ đệm DNS</value></data>
+  <data name="Maint_flush_dns_Summary" xml:space="preserve"><value>Xoá bộ nhớ đệm phân giải khi tên miền gặp trục trặc.</value></data>
+  <data name="Maint_winsock_reset_Title" xml:space="preserve"><value>Đặt lại danh mục Winsock</value></data>
+  <data name="Maint_winsock_reset_Summary" xml:space="preserve"><value>Đặt lại ngăn xếp mạng về mặc định. Khởi động lại sau đó.</value></data>
+  <data name="Maint_sfc_scan_Title" xml:space="preserve"><value>Chạy System File Checker</value></data>
+  <data name="Maint_sfc_scan_Summary" xml:space="preserve"><value>Quét và sửa các tệp hệ thống Windows được bảo vệ (sfc /scannow).</value></data>
+  <data name="Maint_dism_restore_Title" xml:space="preserve"><value>Sửa kho thành phần (component store)</value></data>
+  <data name="Maint_dism_restore_Summary" xml:space="preserve"><value>DISM /Online /Cleanup-Image /RestoreHealth — sửa hỏng hóc mà riêng SFC không xử lý được.</value></data>
+  <data name="Maint_chkdsk_scan_Title" xml:space="preserve"><value>Quét ổ đĩa hệ thống</value></data>
+  <data name="Maint_chkdsk_scan_Summary" xml:space="preserve"><value>Quét trực tuyến ổ C: tìm lỗi hệ thống tệp (chkdsk C: /scan).</value></data>
+  <data name="Maint_gpupdate_Title" xml:space="preserve"><value>Làm mới Group Policy</value></data>
+  <data name="Maint_gpupdate_Summary" xml:space="preserve"><value>Áp dụng lại chính sách máy và người dùng (gpupdate /force).</value></data>
+  <data name="Maint_restart_explorer_Title" xml:space="preserve"><value>Khởi động lại Explorer</value></data>
+  <data name="Maint_restart_explorer_Summary" xml:space="preserve"><value>Khởi chạy lại shell Windows — hữu ích sau khi đổi thiết lập.</value></data>
+  <data name="Malware_Title" xml:space="preserve"><value>Gỡ mã độc</value></data>
+  <data name="Malware_Subtitle" xml:space="preserve"><value>Bảo vệ thời gian thực + quét toàn bộ mục tự chạy và mã băm</value></data>
+  <data name="Malware_RealtimeTitle" xml:space="preserve"><value>Bảo vệ thời gian thực</value></data>
+  <data name="Malware_RealtimeDesc" xml:space="preserve"><value>Theo dõi Downloads, Desktop, Documents và Startup; tự cách ly tệp khớp danh sách băm chặn cục bộ và bảo vệ tệp bằng mồi nhử ransomware.</value></data>
+  <data name="Malware_RecentDetections" xml:space="preserve"><value>Phát hiện gần đây</value></data>
+  <data name="Common_Clear" xml:space="preserve"><value>Xoá</value></data>
+  <data name="Malware_NoDetections" xml:space="preserve"><value>Chưa có phát hiện nào</value></data>
+  <data name="Malware_FullScan" xml:space="preserve"><value>Quét toàn bộ</value></data>
+  <data name="Malware_QuarantineSelected" xml:space="preserve"><value>Cách ly mục đã chọn</value></data>
+  <data name="Malware_RealtimeActiveFormat" xml:space="preserve"><value>Đang hoạt động · {0} vị trí · {1} chữ ký</value></data>
+  <data name="Malware_RealtimeOff" xml:space="preserve"><value>Tắt — không giám sát mối đe doạ mới</value></data>
+  <data name="Malware_ScanProgressFormat" xml:space="preserve"><value>{0} — {1} · {2} tệp</value></data>
+  <data name="Malware_ScanFailedFormat" xml:space="preserve"><value>Quét thất bại: {0}</value></data>
+  <data name="Malware_NoThreatsFormat" xml:space="preserve"><value>Không phát hiện mối đe doạ · đã kiểm tra {0} tệp cùng mọi mục tự chạy.</value></data>
+  <data name="Malware_FlaggedFormat" xml:space="preserve"><value>{0} mục bị gắn cờ trong các mục tự chạy và {1} tệp đã quét</value></data>
+  <data name="Malware_QuarantinedFormat" xml:space="preserve"><value>Đã cách ly {0} mục.</value></data>
+  <data name="QuickClean_Title" xml:space="preserve"><value>Dọn nhanh</value></data>
+  <data name="QuickClean_Subtitle" xml:space="preserve"><value>Bộ nhớ đệm, thư mục tạm, dữ liệu trình duyệt và tệp dump</value></data>
+  <data name="Common_Scan" xml:space="preserve"><value>Quét</value></data>
+  <data name="QuickClean_CleanSelected" xml:space="preserve"><value>Dọn mục đã chọn</value></data>
+  <data name="QuickClean_Prompt" xml:space="preserve"><value>Nhấn Quét để ước tính dung lượng có thể thu hồi.</value></data>
+  <data name="QuickClean_ScanningFormat" xml:space="preserve"><value>Đang quét {0}…</value></data>
+  <data name="QuickClean_TotalFormat" xml:space="preserve"><value>Tổng có thể thu hồi: {0}</value></data>
+  <data name="QuickClean_ScanComplete" xml:space="preserve"><value>Quét xong.</value></data>
+  <data name="QuickClean_Cleaning" xml:space="preserve"><value>Đang dọn…</value></data>
+  <data name="QuickClean_CleaningFormat" xml:space="preserve"><value>Đang dọn {0}…</value></data>
+  <data name="QuickClean_FreedFormat" xml:space="preserve"><value>Đã giải phóng: {0} — đã xoá {1} tệp, bỏ qua {2}</value></data>
+  <data name="QuickClean_CleanComplete" xml:space="preserve"><value>Dọn xong.</value></data>
+  <data name="QuickClean_SizeFormat" xml:space="preserve"><value>{0} · {1} tệp</value></data>
+  <data name="Clean_user_temp_Label" xml:space="preserve"><value>Tệp tạm người dùng</value></data>
+  <data name="Clean_user_temp_Desc" xml:space="preserve"><value>Tệp trong thư mục %TEMP% cũ hơn 1 giờ.</value></data>
+  <data name="Clean_windows_temp_Label" xml:space="preserve"><value>Tệp tạm Windows</value></data>
+  <data name="Clean_windows_temp_Desc" xml:space="preserve"><value>C:\Windows\Temp — vùng nháp dùng chung.</value></data>
+  <data name="Clean_prefetch_Label" xml:space="preserve"><value>Prefetch</value></data>
+  <data name="Clean_prefetch_Desc" xml:space="preserve"><value>Bộ nhớ đệm dự đoán khi khởi chạy của Windows; sẽ tự tạo lại.</value></data>
+  <data name="Clean_windows_update_Label" xml:space="preserve"><value>Tải về Windows Update</value></data>
+  <data name="Clean_windows_update_Desc" xml:space="preserve"><value>Gói cập nhật đã tải về đang chờ dọn.</value></data>
+  <data name="Clean_thumb_cache_Label" xml:space="preserve"><value>Bộ nhớ đệm hình thu nhỏ</value></data>
+  <data name="Clean_thumb_cache_Desc" xml:space="preserve"><value>Cơ sở dữ liệu hình thu nhỏ của Explorer (thumbcache_*.db).</value></data>
+  <data name="Clean_chrome_cache_Label" xml:space="preserve"><value>Bộ nhớ đệm Chrome</value></data>
+  <data name="Clean_chrome_cache_Desc" xml:space="preserve"><value>Bộ nhớ đệm HTTP của hồ sơ mặc định.</value></data>
+  <data name="Clean_edge_cache_Label" xml:space="preserve"><value>Bộ nhớ đệm Edge</value></data>
+  <data name="Clean_edge_cache_Desc" xml:space="preserve"><value>Bộ nhớ đệm HTTP của hồ sơ mặc định.</value></data>
+  <data name="Clean_crash_dumps_Label" xml:space="preserve"><value>Tệp dump sự cố</value></data>
+  <data name="Clean_crash_dumps_Desc" xml:space="preserve"><value>Tệp dump theo người dùng do WER ghi.</value></data>
+  <data name="Clean_directx_cache_Label" xml:space="preserve"><value>Bộ nhớ đệm shader DirectX</value></data>
+  <data name="Clean_directx_cache_Desc" xml:space="preserve"><value>Vùng nháp của trình biên dịch shader.</value></data>
+  <data name="RecycleBin_Title" xml:space="preserve"><value>Thùng rác</value></data>
+  <data name="RecycleBin_Subtitle" xml:space="preserve"><value>Dọn sạch trên mọi ổ đĩa</value></data>
+  <data name="RecycleBin_Empty" xml:space="preserve"><value>Dọn sạch Thùng rác</value></data>
+  <data name="RecycleBin_IsEmpty" xml:space="preserve"><value>Thùng rác trống</value></data>
+  <data name="RecycleBin_CountFormat" xml:space="preserve"><value>{0} mục trên mọi ổ đĩa</value></data>
+  <data name="RecycleBin_DialogTitle" xml:space="preserve"><value>Dọn sạch Thùng rác?</value></data>
+  <data name="RecycleBin_DialogContentFormat" xml:space="preserve"><value>Thao tác này sẽ xoá vĩnh viễn {0}. Không thể hoàn tác.</value></data>
+  <data name="Common_EmptyButton" xml:space="preserve"><value>Dọn sạch</value></data>
+  <data name="Common_Cancel" xml:space="preserve"><value>Huỷ</value></data>
+  <data name="RecycleBin_Emptying" xml:space="preserve"><value>Đang dọn…</value></data>
+  <data name="Common_Done" xml:space="preserve"><value>Hoàn tất.</value></data>
+  <data name="SpaceLens_Title" xml:space="preserve"><value>Ống kính dung lượng</value></data>
+  <data name="SpaceLens_Subtitle" xml:space="preserve"><value>Khám phá các thư mục lớn nhất</value></data>
+  <data name="SpaceLens_ParentTooltip" xml:space="preserve"><value>Thư mục cha</value></data>
+  <data name="SpaceLens_ScanningFormat" xml:space="preserve"><value>Đang quét {0}…</value></data>
+  <data name="SpaceLens_TotalFormat" xml:space="preserve"><value>{0} trong {1} mục trực tiếp</value></data>
+  <data name="Common_ScanFailedFormat" xml:space="preserve"><value>Quét thất bại: {0}</value></data>
+  <data name="LargeOld_Title" xml:space="preserve"><value>Lớn &amp; Cũ</value></data>
+  <data name="LargeOld_Subtitle" xml:space="preserve"><value>Tệp vượt ngưỡng kích thước + tuổi</value></data>
+  <data name="LargeOld_PathPlaceholder" xml:space="preserve"><value>Đường dẫn cần quét</value></data>
+  <data name="LargeOld_MinSize" xml:space="preserve"><value>Kích thước tối thiểu (MB):</value></data>
+  <data name="LargeOld_MinAge" xml:space="preserve"><value>Tuổi tối thiểu (ngày):</value></data>
+  <data name="LargeOld_CountFormat" xml:space="preserve"><value>{0} tệp khớp</value></data>
+  <data name="LargeOld_RowFormat" xml:space="preserve"><value>{0} · sửa lần cuối {1}</value></data>
+  <data name="Duplicates_Title" xml:space="preserve"><value>Trùng lặp</value></data>
+  <data name="Duplicates_Subtitle" xml:space="preserve"><value>So khớp luồng SHA-256 (lọc trước theo kích thước)</value></data>
+  <data name="Common_PathToScan" xml:space="preserve"><value>Đường dẫn cần quét</value></data>
+  <data name="Duplicates_Hashing" xml:space="preserve"><value>Đang băm…</value></data>
+  <data name="Duplicates_ResultFormat" xml:space="preserve"><value>{0} nhóm trùng lặp · {1} có thể thu hồi khi giữ một bản</value></data>
+  <data name="Duplicates_GroupFormat" xml:space="preserve"><value>{0} bản · {1} mỗi bản</value></data>
+  <data name="Similar_Title" xml:space="preserve"><value>Ảnh tương tự</value></data>
+  <data name="Similar_Subtitle" xml:space="preserve"><value>Gom cụm bằng mã băm tri giác (trung bình)</value></data>
+  <data name="Similar_MaxDistance" xml:space="preserve"><value>Khoảng cách tối đa:</value></data>
+  <data name="Similar_Hashing" xml:space="preserve"><value>Đang băm ảnh…</value></data>
+  <data name="Similar_CountFormat" xml:space="preserve"><value>{0} cụm</value></data>
+  <data name="Similar_GroupFormat" xml:space="preserve"><value>{0} ảnh tương tự (khoảng cách xa nhất {1})</value></data>
+  <data name="Shredder_Title" xml:space="preserve"><value>Huỷ vĩnh viễn</value></data>
+  <data name="Shredder_Subtitle" xml:space="preserve"><value>Ghi đè rồi xoá</value></data>
+  <data name="Shredder_SsdWarning" xml:space="preserve"><value>Trên SSD, cân bằng hao mòn có thể dời khối dữ liệu, nên ghi đè rồi xoá không đảm bảo dữ liệu gốc bị phá huỷ. Hãy dùng BitLocker toàn ổ cho SSD bạn định thanh lý.</value></data>
+  <data name="Shredder_PathPlaceholder" xml:space="preserve"><value>Đường dẫn tuyệt đối tới một tệp</value></data>
+  <data name="Shredder_Shred" xml:space="preserve"><value>Huỷ vĩnh viễn</value></data>
+  <data name="Shredder_Passes" xml:space="preserve"><value>Số lần ghi đè:</value></data>
+  <data name="Shredder_BadPath" xml:space="preserve"><value>Đường dẫn không trỏ tới tệp đang tồn tại.</value></data>
+  <data name="Shredder_DialogTitle" xml:space="preserve"><value>Huỷ vĩnh viễn tệp này?</value></data>
+  <data name="Shredder_DialogContentFormat" xml:space="preserve"><value>{0} sẽ được ghi đè {1} lần bằng byte ngẫu nhiên rồi xoá. Không thể hoàn tác.</value></data>
+  <data name="Shredder_Shredding" xml:space="preserve"><value>Đang huỷ…</value></data>
+  <data name="Shredder_Done" xml:space="preserve"><value>Đã huỷ tệp.</value></data>
+  <data name="Quarantine_Title" xml:space="preserve"><value>Cách ly</value></data>
+  <data name="Quarantine_Subtitle" xml:space="preserve"><value>Tệp đang giữ lại chờ khôi phục hoặc xoá</value></data>
+  <data name="Quarantine_Purge" xml:space="preserve"><value>Xoá &gt; 7 ngày</value></data>
+  <data name="Quarantine_Empty" xml:space="preserve"><value>Không có tệp nào trong khu cách ly.</value></data>
+  <data name="Quarantine_RowFormat" xml:space="preserve"><value>{0} · cách ly {1} UTC</value></data>
+  <data name="Common_Restore" xml:space="preserve"><value>Khôi phục</value></data>
+  <data name="Quarantine_RestoreFailed" xml:space="preserve"><value>Khôi phục thất bại</value></data>
+  <data name="Common_Close" xml:space="preserve"><value>Đóng</value></data>
+  <data name="MyTools_Title" xml:space="preserve"><value>Công cụ của tôi</value></data>
+  <data name="MyTools_Subtitle" xml:space="preserve"><value>Lối tắt và thư mục đã ghim</value></data>
+  <data name="MyTools_LabelPlaceholder" xml:space="preserve"><value>Nhãn</value></data>
+  <data name="MyTools_TargetPlaceholder" xml:space="preserve"><value>C:\đường\dẫn\bất-kỳ (tệp, thư mục, URL)</value></data>
+  <data name="Common_Add" xml:space="preserve"><value>Thêm</value></data>
+  <data name="MyTools_Empty" xml:space="preserve"><value>Thêm một lối tắt ở trên để ghim vào đây.</value></data>
+  <data name="Common_Open" xml:space="preserve"><value>Mở</value></data>
+  <data name="MyTools_OpenFailed" xml:space="preserve"><value>Không thể mở</value></data>
+  <data name="Common_Remove" xml:space="preserve"><value>Gỡ</value></data>
+  <data name="Clock_Title" xml:space="preserve"><value>Đồng hồ</value></data>
+  <data name="Clock_Subtitle" xml:space="preserve"><value>Đồng hồ thế giới — múi giờ đã ghim</value></data>
+  <data name="Clock_FilterPlaceholder" xml:space="preserve"><value>Lọc múi giờ…</value></data>
+  <data name="Clock_Pin" xml:space="preserve"><value>Ghim</value></data>
+  <data name="Paint_Title" xml:space="preserve"><value>Vẽ</value></data>
+  <data name="Paint_Subtitle" xml:space="preserve"><value>Khung vẽ — tạm hoãn nối InkCanvas</value></data>
+  <data name="Paint_Pending" xml:space="preserve"><value>Khung vẽ đang chờ</value></data>
+  <data name="Paint_PendingDesc" xml:space="preserve"><value>Một khung vẽ dựa trên SkiaSharp sẽ thay placeholder InkCanvas trong một commit sau, khi tìm được cấu hình build phù hợp.</value></data>
+  <data name="Scroll_Title" xml:space="preserve"><value>Khử nhiễu cuộn</value></data>
+  <data name="Scroll_Subtitle" xml:space="preserve"><value>Bộ lọc khoá hướng cho con lăn chuột giá rẻ</value></data>
+  <data name="Scroll_Desc" xml:space="preserve"><value>Chặn các sự kiện lăn bị đảo hướng trong vòng 80 ms so với lần trước — hiện tượng nảy bộ mã hoá kinh điển trên chuột giá rẻ.</value></data>
+  <data name="Scroll_Active" xml:space="preserve"><value>Bật</value></data>
+  <data name="Scroll_HookOn" xml:space="preserve"><value>Đã cài hook — các sự kiện lăn bị nảy sẽ bị chặn.</value></data>
+  <data name="Scroll_HookOff" xml:space="preserve"><value>Hook chưa hoạt động.</value></data>
+  <data name="Settings_Title" xml:space="preserve"><value>Cài đặt</value></data>
+  <data name="Settings_Subtitle" xml:space="preserve"><value>Về bản dựng này và nơi lưu dữ liệu</value></data>
+  <data name="Settings_About" xml:space="preserve"><value>Giới thiệu</value></data>
+  <data name="Settings_AboutDesc" xml:space="preserve"><value>Bản port Windows của ứng dụng macOS — cùng bộ mô-đun, hạ tầng Win32/WinRT gốc, xem WINDOWS_PORT_PLAN.md.</value></data>
+  <data name="Settings_VersionFormat" xml:space="preserve"><value>Phiên bản {0} · {1}</value></data>
+  <data name="Settings_Startup" xml:space="preserve"><value>Khởi động</value></data>
+  <data name="Settings_StartupToggle" xml:space="preserve"><value>Mở MacCleaner khi đăng nhập</value></data>
+  <data name="Settings_StartupDesc" xml:space="preserve"><value>Thêm MacCleaner vào danh sách Run của người dùng để khởi động cùng Windows. Không cần quyền quản trị.</value></data>
+  <data name="Settings_DataLocations" xml:space="preserve"><value>Vị trí dữ liệu</value></data>
+  <data name="Settings_OpenQuarantine" xml:space="preserve"><value>Mở thư mục Cách ly</value></data>
+  <data name="Settings_OpenTrends" xml:space="preserve"><value>Mở thư mục cơ sở dữ liệu xu hướng</value></data>
+  <data name="Settings_ShowMyToolsJson" xml:space="preserve"><value>Hiện JSON Công cụ của tôi</value></data>
+  <!-- FEATURE-PAGES-END -->
 </root>

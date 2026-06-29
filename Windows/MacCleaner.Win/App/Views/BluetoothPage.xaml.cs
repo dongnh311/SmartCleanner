@@ -15,6 +15,8 @@ public sealed partial class BluetoothPage : Page
     {
         InitializeComponent();
         _bluetooth = App.Services.GetRequiredService<IBluetoothService>();
+        Header.Title = Localization.Loc.Get("Bluetooth_Title", "Bluetooth");
+        Header.Subtitle = Localization.Loc.Get("Bluetooth_Subtitle", "Paired classic + LE devices");
     }
 
     protected override async void OnNavigatedTo(NavigationEventArgs e)
@@ -34,15 +36,15 @@ public sealed partial class BluetoothPage : Page
 
     private async Task ReloadAsync(CancellationToken ct)
     {
-        StatusText.Text = "Scanning…";
+        StatusText.Text = Localization.Loc.Get("Common_Scanning", "Scanning…");
         DevicesList.Items.Clear();
         try
         {
             var devices = await _bluetooth.ListAsync(ct);
             if (ct.IsCancellationRequested) return;
             StatusText.Text = devices.Count == 0
-                ? "No paired devices found."
-                : $"{devices.Count} paired device(s)";
+                ? Localization.Loc.Get("Bluetooth_None", "No paired devices found.")
+                : string.Format(Localization.Loc.Get("Bluetooth_CountFormat", "{0} paired device(s)"), devices.Count);
             foreach (var d in devices)
             {
                 DevicesList.Items.Add(BuildRow(d));
@@ -50,7 +52,7 @@ public sealed partial class BluetoothPage : Page
         }
         catch (Exception ex)
         {
-            StatusText.Text = $"Bluetooth scan failed: {ex.Message}";
+            StatusText.Text = string.Format(Localization.Loc.Get("Bluetooth_ScanFailedFormat", "Bluetooth scan failed: {0}"), ex.Message);
         }
     }
 
@@ -64,7 +66,9 @@ public sealed partial class BluetoothPage : Page
         });
         stack.Children.Add(new TextBlock
         {
-            Text = $"{(d.IsLowEnergy ? "LE" : "Classic")} · {(d.IsConnected ? "Connected" : "Disconnected")} · {(d.IsPaired ? "Paired" : "Unpaired")}",
+            Text = $"{(d.IsLowEnergy ? "LE" : "Classic")} · "
+                + $"{(d.IsConnected ? Localization.Loc.Get("Common_Connected", "Connected") : Localization.Loc.Get("Common_Disconnected", "Disconnected"))} · "
+                + $"{(d.IsPaired ? Localization.Loc.Get("Common_Paired", "Paired") : Localization.Loc.Get("Common_Unpaired", "Unpaired"))}",
             FontSize = 11,
             Opacity = 0.65
         });

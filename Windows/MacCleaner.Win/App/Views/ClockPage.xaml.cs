@@ -14,6 +14,10 @@ public sealed partial class ClockPage : Page
     public ClockPage()
     {
         InitializeComponent();
+        Header.Title = Localization.Loc.Get("Clock_Title", "Clock");
+        Header.Subtitle = Localization.Loc.Get("Clock_Subtitle", "World clock — pinned time zones");
+        TzBox.PlaceholderText = Localization.Loc.Get("Clock_FilterPlaceholder", "Filter time zones…");
+        AddTzButton.Content = Localization.Loc.Get("Clock_Pin", "Pin");
         // Seed with the local zone so the page renders something meaningful
         // on first navigation without forcing the user to pin anything.
         _pinned.Add(TimeZoneInfo.Local);

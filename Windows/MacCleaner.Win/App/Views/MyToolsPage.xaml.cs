@@ -15,6 +15,11 @@ public sealed partial class MyToolsPage : Page
     {
         InitializeComponent();
         _svc = App.Services.GetRequiredService<IMyToolsService>();
+        Header.Title = Localization.Loc.Get("MyTools_Title", "My Tools");
+        Header.Subtitle = Localization.Loc.Get("MyTools_Subtitle", "Pinned shortcuts and folders");
+        LabelBox.PlaceholderText = Localization.Loc.Get("MyTools_LabelPlaceholder", "Label");
+        TargetBox.PlaceholderText = Localization.Loc.Get("MyTools_TargetPlaceholder", "C:\\path\\to\\anything (file, folder, URL)");
+        AddButton.Content = Localization.Loc.Get("Common_Add", "Add");
     }
 
     protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -31,7 +36,7 @@ public sealed partial class MyToolsPage : Page
         {
             ItemsList.Items.Add(new TextBlock
             {
-                Text = "Add a shortcut above to pin it here.",
+                Text = Localization.Loc.Get("MyTools_Empty", "Add a shortcut above to pin it here."),
                 Padding = new Thickness(12, 16, 12, 16),
                 Opacity = 0.65,
                 HorizontalAlignment = HorizontalAlignment.Center
@@ -71,7 +76,7 @@ public sealed partial class MyToolsPage : Page
         });
         Grid.SetColumn(stack, 0); grid.Children.Add(stack);
 
-        var open = new Button { Content = "Open" };
+        var open = new Button { Content = Localization.Loc.Get("Common_Open", "Open") };
         open.Click += (_, _) =>
         {
             try
@@ -82,16 +87,16 @@ public sealed partial class MyToolsPage : Page
             {
                 _ = new ContentDialog
                 {
-                    Title = "Could not open",
+                    Title = Localization.Loc.Get("MyTools_OpenFailed", "Could not open"),
                     Content = ex.Message,
-                    CloseButtonText = "Close",
+                    CloseButtonText = Localization.Loc.Get("Common_Close", "Close"),
                     XamlRoot = this.XamlRoot
                 }.ShowAsync();
             }
         };
         Grid.SetColumn(open, 1); grid.Children.Add(open);
 
-        var remove = new Button { Content = "Remove" };
+        var remove = new Button { Content = Localization.Loc.Get("Common_Remove", "Remove") };
         remove.Click += async (_, _) => { await _svc.RemoveAsync(s.Id); Refresh(); };
         Grid.SetColumn(remove, 2); grid.Children.Add(remove);
         return grid;

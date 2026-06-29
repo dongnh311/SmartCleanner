@@ -50,4 +50,228 @@
 
   <data name="Settings_Language" xml:space="preserve"><value>Language</value></data>
   <data name="Settings_LanguageNote" xml:space="preserve"><value>Restart MacCleaner to apply the change across every screen.</value></data>
+  <!-- FEATURE-PAGES-START (generated) -->
+  <data name="Common_Memory" xml:space="preserve"><value>Memory</value></data>
+  <data name="Common_NotReady" xml:space="preserve"><value>Not ready</value></data>
+  <data name="Common_UsedOfFormat" xml:space="preserve"><value>{0} of {1}</value></data>
+  <data name="Common_FreeOfFormat" xml:space="preserve"><value>{0} free of {1}</value></data>
+  <data name="Dashboard_Title" xml:space="preserve"><value>Dashboard</value></data>
+  <data name="Dashboard_Subtitle" xml:space="preserve"><value>CPU, memory and disk at a glance</value></data>
+  <data name="Dashboard_Drives" xml:space="preserve"><value>Drives</value></data>
+  <data name="Processes_Title" xml:space="preserve"><value>Process Monitor</value></data>
+  <data name="Processes_Subtitle" xml:space="preserve"><value>Live process snapshot, refreshed every 2 seconds</value></data>
+  <data name="Processes_FilterPlaceholder" xml:space="preserve"><value>Filter by name…</value></data>
+  <data name="Processes_CountFormat" xml:space="preserve"><value>{0} processes</value></data>
+  <data name="Memory_Title" xml:space="preserve"><value>Memory</value></data>
+  <data name="Memory_Subtitle" xml:space="preserve"><value>Physical RAM usage, refreshed every second</value></data>
+  <data name="Memory_UsedFormat" xml:space="preserve"><value>{0} used</value></data>
+  <data name="Memory_AvailTotalFormat" xml:space="preserve"><value>{0} available · {1} total</value></data>
+  <data name="Battery_Title" xml:space="preserve"><value>Battery</value></data>
+  <data name="Battery_Subtitle" xml:space="preserve"><value>Power state and remaining capacity</value></data>
+  <data name="Battery_NoBattery" xml:space="preserve"><value>No battery detected</value></data>
+  <data name="Battery_Charging" xml:space="preserve"><value>Charging</value></data>
+  <data name="Battery_OnAC" xml:space="preserve"><value>On AC power</value></data>
+  <data name="Battery_OnBattery" xml:space="preserve"><value>On battery</value></data>
+  <data name="Battery_RemainingFormat" xml:space="preserve"><value>≈ {0}h {1}m remaining</value></data>
+  <data name="Battery_TimeUnavailable" xml:space="preserve"><value>Time estimate unavailable</value></data>
+  <data name="Sensors_Title" xml:space="preserve"><value>Sensors</value></data>
+  <data name="Sensors_Subtitle" xml:space="preserve"><value>Temperatures, voltages and fan speeds (admin required for most sensors)</value></data>
+  <data name="Sensors_None" xml:space="preserve"><value>No sensors available. Run as administrator to expose temperatures and voltages.</value></data>
+  <data name="Sensors_CountFormat" xml:space="preserve"><value>{0} sensors</value></data>
+  <data name="Network_Title" xml:space="preserve"><value>Network</value></data>
+  <data name="Network_Subtitle" xml:space="preserve"><value>Active interfaces and total throughput</value></data>
+  <data name="Common_Download" xml:space="preserve"><value>Download</value></data>
+  <data name="Common_Upload" xml:space="preserve"><value>Upload</value></data>
+  <data name="Network_Interfaces" xml:space="preserve"><value>Interfaces</value></data>
+  <data name="Bluetooth_Title" xml:space="preserve"><value>Bluetooth</value></data>
+  <data name="Bluetooth_Subtitle" xml:space="preserve"><value>Paired classic + LE devices</value></data>
+  <data name="Common_Scanning" xml:space="preserve"><value>Scanning…</value></data>
+  <data name="Bluetooth_None" xml:space="preserve"><value>No paired devices found.</value></data>
+  <data name="Bluetooth_CountFormat" xml:space="preserve"><value>{0} paired device(s)</value></data>
+  <data name="Bluetooth_ScanFailedFormat" xml:space="preserve"><value>Bluetooth scan failed: {0}</value></data>
+  <data name="Common_Connected" xml:space="preserve"><value>Connected</value></data>
+  <data name="Common_Disconnected" xml:space="preserve"><value>Disconnected</value></data>
+  <data name="Common_Paired" xml:space="preserve"><value>Paired</value></data>
+  <data name="Common_Unpaired" xml:space="preserve"><value>Unpaired</value></data>
+  <data name="DiskMon_Title" xml:space="preserve"><value>Disk Monitor</value></data>
+  <data name="DiskMon_Subtitle" xml:space="preserve"><value>Per-physical-disk read/write throughput and queue depth</value></data>
+  <data name="DiskMon_RowFormat" xml:space="preserve"><value>↓ {0}  ·  ↑ {1}  ·  queue {2}</value></data>
+  <data name="LoginItems_Title" xml:space="preserve"><value>Login Items</value></data>
+  <data name="LoginItems_Subtitle" xml:space="preserve"><value>Programs that start with Windows</value></data>
+  <data name="LoginItems_CountFormat" xml:space="preserve"><value>{0} entries across HKCU and HKLM (64-bit + WoW64)</value></data>
+  <data name="Uninstaller_Title" xml:space="preserve"><value>Uninstaller</value></data>
+  <data name="Uninstaller_Subtitle" xml:space="preserve"><value>Installed programs across HKCU and HKLM (64-bit + WoW64)</value></data>
+  <data name="Uninstaller_FilterPlaceholder" xml:space="preserve"><value>Filter by name or publisher…</value></data>
+  <data name="Uninstaller_CountFormat" xml:space="preserve"><value>{0} programs</value></data>
+  <data name="Updater_Title" xml:space="preserve"><value>Updater</value></data>
+  <data name="Updater_Subtitle" xml:space="preserve"><value>Pending updates via winget</value></data>
+  <data name="Common_Refresh" xml:space="preserve"><value>Refresh</value></data>
+  <data name="Updater_Querying" xml:space="preserve"><value>Querying winget…</value></data>
+  <data name="Updater_NotInstalled" xml:space="preserve"><value>winget is not installed. Install "App Installer" from the Microsoft Store.</value></data>
+  <data name="Updater_UpToDate" xml:space="preserve"><value>Everything is up to date.</value></data>
+  <data name="Updater_CountFormat" xml:space="preserve"><value>{0} package(s) have updates available</value></data>
+  <data name="Common_FailedFormat" xml:space="preserve"><value>Failed: {0}</value></data>
+  <data name="Maintenance_Title" xml:space="preserve"><value>Maintenance</value></data>
+  <data name="Maintenance_Subtitle" xml:space="preserve"><value>Run Windows upkeep in-app — admin items prompt via UAC</value></data>
+  <data name="Maintenance_Unavailable" xml:space="preserve"><value>Unavailable</value></data>
+  <data name="Common_Copy" xml:space="preserve"><value>Copy</value></data>
+  <data name="Common_Run" xml:space="preserve"><value>Run</value></data>
+  <data name="Common_Running" xml:space="preserve"><value>Running…</value></data>
+  <data name="MaintenanceCat_SystemFiles" xml:space="preserve"><value>System Files</value></data>
+  <data name="MaintenanceCat_Disk" xml:space="preserve"><value>Disk</value></data>
+  <data name="MaintenanceCat_Network" xml:space="preserve"><value>Network</value></data>
+  <data name="MaintenanceCat_Policy" xml:space="preserve"><value>Policy</value></data>
+  <data name="MaintenanceCat_Shell" xml:space="preserve"><value>Shell</value></data>
+  <data name="Maint_flush_dns_Title" xml:space="preserve"><value>Flush DNS cache</value></data>
+  <data name="Maint_flush_dns_Summary" xml:space="preserve"><value>Clears the resolver cache when domain resolution acts up.</value></data>
+  <data name="Maint_winsock_reset_Title" xml:space="preserve"><value>Reset Winsock catalog</value></data>
+  <data name="Maint_winsock_reset_Summary" xml:space="preserve"><value>Resets the networking stack to defaults. Restart afterwards.</value></data>
+  <data name="Maint_sfc_scan_Title" xml:space="preserve"><value>Run System File Checker</value></data>
+  <data name="Maint_sfc_scan_Summary" xml:space="preserve"><value>Scans and repairs protected Windows system files (sfc /scannow).</value></data>
+  <data name="Maint_dism_restore_Title" xml:space="preserve"><value>Repair the component store</value></data>
+  <data name="Maint_dism_restore_Summary" xml:space="preserve"><value>DISM /Online /Cleanup-Image /RestoreHealth — fixes corruption SFC alone can't.</value></data>
+  <data name="Maint_chkdsk_scan_Title" xml:space="preserve"><value>Scan the system drive</value></data>
+  <data name="Maint_chkdsk_scan_Summary" xml:space="preserve"><value>Online scan of C: for file-system errors (chkdsk C: /scan).</value></data>
+  <data name="Maint_gpupdate_Title" xml:space="preserve"><value>Refresh Group Policy</value></data>
+  <data name="Maint_gpupdate_Summary" xml:space="preserve"><value>Re-applies machine and user policy (gpupdate /force).</value></data>
+  <data name="Maint_restart_explorer_Title" xml:space="preserve"><value>Restart Explorer</value></data>
+  <data name="Maint_restart_explorer_Summary" xml:space="preserve"><value>Re-launches the Windows shell — useful after settings changes.</value></data>
+  <data name="Malware_Title" xml:space="preserve"><value>Malware Removal</value></data>
+  <data name="Malware_Subtitle" xml:space="preserve"><value>Realtime protection + a full auto-run and hash scan</value></data>
+  <data name="Malware_RealtimeTitle" xml:space="preserve"><value>Realtime Protection</value></data>
+  <data name="Malware_RealtimeDesc" xml:space="preserve"><value>Watches Downloads, Desktop, Documents and Startup; auto-quarantines files matching the local hash blocklist and guards your files with ransomware canaries.</value></data>
+  <data name="Malware_RecentDetections" xml:space="preserve"><value>Recent detections</value></data>
+  <data name="Common_Clear" xml:space="preserve"><value>Clear</value></data>
+  <data name="Malware_NoDetections" xml:space="preserve"><value>No detections yet</value></data>
+  <data name="Malware_FullScan" xml:space="preserve"><value>Full Scan</value></data>
+  <data name="Malware_QuarantineSelected" xml:space="preserve"><value>Quarantine selected</value></data>
+  <data name="Malware_RealtimeActiveFormat" xml:space="preserve"><value>Active · {0} locations · {1} signatures</value></data>
+  <data name="Malware_RealtimeOff" xml:space="preserve"><value>Off — new threats aren't being monitored</value></data>
+  <data name="Malware_ScanProgressFormat" xml:space="preserve"><value>{0} — {1} · {2} files</value></data>
+  <data name="Malware_ScanFailedFormat" xml:space="preserve"><value>Scan failed: {0}</value></data>
+  <data name="Malware_NoThreatsFormat" xml:space="preserve"><value>No threats found · checked {0} files plus all auto-run items.</value></data>
+  <data name="Malware_FlaggedFormat" xml:space="preserve"><value>{0} flagged across auto-run items and {1} scanned files</value></data>
+  <data name="Malware_QuarantinedFormat" xml:space="preserve"><value>Quarantined {0} item(s).</value></data>
+  <data name="QuickClean_Title" xml:space="preserve"><value>Quick Clean</value></data>
+  <data name="QuickClean_Subtitle" xml:space="preserve"><value>Caches, temp folders, browser data and dump files</value></data>
+  <data name="Common_Scan" xml:space="preserve"><value>Scan</value></data>
+  <data name="QuickClean_CleanSelected" xml:space="preserve"><value>Clean selected</value></data>
+  <data name="QuickClean_Prompt" xml:space="preserve"><value>Press Scan to estimate reclaimable space.</value></data>
+  <data name="QuickClean_ScanningFormat" xml:space="preserve"><value>Scanning {0}…</value></data>
+  <data name="QuickClean_TotalFormat" xml:space="preserve"><value>Total reclaimable: {0}</value></data>
+  <data name="QuickClean_ScanComplete" xml:space="preserve"><value>Scan complete.</value></data>
+  <data name="QuickClean_Cleaning" xml:space="preserve"><value>Cleaning…</value></data>
+  <data name="QuickClean_CleaningFormat" xml:space="preserve"><value>Cleaning {0}…</value></data>
+  <data name="QuickClean_FreedFormat" xml:space="preserve"><value>Freed: {0} — {1} files deleted, {2} skipped</value></data>
+  <data name="QuickClean_CleanComplete" xml:space="preserve"><value>Clean complete.</value></data>
+  <data name="QuickClean_SizeFormat" xml:space="preserve"><value>{0} · {1} files</value></data>
+  <data name="Clean_user_temp_Label" xml:space="preserve"><value>User temp files</value></data>
+  <data name="Clean_user_temp_Desc" xml:space="preserve"><value>Files in your %TEMP% folder older than 1 hour.</value></data>
+  <data name="Clean_windows_temp_Label" xml:space="preserve"><value>Windows temp</value></data>
+  <data name="Clean_windows_temp_Desc" xml:space="preserve"><value>C:\Windows\Temp — shared scratch space.</value></data>
+  <data name="Clean_prefetch_Label" xml:space="preserve"><value>Prefetch</value></data>
+  <data name="Clean_prefetch_Desc" xml:space="preserve"><value>Windows launch-time prediction cache; regenerated.</value></data>
+  <data name="Clean_windows_update_Label" xml:space="preserve"><value>Windows Update DL</value></data>
+  <data name="Clean_windows_update_Desc" xml:space="preserve"><value>Downloaded update packages awaiting cleanup.</value></data>
+  <data name="Clean_thumb_cache_Label" xml:space="preserve"><value>Thumbnail cache</value></data>
+  <data name="Clean_thumb_cache_Desc" xml:space="preserve"><value>Explorer thumbnail database (thumbcache_*.db).</value></data>
+  <data name="Clean_chrome_cache_Label" xml:space="preserve"><value>Chrome cache</value></data>
+  <data name="Clean_chrome_cache_Desc" xml:space="preserve"><value>Default profile HTTP cache.</value></data>
+  <data name="Clean_edge_cache_Label" xml:space="preserve"><value>Edge cache</value></data>
+  <data name="Clean_edge_cache_Desc" xml:space="preserve"><value>Default profile HTTP cache.</value></data>
+  <data name="Clean_crash_dumps_Label" xml:space="preserve"><value>Crash dumps</value></data>
+  <data name="Clean_crash_dumps_Desc" xml:space="preserve"><value>Per-user dump files written by WER.</value></data>
+  <data name="Clean_directx_cache_Label" xml:space="preserve"><value>DirectX shader cache</value></data>
+  <data name="Clean_directx_cache_Desc" xml:space="preserve"><value>Shader-compiler scratch.</value></data>
+  <data name="RecycleBin_Title" xml:space="preserve"><value>Recycle Bin</value></data>
+  <data name="RecycleBin_Subtitle" xml:space="preserve"><value>Empty across all drives</value></data>
+  <data name="RecycleBin_Empty" xml:space="preserve"><value>Empty Recycle Bin</value></data>
+  <data name="RecycleBin_IsEmpty" xml:space="preserve"><value>Recycle Bin is empty</value></data>
+  <data name="RecycleBin_CountFormat" xml:space="preserve"><value>{0} item(s) across all drives</value></data>
+  <data name="RecycleBin_DialogTitle" xml:space="preserve"><value>Empty Recycle Bin?</value></data>
+  <data name="RecycleBin_DialogContentFormat" xml:space="preserve"><value>This will permanently delete {0}. This cannot be undone.</value></data>
+  <data name="Common_EmptyButton" xml:space="preserve"><value>Empty</value></data>
+  <data name="Common_Cancel" xml:space="preserve"><value>Cancel</value></data>
+  <data name="RecycleBin_Emptying" xml:space="preserve"><value>Emptying…</value></data>
+  <data name="Common_Done" xml:space="preserve"><value>Done.</value></data>
+  <data name="SpaceLens_Title" xml:space="preserve"><value>Space Lens</value></data>
+  <data name="SpaceLens_Subtitle" xml:space="preserve"><value>Drill into the largest folders</value></data>
+  <data name="SpaceLens_ParentTooltip" xml:space="preserve"><value>Parent</value></data>
+  <data name="SpaceLens_ScanningFormat" xml:space="preserve"><value>Scanning {0}…</value></data>
+  <data name="SpaceLens_TotalFormat" xml:space="preserve"><value>{0} in {1} immediate items</value></data>
+  <data name="Common_ScanFailedFormat" xml:space="preserve"><value>Scan failed: {0}</value></data>
+  <data name="LargeOld_Title" xml:space="preserve"><value>Large &amp; Old</value></data>
+  <data name="LargeOld_Subtitle" xml:space="preserve"><value>Files past the size + age thresholds</value></data>
+  <data name="LargeOld_PathPlaceholder" xml:space="preserve"><value>Path to scan</value></data>
+  <data name="LargeOld_MinSize" xml:space="preserve"><value>Min size (MB):</value></data>
+  <data name="LargeOld_MinAge" xml:space="preserve"><value>Min age (days):</value></data>
+  <data name="LargeOld_CountFormat" xml:space="preserve"><value>{0} file(s) match</value></data>
+  <data name="LargeOld_RowFormat" xml:space="preserve"><value>{0} · last modified {1}</value></data>
+  <data name="Duplicates_Title" xml:space="preserve"><value>Duplicates</value></data>
+  <data name="Duplicates_Subtitle" xml:space="preserve"><value>SHA-256 streaming match (size pre-filter)</value></data>
+  <data name="Common_PathToScan" xml:space="preserve"><value>Path to scan</value></data>
+  <data name="Duplicates_Hashing" xml:space="preserve"><value>Hashing…</value></data>
+  <data name="Duplicates_ResultFormat" xml:space="preserve"><value>{0} duplicate group(s) · {1} reclaimable by keeping one copy</value></data>
+  <data name="Duplicates_GroupFormat" xml:space="preserve"><value>{0} copies · {1} each</value></data>
+  <data name="Similar_Title" xml:space="preserve"><value>Similar Photos</value></data>
+  <data name="Similar_Subtitle" xml:space="preserve"><value>Perceptual (average) hash clustering</value></data>
+  <data name="Similar_MaxDistance" xml:space="preserve"><value>Max distance:</value></data>
+  <data name="Similar_Hashing" xml:space="preserve"><value>Hashing photos…</value></data>
+  <data name="Similar_CountFormat" xml:space="preserve"><value>{0} cluster(s)</value></data>
+  <data name="Similar_GroupFormat" xml:space="preserve"><value>{0} similar (worst distance {1})</value></data>
+  <data name="Shredder_Title" xml:space="preserve"><value>Shredder</value></data>
+  <data name="Shredder_Subtitle" xml:space="preserve"><value>Overwrite then delete</value></data>
+  <data name="Shredder_SsdWarning" xml:space="preserve"><value>On SSDs, wear leveling may relocate blocks, so overwrite-then-delete cannot guarantee the original ciphertext is destroyed. Use full-disk BitLocker for SSDs you intend to dispose of.</value></data>
+  <data name="Shredder_PathPlaceholder" xml:space="preserve"><value>Absolute path to a single file</value></data>
+  <data name="Shredder_Shred" xml:space="preserve"><value>Shred</value></data>
+  <data name="Shredder_Passes" xml:space="preserve"><value>Passes:</value></data>
+  <data name="Shredder_BadPath" xml:space="preserve"><value>Path does not point to an existing file.</value></data>
+  <data name="Shredder_DialogTitle" xml:space="preserve"><value>Shred this file?</value></data>
+  <data name="Shredder_DialogContentFormat" xml:space="preserve"><value>{0} will be overwritten {1} time(s) with random bytes and then deleted. This cannot be undone.</value></data>
+  <data name="Shredder_Shredding" xml:space="preserve"><value>Shredding…</value></data>
+  <data name="Shredder_Done" xml:space="preserve"><value>File shredded.</value></data>
+  <data name="Quarantine_Title" xml:space="preserve"><value>Quarantine</value></data>
+  <data name="Quarantine_Subtitle" xml:space="preserve"><value>Held-back files awaiting restore or purge</value></data>
+  <data name="Quarantine_Purge" xml:space="preserve"><value>Purge &gt; 7 days</value></data>
+  <data name="Quarantine_Empty" xml:space="preserve"><value>No files in quarantine.</value></data>
+  <data name="Quarantine_RowFormat" xml:space="preserve"><value>{0} · quarantined {1} UTC</value></data>
+  <data name="Common_Restore" xml:space="preserve"><value>Restore</value></data>
+  <data name="Quarantine_RestoreFailed" xml:space="preserve"><value>Restore failed</value></data>
+  <data name="Common_Close" xml:space="preserve"><value>Close</value></data>
+  <data name="MyTools_Title" xml:space="preserve"><value>My Tools</value></data>
+  <data name="MyTools_Subtitle" xml:space="preserve"><value>Pinned shortcuts and folders</value></data>
+  <data name="MyTools_LabelPlaceholder" xml:space="preserve"><value>Label</value></data>
+  <data name="MyTools_TargetPlaceholder" xml:space="preserve"><value>C:\path\to\anything (file, folder, URL)</value></data>
+  <data name="Common_Add" xml:space="preserve"><value>Add</value></data>
+  <data name="MyTools_Empty" xml:space="preserve"><value>Add a shortcut above to pin it here.</value></data>
+  <data name="Common_Open" xml:space="preserve"><value>Open</value></data>
+  <data name="MyTools_OpenFailed" xml:space="preserve"><value>Could not open</value></data>
+  <data name="Common_Remove" xml:space="preserve"><value>Remove</value></data>
+  <data name="Clock_Title" xml:space="preserve"><value>Clock</value></data>
+  <data name="Clock_Subtitle" xml:space="preserve"><value>World clock — pinned time zones</value></data>
+  <data name="Clock_FilterPlaceholder" xml:space="preserve"><value>Filter time zones…</value></data>
+  <data name="Clock_Pin" xml:space="preserve"><value>Pin</value></data>
+  <data name="Paint_Title" xml:space="preserve"><value>Paint</value></data>
+  <data name="Paint_Subtitle" xml:space="preserve"><value>Canvas — InkCanvas wiring deferred</value></data>
+  <data name="Paint_Pending" xml:space="preserve"><value>Paint canvas pending</value></data>
+  <data name="Paint_PendingDesc" xml:space="preserve"><value>A SkiaSharp-backed canvas will replace the InkCanvas placeholder in a follow-up commit once a working build configuration is identified.</value></data>
+  <data name="Scroll_Title" xml:space="preserve"><value>Scroll Denoiser</value></data>
+  <data name="Scroll_Subtitle" xml:space="preserve"><value>Direction-lock filter for cheap mouse wheels</value></data>
+  <data name="Scroll_Desc" xml:space="preserve"><value>Suppresses wheel events whose direction reverses within 80 ms of the previous one — the classic encoder bounce on budget mice.</value></data>
+  <data name="Scroll_Active" xml:space="preserve"><value>Active</value></data>
+  <data name="Scroll_HookOn" xml:space="preserve"><value>Hook installed — bouncing wheel events will be suppressed.</value></data>
+  <data name="Scroll_HookOff" xml:space="preserve"><value>Hook not active.</value></data>
+  <data name="Settings_Title" xml:space="preserve"><value>Settings</value></data>
+  <data name="Settings_Subtitle" xml:space="preserve"><value>About this build and where it stores data</value></data>
+  <data name="Settings_About" xml:space="preserve"><value>About</value></data>
+  <data name="Settings_AboutDesc" xml:space="preserve"><value>Windows port of the macOS app — same module set, native Win32/WinRT plumbing, see WINDOWS_PORT_PLAN.md.</value></data>
+  <data name="Settings_VersionFormat" xml:space="preserve"><value>Version {0} · {1}</value></data>
+  <data name="Settings_Startup" xml:space="preserve"><value>Startup</value></data>
+  <data name="Settings_StartupToggle" xml:space="preserve"><value>Open MacCleaner at login</value></data>
+  <data name="Settings_StartupDesc" xml:space="preserve"><value>Adds MacCleaner to your per-user Run list so it starts with Windows. No admin rights needed.</value></data>
+  <data name="Settings_DataLocations" xml:space="preserve"><value>Data locations</value></data>
+  <data name="Settings_OpenQuarantine" xml:space="preserve"><value>Open Quarantine folder</value></data>
+  <data name="Settings_OpenTrends" xml:space="preserve"><value>Open trends database folder</value></data>
+  <data name="Settings_ShowMyToolsJson" xml:space="preserve"><value>Show My Tools JSON</value></data>
+  <!-- FEATURE-PAGES-END -->
 </root>
