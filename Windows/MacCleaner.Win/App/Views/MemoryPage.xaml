@@ -12,6 +12,7 @@
         </Grid.RowDefinitions>
 
         <controls:ModuleHeader
+            x:Name="Header"
             Grid.Row="0"
             Title="Memory"
             Subtitle="Physical RAM usage, refreshed every second"

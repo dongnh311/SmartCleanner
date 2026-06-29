@@ -12,6 +12,7 @@
         </Grid.RowDefinitions>
 
         <controls:ModuleHeader
+            x:Name="Header"
             Grid.Row="0"
             Title="Settings"
             Subtitle="About this build and where it stores data"
@@ -22,10 +23,11 @@
 
                 <Border Style="{StaticResource Card}">
                     <StackPanel Spacing="8">
-                        <TextBlock Text="About" FontSize="13" FontWeight="SemiBold" Opacity="0.6" />
+                        <TextBlock x:Name="AboutLabel" Text="About" FontSize="13" FontWeight="SemiBold" Opacity="0.6" />
                         <TextBlock x:Name="ProductText" FontSize="20" FontWeight="SemiBold" Text="MacCleaner for Windows" />
                         <TextBlock x:Name="VersionText" FontSize="12" Opacity="0.7" />
                         <TextBlock
+                            x:Name="AboutDesc"
                             Text="Windows port of the macOS app — same module set, native Win32/WinRT plumbing, see WINDOWS_PORT_PLAN.md."
                             FontSize="12"
                             Opacity="0.6"
@@ -46,9 +48,10 @@
 
                 <Border Style="{StaticResource Card}">
                     <StackPanel Spacing="8">
-                        <TextBlock Text="Startup" FontSize="13" FontWeight="SemiBold" Opacity="0.6" />
+                        <TextBlock x:Name="StartupLabel" Text="Startup" FontSize="13" FontWeight="SemiBold" Opacity="0.6" />
                         <ToggleSwitch x:Name="StartupToggle" Header="Open MacCleaner at login" Toggled="StartupToggle_Toggled" />
                         <TextBlock
+                            x:Name="StartupDesc"
                             Text="Adds MacCleaner to your per-user Run list so it starts with Windows. No admin rights needed."
                             FontSize="12"
                             Opacity="0.6"
@@ -58,10 +61,10 @@
 
                 <Border Style="{StaticResource Card}">
                     <StackPanel Spacing="8">
-                        <TextBlock Text="Data locations" FontSize="13" FontWeight="SemiBold" Opacity="0.6" />
-                        <Button Content="Open Quarantine folder" Click="OpenQuarantine_Click" />
-                        <Button Content="Open trends database folder" Click="OpenTrends_Click" />
-                        <Button Content="Show My Tools JSON" Click="OpenMyTools_Click" />
+                        <TextBlock x:Name="DataLocationsLabel" Text="Data locations" FontSize="13" FontWeight="SemiBold" Opacity="0.6" />
+                        <Button x:Name="OpenQuarantineButton" Content="Open Quarantine folder" Click="OpenQuarantine_Click" />
+                        <Button x:Name="OpenTrendsButton" Content="Open trends database folder" Click="OpenTrends_Click" />
+                        <Button x:Name="OpenMyToolsButton" Content="Show My Tools JSON" Click="OpenMyTools_Click" />
                     </StackPanel>
                 </Border>
 

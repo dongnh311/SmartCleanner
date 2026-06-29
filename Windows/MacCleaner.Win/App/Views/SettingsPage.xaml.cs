@@ -30,7 +30,19 @@ public sealed partial class SettingsPage : Page
     {
         base.OnNavigatedTo(e);
         var version = Assembly.GetExecutingAssembly().GetName().Version;
-        VersionText.Text = $"Version {version} · {RuntimeInformation()}";
+
+        Header.Title = Localization.Loc.Get("Settings_Title", "Settings");
+        Header.Subtitle = Localization.Loc.Get("Settings_Subtitle", "About this build and where it stores data");
+        AboutLabel.Text = Localization.Loc.Get("Settings_About", "About");
+        AboutDesc.Text = Localization.Loc.Get("Settings_AboutDesc", "Windows port of the macOS app — same module set, native Win32/WinRT plumbing, see WINDOWS_PORT_PLAN.md.");
+        VersionText.Text = string.Format(Localization.Loc.Get("Settings_VersionFormat", "Version {0} · {1}"), version, RuntimeInformation());
+        StartupLabel.Text = Localization.Loc.Get("Settings_Startup", "Startup");
+        StartupToggle.Header = Localization.Loc.Get("Settings_StartupToggle", "Open MacCleaner at login");
+        StartupDesc.Text = Localization.Loc.Get("Settings_StartupDesc", "Adds MacCleaner to your per-user Run list so it starts with Windows. No admin rights needed.");
+        DataLocationsLabel.Text = Localization.Loc.Get("Settings_DataLocations", "Data locations");
+        OpenQuarantineButton.Content = Localization.Loc.Get("Settings_OpenQuarantine", "Open Quarantine folder");
+        OpenTrendsButton.Content = Localization.Loc.Get("Settings_OpenTrends", "Open trends database folder");
+        OpenMyToolsButton.Content = Localization.Loc.Get("Settings_ShowMyToolsJson", "Show My Tools JSON");
 
         // Reflect current state without bouncing the change handlers back at us.
         _initializing = true;

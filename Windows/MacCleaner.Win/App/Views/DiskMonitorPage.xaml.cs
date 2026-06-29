@@ -16,6 +16,8 @@ public sealed partial class DiskMonitorPage : Page
     {
         InitializeComponent();
         _disks = App.Services.GetRequiredService<IDiskMonitorService>();
+        Header.Title = Localization.Loc.Get("DiskMon_Title", "Disk Monitor");
+        Header.Subtitle = Localization.Loc.Get("DiskMon_Subtitle", "Per-physical-disk read/write throughput and queue depth");
     }
 
     protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -55,7 +57,11 @@ public sealed partial class DiskMonitorPage : Page
         });
         stack.Children.Add(new TextBlock
         {
-            Text = $"↓ {Core.FileSystem.Bytes.FormatRateVerbose((ulong)s.ReadBytesPerSec)}  ·  ↑ {Core.FileSystem.Bytes.FormatRateVerbose((ulong)s.WriteBytesPerSec)}  ·  queue {s.QueueLength:F1}",
+            Text = string.Format(
+                Localization.Loc.Get("DiskMon_RowFormat", "↓ {0}  ·  ↑ {1}  ·  queue {2}"),
+                Core.FileSystem.Bytes.FormatRateVerbose((ulong)s.ReadBytesPerSec),
+                Core.FileSystem.Bytes.FormatRateVerbose((ulong)s.WriteBytesPerSec),
+                s.QueueLength.ToString("F1")),
             FontSize = 12,
             Opacity = 0.7,
             FontFamily = new Microsoft.UI.Xaml.Media.FontFamily("Cascadia Mono,Consolas,Courier New")

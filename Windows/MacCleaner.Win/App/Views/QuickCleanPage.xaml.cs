@@ -17,13 +17,23 @@ public sealed partial class QuickCleanPage : Page
     {
         InitializeComponent();
         _cleanup = App.Services.GetRequiredService<ICleanupService>();
+        Header.Title = Localization.Loc.Get("QuickClean_Title", "Quick Clean");
+        Header.Subtitle = Localization.Loc.Get("QuickClean_Subtitle", "Caches, temp folders, browser data and dump files");
+        ScanButton.Content = Localization.Loc.Get("Common_Scan", "Scan");
+        CleanButton.Content = Localization.Loc.Get("QuickClean_CleanSelected", "Clean selected");
     }
+
+    private static string LocalizedLabel(CleanupTarget t) =>
+        Localization.Loc.Get("Clean_" + t.Id.Replace("-", "_") + "_Label", t.Label);
+
+    private static string LocalizedDesc(CleanupTarget t) =>
+        Localization.Loc.Get("Clean_" + t.Id.Replace("-", "_") + "_Desc", t.Description);
 
     protected override void OnNavigatedTo(NavigationEventArgs e)
     {
         base.OnNavigatedTo(e);
         RenderTargets();
-        StatusText.Text = "Press Scan to estimate reclaimable space.";
+        StatusText.Text = Localization.Loc.Get("QuickClean_Prompt", "Press Scan to estimate reclaimable space.");
     }
 
     protected override void OnNavigatedFrom(NavigationEventArgs e)
@@ -60,7 +70,7 @@ public sealed partial class QuickCleanPage : Page
         var top = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 8 };
         top.Children.Add(new TextBlock
         {
-            Text = t.Label,
+            Text = LocalizedLabel(t),
             FontWeight = Microsoft.UI.Text.FontWeights.SemiBold
         });
         if (t.RequiresAdmin)
@@ -76,7 +86,7 @@ public sealed partial class QuickCleanPage : Page
         stack.Children.Add(top);
         stack.Children.Add(new TextBlock
         {
-            Text = t.Description,
+            Text = LocalizedDesc(t),
             FontSize = 11,
             Opacity = 0.6
         });
@@ -110,13 +120,13 @@ public sealed partial class QuickCleanPage : Page
 
         ScanButton.IsEnabled = false;
         CleanButton.IsEnabled = false;
-        StatusText.Text = "Scanning…";
+        StatusText.Text = Localization.Loc.Get("Common_Scanning", "Scanning…");
         _scans.Clear();
 
         long grand = 0;
         foreach (var t in CleanupTargets.QuickClean())
         {
-            StatusText.Text = $"Scanning {t.Label}…";
+            StatusText.Text = string.Format(Localization.Loc.Get("QuickClean_ScanningFormat", "Scanning {0}…"), LocalizedLabel(t));
             TargetScan scan = await Task.Run(() => _cleanup.Scan(t, ct), ct);
             if (ct.IsCancellationRequested) return;
             _scans[t.Id] = scan;
@@ -124,8 +134,8 @@ public sealed partial class QuickCleanPage : Page
             grand += scan.TotalBytes;
         }
 
-        TotalText.Text = $"Total reclaimable: {Core.FileSystem.Bytes.Format(grand)}";
-        StatusText.Text = "Scan complete.";
+        TotalText.Text = string.Format(Localization.Loc.Get("QuickClean_TotalFormat", "Total reclaimable: {0}"), Core.FileSystem.Bytes.Format(grand));
+        StatusText.Text = Localization.Loc.Get("QuickClean_ScanComplete", "Scan complete.");
         ScanButton.IsEnabled = true;
         CleanButton.IsEnabled = grand > 0;
     }
@@ -138,7 +148,7 @@ public sealed partial class QuickCleanPage : Page
 
         ScanButton.IsEnabled = false;
         CleanButton.IsEnabled = false;
-        StatusText.Text = "Cleaning…";
+        StatusText.Text = Localization.Loc.Get("QuickClean_Cleaning", "Cleaning…");
 
         long freed = 0;
         int deleted = 0;
@@ -146,7 +156,7 @@ public sealed partial class QuickCleanPage : Page
         foreach (var t in CleanupTargets.QuickClean())
         {
             if (!_checkboxes.TryGetValue(t.Id, out var cb) || cb.IsChecked != true) continue;
-            StatusText.Text = $"Cleaning {t.Label}…";
+            StatusText.Text = string.Format(Localization.Loc.Get("QuickClean_CleaningFormat", "Cleaning {0}…"), LocalizedLabel(t));
             var res = await Task.Run(() => _cleanup.Clean(t, ct), ct);
             if (ct.IsCancellationRequested) return;
             freed += res.BytesFreed;
@@ -154,8 +164,8 @@ public sealed partial class QuickCleanPage : Page
             skipped += res.FilesSkipped;
         }
 
-        TotalText.Text = $"Freed: {Core.FileSystem.Bytes.Format(freed)} — {deleted} files deleted, {skipped} skipped";
-        StatusText.Text = "Clean complete.";
+        TotalText.Text = string.Format(Localization.Loc.Get("QuickClean_FreedFormat", "Freed: {0} — {1} files deleted, {2} skipped"), Core.FileSystem.Bytes.Format(freed), deleted, skipped);
+        StatusText.Text = Localization.Loc.Get("QuickClean_CleanComplete", "Clean complete.");
         ScanButton.IsEnabled = true;
     }
 
@@ -170,7 +180,7 @@ public sealed partial class QuickCleanPage : Page
                 if (child is TextBlock tb && tb.Name == $"size-{id}")
                 {
                     tb.Text = scan.Accessible
-                        ? $"{Core.FileSystem.Bytes.Format(scan.TotalBytes)} · {scan.FileCount} files"
+                        ? string.Format(Localization.Loc.Get("QuickClean_SizeFormat", "{0} · {1} files"), Core.FileSystem.Bytes.Format(scan.TotalBytes), scan.FileCount)
                         : "n/a";
                     return;
                 }

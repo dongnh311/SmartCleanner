@@ -19,6 +19,8 @@ public sealed partial class MaintenancePage : Page
     {
         InitializeComponent();
         _service = App.Services.GetRequiredService<IMaintenanceService>();
+        Header.Title = Localization.Loc.Get("Maintenance_Title", "Maintenance");
+        Header.Subtitle = Localization.Loc.Get("Maintenance_Subtitle", "Run Windows upkeep in-app — admin items prompt via UAC");
     }
 
     protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -31,7 +33,7 @@ public sealed partial class MaintenancePage : Page
         {
             Host.Children.Add(new TextBlock
             {
-                Text = group.Key.ToString(),
+                Text = Localization.Loc.Get("MaintenanceCat_" + group.Key, group.Key.ToString()),
                 FontSize = 12,
                 FontWeight = FontWeights.SemiBold,
                 Opacity = 0.6,
@@ -57,7 +59,7 @@ public sealed partial class MaintenancePage : Page
         var titleRow = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 8, VerticalAlignment = VerticalAlignment.Center };
         titleRow.Children.Add(new TextBlock
         {
-            Text = cmd.Title,
+            Text = Localization.Loc.Get("Maint_" + cmd.Id + "_Title", cmd.Title),
             FontWeight = FontWeights.SemiBold,
             VerticalAlignment = VerticalAlignment.Center
         });
@@ -85,7 +87,7 @@ public sealed partial class MaintenancePage : Page
 
         var buttons = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 6, VerticalAlignment = VerticalAlignment.Center };
 
-        var copy = new Button { Content = "Copy" };
+        var copy = new Button { Content = Localization.Loc.Get("Common_Copy", "Copy") };
         copy.Click += (_, _) =>
         {
             var data = new DataPackage();
@@ -94,11 +96,11 @@ public sealed partial class MaintenancePage : Page
         };
         buttons.Children.Add(copy);
 
-        var run = new Button { Content = "Run" };
+        var run = new Button { Content = Localization.Loc.Get("Common_Run", "Run") };
         if (!_service.IsAvailable(cmd))
         {
             run.IsEnabled = false;
-            run.Content = "Unavailable";
+            run.Content = Localization.Loc.Get("Maintenance_Unavailable", "Unavailable");
         }
         else
         {
@@ -106,7 +108,7 @@ public sealed partial class MaintenancePage : Page
             {
                 run.IsEnabled = false;
                 var label = run.Content;
-                run.Content = "Running…";
+                run.Content = Localization.Loc.Get("Common_Running", "Running…");
 
                 var outcome = await _service.RunAsync(cmd);
 
@@ -123,7 +125,7 @@ public sealed partial class MaintenancePage : Page
         headerGrid.Children.Add(buttons);
 
         content.Children.Add(headerGrid);
-        content.Children.Add(new TextBlock { Text = cmd.Summary, FontSize = 12, Opacity = 0.65, TextWrapping = TextWrapping.Wrap });
+        content.Children.Add(new TextBlock { Text = Localization.Loc.Get("Maint_" + cmd.Id + "_Summary", cmd.Summary), FontSize = 12, Opacity = 0.65, TextWrapping = TextWrapping.Wrap });
         content.Children.Add(new TextBlock
         {
             Text = cmd.DisplayCommand,

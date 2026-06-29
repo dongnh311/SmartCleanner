@@ -15,6 +15,8 @@ public sealed partial class MemoryPage : Page
     {
         InitializeComponent();
         _metrics = App.Services.GetRequiredService<ISystemMetricsService>();
+        Header.Title = Localization.Loc.Get("Memory_Title", "Memory");
+        Header.Subtitle = Localization.Loc.Get("Memory_Subtitle", "Physical RAM usage, refreshed every second");
     }
 
     protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -40,7 +42,12 @@ public sealed partial class MemoryPage : Page
         var s = _metrics.SampleMemory();
         UsedPercentText.Text = $"{s.UsedPercent:F0}%";
         UsedBar.Value = s.UsedPercent;
-        UsedDetailText.Text = $"{Core.FileSystem.Bytes.Format((long)s.UsedBytes)} used";
-        TotalDetailText.Text = $"{Core.FileSystem.Bytes.Format((long)s.AvailableBytes)} available · {Core.FileSystem.Bytes.Format((long)s.TotalBytes)} total";
+        UsedDetailText.Text = string.Format(
+            Localization.Loc.Get("Memory_UsedFormat", "{0} used"),
+            Core.FileSystem.Bytes.Format((long)s.UsedBytes));
+        TotalDetailText.Text = string.Format(
+            Localization.Loc.Get("Memory_AvailTotalFormat", "{0} available · {1} total"),
+            Core.FileSystem.Bytes.Format((long)s.AvailableBytes),
+            Core.FileSystem.Bytes.Format((long)s.TotalBytes));
     }
 }

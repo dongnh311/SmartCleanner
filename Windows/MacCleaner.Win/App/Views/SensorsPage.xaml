@@ -12,6 +12,7 @@
         </Grid.RowDefinitions>
 
         <controls:ModuleHeader
+            x:Name="Header"
             Grid.Row="0"
             Title="Sensors"
             Subtitle="Temperatures, voltages and fan speeds (admin required for most sensors)"

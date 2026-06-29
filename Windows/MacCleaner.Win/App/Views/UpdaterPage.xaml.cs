@@ -15,6 +15,9 @@ public sealed partial class UpdaterPage : Page
     {
         InitializeComponent();
         _winget = App.Services.GetRequiredService<IWingetService>();
+        Header.Title = Localization.Loc.Get("Updater_Title", "Updater");
+        Header.Subtitle = Localization.Loc.Get("Updater_Subtitle", "Pending updates via winget");
+        RefreshButton.Content = Localization.Loc.Get("Common_Refresh", "Refresh");
     }
 
     protected override async void OnNavigatedTo(NavigationEventArgs e)
@@ -42,14 +45,14 @@ public sealed partial class UpdaterPage : Page
     private async Task ReloadAsync(CancellationToken ct)
     {
         RefreshButton.IsEnabled = false;
-        StatusText.Text = "Querying winget…";
+        StatusText.Text = Localization.Loc.Get("Updater_Querying", "Querying winget…");
         UpgradesList.Items.Clear();
 
         try
         {
             if (!await _winget.IsAvailableAsync(ct))
             {
-                StatusText.Text = "winget is not installed. Install \"App Installer\" from the Microsoft Store.";
+                StatusText.Text = Localization.Loc.Get("Updater_NotInstalled", "winget is not installed. Install \"App Installer\" from the Microsoft Store.");
                 return;
             }
 
@@ -57,14 +60,14 @@ public sealed partial class UpdaterPage : Page
             if (ct.IsCancellationRequested) return;
 
             StatusText.Text = upgrades.Count == 0
-                ? "Everything is up to date."
-                : $"{upgrades.Count} package(s) have updates available";
+                ? Localization.Loc.Get("Updater_UpToDate", "Everything is up to date.")
+                : string.Format(Localization.Loc.Get("Updater_CountFormat", "{0} package(s) have updates available"), upgrades.Count);
 
             foreach (var u in upgrades) UpgradesList.Items.Add(BuildRow(u));
         }
         catch (Exception ex)
         {
-            StatusText.Text = $"Failed: {ex.Message}";
+            StatusText.Text = string.Format(Localization.Loc.Get("Common_FailedFormat", "Failed: {0}"), ex.Message);
         }
         finally
         {

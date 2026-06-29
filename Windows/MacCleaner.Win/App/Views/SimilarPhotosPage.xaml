@@ -13,6 +13,7 @@
         </Grid.RowDefinitions>
 
         <controls:ModuleHeader
+            x:Name="Header"
             Grid.Row="0"
             Title="Similar Photos"
             Subtitle="Perceptual (average) hash clustering"
@@ -28,7 +29,7 @@
                 <Button x:Name="ScanButton" Grid.Column="1" Content="Scan" Style="{ThemeResource AccentButtonStyle}" Click="ScanButton_Click" />
             </Grid>
             <StackPanel Orientation="Horizontal" Spacing="4">
-                <TextBlock Text="Max distance:" VerticalAlignment="Center" FontSize="12" />
+                <TextBlock x:Name="MaxDistLabel" Text="Max distance:" VerticalAlignment="Center" FontSize="12" />
                 <NumberBox x:Name="MaxDist" Value="6" Minimum="0" Maximum="20" SmallChange="1" Width="100" />
                 <TextBlock x:Name="StatusText" VerticalAlignment="Center" FontSize="12" Opacity="0.65" Margin="16,0,0,0" />
             </StackPanel>

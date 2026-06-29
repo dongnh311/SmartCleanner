@@ -15,6 +15,8 @@ public sealed partial class BatteryPage : Page
     {
         InitializeComponent();
         _battery = App.Services.GetRequiredService<IBatteryService>();
+        Header.Title = Localization.Loc.Get("Battery_Title", "Battery");
+        Header.Subtitle = Localization.Loc.Get("Battery_Subtitle", "Power state and remaining capacity");
     }
 
     protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -42,16 +44,19 @@ public sealed partial class BatteryPage : Page
         {
             PercentText.Text = "n/a";
             PercentBar.Value = 0;
-            StateText.Text = "No battery detected";
+            StateText.Text = Localization.Loc.Get("Battery_NoBattery", "No battery detected");
             RemainingText.Text = "";
             return;
         }
 
         PercentText.Text = $"{s.PercentRemaining}%";
         PercentBar.Value = s.PercentRemaining;
-        StateText.Text = s.IsCharging ? "Charging" : (s.IsOnAC ? "On AC power" : "On battery");
+        StateText.Text = s.IsCharging
+            ? Localization.Loc.Get("Battery_Charging", "Charging")
+            : (s.IsOnAC ? Localization.Loc.Get("Battery_OnAC", "On AC power")
+                        : Localization.Loc.Get("Battery_OnBattery", "On battery"));
         RemainingText.Text = s.TimeRemaining is { } t
-            ? $"≈ {t.Hours}h {t.Minutes}m remaining"
-            : "Time estimate unavailable";
+            ? string.Format(Localization.Loc.Get("Battery_RemainingFormat", "≈ {0}h {1}m remaining"), t.Hours, t.Minutes)
+            : Localization.Loc.Get("Battery_TimeUnavailable", "Time estimate unavailable");
     }
 }

@@ -15,6 +15,12 @@ public sealed partial class LargeOldFilesPage : Page
     {
         InitializeComponent();
         _svc = App.Services.GetRequiredService<ILargeOldFilesService>();
+        Header.Title = Localization.Loc.Get("LargeOld_Title", "Large & Old");
+        Header.Subtitle = Localization.Loc.Get("LargeOld_Subtitle", "Files past the size + age thresholds");
+        PathBox.PlaceholderText = Localization.Loc.Get("LargeOld_PathPlaceholder", "Path to scan");
+        ScanButton.Content = Localization.Loc.Get("Common_Scan", "Scan");
+        MinSizeLabel.Text = Localization.Loc.Get("LargeOld_MinSize", "Min size (MB):");
+        MinAgeLabel.Text = Localization.Loc.Get("LargeOld_MinAge", "Min age (days):");
     }
 
     protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -38,7 +44,7 @@ public sealed partial class LargeOldFilesPage : Page
         var ct = _cts.Token;
 
         ScanButton.IsEnabled = false;
-        StatusText.Text = "Scanning…";
+        StatusText.Text = Localization.Loc.Get("Common_Scanning", "Scanning…");
         ResultsList.Items.Clear();
 
         var filter = new LargeOldFilter(
@@ -51,12 +57,12 @@ public sealed partial class LargeOldFilesPage : Page
         {
             var rows = await Task.Run(() => _svc.Find(filter, ct), ct);
             if (ct.IsCancellationRequested) return;
-            StatusText.Text = $"{rows.Count} file(s) match";
+            StatusText.Text = string.Format(Localization.Loc.Get("LargeOld_CountFormat", "{0} file(s) match"), rows.Count);
             foreach (var r in rows) ResultsList.Items.Add(BuildRow(r));
         }
         catch (Exception ex)
         {
-            StatusText.Text = $"Failed: {ex.Message}";
+            StatusText.Text = string.Format(Localization.Loc.Get("Common_FailedFormat", "Failed: {0}"), ex.Message);
         }
         finally
         {
@@ -74,7 +80,7 @@ public sealed partial class LargeOldFilesPage : Page
         });
         stack.Children.Add(new TextBlock
         {
-            Text = $"{Core.FileSystem.Bytes.Format(r.SizeBytes)} · last modified {r.LastWriteUtc:yyyy-MM-dd}",
+            Text = string.Format(Localization.Loc.Get("LargeOld_RowFormat", "{0} · last modified {1}"), Core.FileSystem.Bytes.Format(r.SizeBytes), r.LastWriteUtc.ToString("yyyy-MM-dd")),
             FontSize = 11,
             Opacity = 0.65
         });

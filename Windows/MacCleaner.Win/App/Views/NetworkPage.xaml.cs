@@ -16,6 +16,11 @@ public sealed partial class NetworkPage : Page
     {
         InitializeComponent();
         _network = App.Services.GetRequiredService<INetworkService>();
+        Header.Title = Localization.Loc.Get("Network_Title", "Network");
+        Header.Subtitle = Localization.Loc.Get("Network_Subtitle", "Active interfaces and total throughput");
+        DownloadLabel.Text = Localization.Loc.Get("Common_Download", "Download");
+        UploadLabel.Text = Localization.Loc.Get("Common_Upload", "Upload");
+        InterfacesLabel.Text = Localization.Loc.Get("Network_Interfaces", "Interfaces");
     }
 
     protected override void OnNavigatedTo(NavigationEventArgs e)

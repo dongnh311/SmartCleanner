@@ -15,6 +15,10 @@ public sealed partial class SpaceLensPage : Page
     {
         InitializeComponent();
         _lens = App.Services.GetRequiredService<ISpaceLensService>();
+        Header.Title = Localization.Loc.Get("SpaceLens_Title", "Space Lens");
+        Header.Subtitle = Localization.Loc.Get("SpaceLens_Subtitle", "Drill into the largest folders");
+        ScanButton.Content = Localization.Loc.Get("Common_Scan", "Scan");
+        ToolTipService.SetToolTip(UpButton, Localization.Loc.Get("SpaceLens_ParentTooltip", "Parent"));
     }
 
     protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -57,7 +61,7 @@ public sealed partial class SpaceLensPage : Page
         var ct = _cts.Token;
 
         ScanButton.IsEnabled = false;
-        TotalText.Text = $"Scanning {path}…";
+        TotalText.Text = string.Format(Localization.Loc.Get("SpaceLens_ScanningFormat", "Scanning {0}…"), path);
         ChildList.Items.Clear();
 
         try
@@ -65,7 +69,7 @@ public sealed partial class SpaceLensPage : Page
             SpaceNode node = await Task.Run(() => _lens.Scan(path, ct), ct);
             if (ct.IsCancellationRequested) return;
 
-            TotalText.Text = $"{Core.FileSystem.Bytes.Format(node.TotalBytes)} in {node.Children.Count} immediate items";
+            TotalText.Text = string.Format(Localization.Loc.Get("SpaceLens_TotalFormat", "{0} in {1} immediate items"), Core.FileSystem.Bytes.Format(node.TotalBytes), node.Children.Count);
             foreach (var child in node.Children)
             {
                 ChildList.Items.Add(BuildRow(child, node.TotalBytes));
@@ -73,7 +77,7 @@ public sealed partial class SpaceLensPage : Page
         }
         catch (Exception ex)
         {
-            TotalText.Text = $"Scan failed: {ex.Message}";
+            TotalText.Text = string.Format(Localization.Loc.Get("Common_ScanFailedFormat", "Scan failed: {0}"), ex.Message);
         }
         finally
         {

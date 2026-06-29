@@ -13,6 +13,7 @@
         </Grid.RowDefinitions>
 
         <controls:ModuleHeader
+            x:Name="Header"
             Grid.Row="0"
             Title="Large &amp; Old"
             Subtitle="Files past the size + age thresholds"
@@ -29,11 +30,11 @@
             </Grid>
             <StackPanel Orientation="Horizontal" Spacing="16">
                 <StackPanel Orientation="Horizontal" Spacing="4">
-                    <TextBlock Text="Min size (MB):" VerticalAlignment="Center" FontSize="12" />
+                    <TextBlock x:Name="MinSizeLabel" Text="Min size (MB):" VerticalAlignment="Center" FontSize="12" />
                     <NumberBox x:Name="MinSizeMb" Value="100" Minimum="1" Maximum="100000" SmallChange="10" Width="120" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Spacing="4">
-                    <TextBlock Text="Min age (days):" VerticalAlignment="Center" FontSize="12" />
+                    <TextBlock x:Name="MinAgeLabel" Text="Min age (days):" VerticalAlignment="Center" FontSize="12" />
                     <NumberBox x:Name="MinAgeDays" Value="180" Minimum="1" Maximum="3650" SmallChange="30" Width="120" />
                 </StackPanel>
                 <TextBlock x:Name="StatusText" VerticalAlignment="Center" FontSize="12" Opacity="0.65" />

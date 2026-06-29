@@ -13,6 +13,7 @@
         </Grid.RowDefinitions>
 
         <controls:ModuleHeader
+            x:Name="Header"
             Grid.Row="0"
             Title="Duplicates"
             Subtitle="SHA-256 streaming match (size pre-filter)"

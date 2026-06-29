@@ -18,6 +18,9 @@ public sealed partial class ProcessMonitorPage : Page
     {
         InitializeComponent();
         _processes = App.Services.GetRequiredService<IProcessService>();
+        Header.Title = Localization.Loc.Get("Processes_Title", "Process Monitor");
+        Header.Subtitle = Localization.Loc.Get("Processes_Subtitle", "Live process snapshot, refreshed every 2 seconds");
+        FilterBox.PlaceholderText = Localization.Loc.Get("Processes_FilterPlaceholder", "Filter by name…");
     }
 
     protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -69,7 +72,7 @@ public sealed partial class ProcessMonitorPage : Page
         }
 
         CountText.Text = ordered.Length == _lastSnapshot.Count
-            ? $"{ordered.Length} processes"
+            ? string.Format(Localization.Loc.Get("Processes_CountFormat", "{0} processes"), ordered.Length)
             : $"{ordered.Length} / {_lastSnapshot.Count}";
     }
 

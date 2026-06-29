@@ -14,6 +14,10 @@ public sealed partial class RecycleBinPage : Page
     {
         InitializeComponent();
         _bin = App.Services.GetRequiredService<IRecycleBinService>();
+        Header.Title = Localization.Loc.Get("RecycleBin_Title", "Recycle Bin");
+        Header.Subtitle = Localization.Loc.Get("RecycleBin_Subtitle", "Empty across all drives");
+        RefreshButton.Content = Localization.Loc.Get("Common_Refresh", "Refresh");
+        EmptyButton.Content = Localization.Loc.Get("RecycleBin_Empty", "Empty Recycle Bin");
     }
 
     protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -29,8 +33,8 @@ public sealed partial class RecycleBinPage : Page
         var info = _bin.Query();
         SizeText.Text = Core.FileSystem.Bytes.Format(info.TotalBytes);
         CountText.Text = info.ItemCount == 0
-            ? "Recycle Bin is empty"
-            : $"{info.ItemCount} item(s) across all drives";
+            ? Localization.Loc.Get("RecycleBin_IsEmpty", "Recycle Bin is empty")
+            : string.Format(Localization.Loc.Get("RecycleBin_CountFormat", "{0} item(s) across all drives"), info.ItemCount);
         EmptyButton.IsEnabled = info.ItemCount > 0;
     }
 
@@ -38,10 +42,10 @@ public sealed partial class RecycleBinPage : Page
     {
         var dialog = new ContentDialog
         {
-            Title = "Empty Recycle Bin?",
-            Content = $"This will permanently delete {CountText.Text.ToLowerInvariant()}. This cannot be undone.",
-            PrimaryButtonText = "Empty",
-            CloseButtonText = "Cancel",
+            Title = Localization.Loc.Get("RecycleBin_DialogTitle", "Empty Recycle Bin?"),
+            Content = string.Format(Localization.Loc.Get("RecycleBin_DialogContentFormat", "This will permanently delete {0}. This cannot be undone."), CountText.Text.ToLowerInvariant()),
+            PrimaryButtonText = Localization.Loc.Get("Common_EmptyButton", "Empty"),
+            CloseButtonText = Localization.Loc.Get("Common_Cancel", "Cancel"),
             DefaultButton = ContentDialogButton.Close,
             XamlRoot = this.XamlRoot
         };
@@ -49,10 +53,10 @@ public sealed partial class RecycleBinPage : Page
         var choice = await dialog.ShowAsync();
         if (choice != ContentDialogResult.Primary) return;
 
-        StatusText.Text = "Emptying…";
+        StatusText.Text = Localization.Loc.Get("RecycleBin_Emptying", "Emptying…");
         EmptyButton.IsEnabled = false;
         await Task.Run(_bin.Empty);
-        StatusText.Text = "Done.";
+        StatusText.Text = Localization.Loc.Get("Common_Done", "Done.");
         Refresh();
     }
 }

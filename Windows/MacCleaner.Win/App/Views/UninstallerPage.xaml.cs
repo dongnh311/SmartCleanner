@@ -16,6 +16,9 @@ public sealed partial class UninstallerPage : Page
     {
         InitializeComponent();
         _registry = App.Services.GetRequiredService<IRegistryService>();
+        Header.Title = Localization.Loc.Get("Uninstaller_Title", "Uninstaller");
+        Header.Subtitle = Localization.Loc.Get("Uninstaller_Subtitle", "Installed programs across HKCU and HKLM (64-bit + WoW64)");
+        FilterBox.PlaceholderText = Localization.Loc.Get("Uninstaller_FilterPlaceholder", "Filter by name or publisher…");
     }
 
     protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -50,7 +53,7 @@ public sealed partial class UninstallerPage : Page
         foreach (var p in ordered) ProgramsList.Items.Add(BuildRow(p));
 
         CountText.Text = ordered.Length == _all.Count
-            ? $"{ordered.Length} programs"
+            ? string.Format(Localization.Loc.Get("Uninstaller_CountFormat", "{0} programs"), ordered.Length)
             : $"{ordered.Length} / {_all.Count}";
     }
 

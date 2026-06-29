@@ -12,6 +12,7 @@
         </Grid.RowDefinitions>
 
         <controls:ModuleHeader
+            x:Name="Header"
             Grid.Row="0"
             Title="Network"
             Subtitle="Active interfaces and total throughput"
@@ -26,11 +27,11 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <StackPanel Grid.Column="0" Spacing="4">
-                            <TextBlock Text="Download" FontSize="12" FontWeight="SemiBold" Opacity="0.6" />
+                            <TextBlock x:Name="DownloadLabel" Text="Download" FontSize="12" FontWeight="SemiBold" Opacity="0.6" />
                             <TextBlock x:Name="DownText" FontSize="28" FontWeight="SemiBold" Text="—" />
                         </StackPanel>
                         <StackPanel Grid.Column="1" Spacing="4">
-                            <TextBlock Text="Upload" FontSize="12" FontWeight="SemiBold" Opacity="0.6" />
+                            <TextBlock x:Name="UploadLabel" Text="Upload" FontSize="12" FontWeight="SemiBold" Opacity="0.6" />
                             <TextBlock x:Name="UpText" FontSize="28" FontWeight="SemiBold" Text="—" />
                         </StackPanel>
                     </Grid>
@@ -38,7 +39,7 @@
 
                 <Border Style="{StaticResource Card}">
                     <StackPanel Spacing="8">
-                        <TextBlock Text="Interfaces" FontSize="13" FontWeight="SemiBold" Opacity="0.65" />
+                        <TextBlock x:Name="InterfacesLabel" Text="Interfaces" FontSize="13" FontWeight="SemiBold" Opacity="0.65" />
                         <ListView x:Name="InterfacesList" SelectionMode="None" />
                     </StackPanel>
                 </Border>
